@@ -1,0 +1,23 @@
+%!TEX root = ../thesis.tex
+
+%% ----------------------------------------------------------------------------
+% BIWI SA/MA thesis template
+%
+% Created 09/29/2006 by Andreas Ess
+% Extended 13/02/2009 by Jan Lesniak - jlesniak@vision.ee.ethz.ch
+%% ----------------------------------------------------------------------------
+\newpage
+\chapter{Methods}
+% The objectives of the ``Methods'' section are the following:
+% \begin{itemize}
+%  \item \textit{What is your work?} Describe (perhaps in a separate chapter) the key component of your work, e.g. an algorithm or software framework you have developed.
+% \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+First study, was to track point on video sequences (DAVIS). Trying different architectures (Hourglass and then ResNet), with different approaches (with and without parent network). First we annotated some points to track, and used and estimation of the heatmap to predict the point (and also multiple scale heatmap).
+
+The second approach was using the ResNet middle representation as representation of the pixel and try to track it.
+
+This led us to pivot and use this representation to segment the instance.
+Move the dataset to PASCAL VOC. And introduce the metric learning. Explain the metric learning, its algorithmic sampling. Explain the double triplet sampling.
