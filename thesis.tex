@@ -20,11 +20,13 @@
 % \usepackage{algorithm}
 \usepackage{fancyhdr}		% Produce the nice header
 \usepackage{fullpage} % Use the full page
+\usepackage{tikz} % For plots
 \usepackage{pgfplots} % For plots
 \usepackage{pgfplotstable} % For plots
 \pgfplotsset{compat=newest} % For plots
 \usetikzlibrary{plotmarks} % For plots
-\usetikzlibrary{colorbrewer} % Nice colors
+\usepgfplotslibrary{colorbrewer} % Nice colors
+\pgfplotsset{cycle list/Set2-8}
 
 
 % Change the appearance of the header. Here \MakeUppercase is hard-coded, so renewing this command allows to elegantly change the header appearance.
@@ -59,7 +61,7 @@
 \cleardoublepage
 \newpage
 
-% % Chapter-pages etc. use the ``plain'' pagestyle - since we don't want to have a heading at all at chapter-pages, redefine plain accordingly. Don't forget the page number.
+% Chapter-pages etc. use the ``plain'' pagestyle - since we don't want to have a heading at all at chapter-pages, redefine plain accordingly. Don't forget the page number.
 \fancypagestyle{plain}{
   \renewcommand{\headrulewidth}{0.0pt}
   \fancyfoot{}
