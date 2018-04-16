@@ -36,4 +36,56 @@ Also I have contributed on preparing the a new track on the segmentation field w
 
 
 
+
+Structure:
+
+Possible: One point to instance object segmentation on videos.
+
+Talk about point tracking, and show results (Hourglass and ResNet heatmaps tracking).
+Instance segmentation using metric learning a nd segment through similarity with keypoint.
+
+1. State of the art
+
+Point tracking with Hourglass to pose estimation
+
+Instance object segmentation using metric learning
+
+
+2. Method presented
+
+Talk about the DeepLab ResNet architecture
+
+Talked about the architecture to track the points
+
+Talke about metric learning.
+
+3. Experiments and Results
+
+Talk about the datasets: PASCAL and DAVIS
+
+Results on tracking points.
+
+Results on Instance Segmentation with metric learning on Pascal
+
+Show visual results on instance enbedding. Plot PCA for images and show that is possible to separate the instances.
+
+Results on instance segmentation in DAVIS taking a GT keypoint (maximum performance on J gerater than OSVOS and nearly equal to ONAVOS).
+
+Segmenting from keypoint on first frame gives 0.44
+
+Traking the keypoint on first frame and segment from tracked keypoints gives almost the same result.
+
+Point tracking should be improved.
+
+4. Conclusion and Future Work
+
+Very few methods for point tracking (mostly for object tracking). Tracking embeddings seems to not be a good solution, neither using resnet and finetune on a single instance (The method would require a high computational cost)
+
+Use some method that capture more contest from the point sorrounding.
+
+Embedding learning looks promising.
+
+
+
+Then give results
 % \section{Thesis Organization}
