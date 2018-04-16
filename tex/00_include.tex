@@ -1,0 +1,328 @@
+%!TEX root = ../thesis.tex
+
+%\usepackage{url}
+\usepackage{subfiles}
+%\usepackage{setspace}
+%\usepackage{multirow}
+
+%Font 1
+%\usepackage[T1]{fontenc}
+%\usepackage{tgbonum}
+
+%Font 2
+\usepackage{fourier}
+%\usepackage{mathpple}
+
+%Font 3
+%\usepackage[T1]{fontenc}
+%\usepackage{tgschola}
+
+%\usepackage{kpfonts}
+
+%\usepackage[table]{xcolor}
+\usepackage[usenames,table]{xcolor}
+\definecolor{webgreen}{rgb}{0, 0.7, 0} % less intense green
+\definecolor{webblue}{rgb}{0, 0, 0.6} % less intense blue
+\definecolor{webred}{rgb}{0.5, 0, 0} % less intense red
+
+\usepackage[pagebackref=true,bookmarks=true, bookmarksnumbered=true, bookmarksopen=false, colorlinks=true,
+    linkcolor= blue, urlcolor = webred, citecolor= webgreen, filecolor = webred]{hyperref}
+\hypersetup{pdftitle={Master's thesis},pdfauthor={Sergi Caelles Prat},
+pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+%\usepackage{algorithm2e}
+
+\usepackage{pdflscape}
+\usepackage{multirow}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{patterns}
+\usetikzlibrary{fit}
+\pgfplotsset{compat=newest}
+\pgfplotsset{every axis/.append style={
+font=\footnotesize,
+thin,
+tick style={ultra thin}}}
+
+\usetikzlibrary{trees,shapes.geometric,arrows,positioning}
+% \usepackage[active,tightpage]{preview}
+% \PreviewEnvironment{tikzpicture}
+
+%\usepackage{marvosym}
+\usepackage{amsmath,amssymb,amsthm}
+%\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage[paperheight=297mm,paperwidth=210mm,top=35mm,left=36mm,height=235mm,width=148mm]{geometry}
+%\usepackage{textcomp}
+\usepackage{graphicx}
+
+
+% To do heatmaps
+\usepackage{collcell}
+
+\newcommand*{\MinNumber}{0}%
+\newcommand*{\MaxNumber}{1}%
+
+\newcommand{\ApplyGradient}[1]{%
+        \pgfmathsetmacro{\PercentColor}{100.0*(#1-\MinNumber)/(\MaxNumber-\MinNumber)}
+        \hspace{-0.33em}\colorbox{blue!\PercentColor!white}{}
+}
+
+\newcolumntype{R}{>{\collectcell\ApplyGradient}c<{\endcollectcell}}
+
+
+
+
+% \usepackage{algorithmic}
+% \usepackage{algorithm}
+% \usepackage[algo2e,ruled,lined]{algorithm2e}
+
+%\usepackage{glossaries}
+%\makeglossaries
+%
+%
+%\newglossaryentry{uv}
+%{name={$[u,v]$},
+% description={Image pixel coordinates used in this work, where the origin is
+%placed at the up-left corner of the image, $u$ is the horizontal direction,
+%and $v$ the vertical one}
+%}
+
+\usepackage{booktabs}
+
+\usepackage{etex}
+\input xy
+\xyoption{all}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}
+
+\newtheoremstyle{myproof}% hnamei
+{3pt}% hSpace abovei
+{3pt}% hSpace belowi
+{}% hBody fonti
+{3pt}% hIndent amounti1
+{\itshape}% hTheorem head fonti
+{:}% hPunctuation after theorem headi
+{.5em}% hSpace after theorem headi2
+{}% hTheorem head spec (can be left empty, meaning `normal')i
+
+
+
+
+\usepackage[compact]{titlesec}
+%\titlespacing{\section}{0pt}{*0}{*0}
+\titlespacing{\subsection}{0pt}{8pt}{0pt}
+%\titlespacing{\subsubsection}{0pt}{*0}{*0}
+
+%\usepackage[small,bf, justification=centering]{caption}
+%\usepackage[format=hang]{caption}
+
+\setlength{\parskip}{0.7\baselineskip}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1}
+
+\usepackage{rotating}
+\usepackage{pifont}
+
+\newcommand{\showglobaldisc}[1]{%
+\mbox{\input{data/flat_meta_soa/global_#1.txt}\hspace{-2.5pt}}%
+}
+\newcommand{\showswappedsoadisc}[1]{%
+\mbox{\input{data/flat_meta_soa/swapped_soa_disc_#1.txt}\hspace{-2.5pt}}%
+}
+\newcommand{\showswappedhumdisc}[1]{%
+\mbox{\input{data/flat_meta_soa/swapped_human_disc_#1.txt}\hspace{-2.5pt}}%
+}
+\newcommand{\showbaselinedisc}[1]{%
+\mbox{\input{data/flat_meta_soa/baseline_disc_#1.txt}\hspace{-2.5pt}}%
+}
+
+\newcommand{\showodsf}[2]{%
+\mbox{\input{data/flat_pr_curves/#1_#2_ods_f.txt}\hspace{-2.5pt}}%
+}
+\newcommand{\showodsfb}[2]{%
+\mbox{\input{data/segm_bsds/test_#1_#2_ods_f.txt}\hspace{-2.5pt}}%
+}
+\newenvironment{llista}{\begin{list}{$\bullet$}{\leftmargin=1em\partopsep=0pt\topsep=0pt\itemsep=0pt}}{\end{list}}
+
+\newenvironment{highlight}{\vspace{5pt}
+\begin{tabular}{@{\hspace{-1.5mm}}c|@{\hspace{4mm}}r}
+&\begin{minipage}{0.95\linewidth}
+}{%
+\end{minipage}
+\end{tabular}
+\vspace{5pt}
+}
+
+\usepackage{paralist}
+
+%********Capcalera i peu de pagina**********
+\pagestyle{myheadings}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\newcommand{\showone}[1]{%
+\mbox{\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_im.jpg}}
+\hspace{2mm}
+\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_ucm.png}}
+\hspace{2mm}
+\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_gt.png}}
+\hspace{2mm}
+\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_mask_1.png}}}%
+}
+
+\newcommand{\showtwo}[1]{%
+\mbox{\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_im.jpg}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_ucm.png}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_gt.png}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_1.png}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_2.png}}}%
+}
+
+\newcommand{\showthree}[1]{%
+\mbox{\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_im.jpg}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_ucm.png}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_gt.png}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_1.png}}
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_2.png}}%
+\hspace{1.5mm}
+\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_3.png}}}%
+}
+
+\newcommand{\headerone}{\noindent\mbox{\begin{minipage}{0.23\linewidth}\centering Original Image\end{minipage}
+\hspace{2mm}
+\begin{minipage}{0.23\linewidth}\centering Multiscale hier.\end{minipage}
+\hspace{2mm}
+\begin{minipage}{0.23\linewidth}\centering Ground truth\end{minipage}
+\hspace{2mm}
+\begin{minipage}{0.23\linewidth}\centering MCG best cand. among 400\end{minipage}}\\[2mm]}
+
+
+\newcommand{\headertwo}{\noindent\mbox{\begin{minipage}{0.18\linewidth}\centering Original Image\end{minipage}
+\hspace{1.5mm}
+\begin{minipage}{0.18\linewidth}\centering Multiscale hier.\end{minipage}
+\hspace{1.5mm}
+\begin{minipage}{0.18\linewidth}\centering Ground truth\end{minipage}
+\hspace{1.5mm}
+\begin{minipage}{0.39\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
+
+
+\newcommand{\headerthree}{\noindent\mbox{\begin{minipage}{0.15\linewidth}\centering Original Image\end{minipage}
+\hspace{1.5mm}
+\begin{minipage}{0.15\linewidth}\centering Multiscale hier.\end{minipage}
+\hspace{1.5mm}
+\begin{minipage}{0.15\linewidth}\centering Ground truth\end{minipage}
+\hspace{1.5mm}
+\begin{minipage}{0.48\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
+
+
+
+% \pgfplotsset{
+% cycle list={%
+% {red, mark=*, mark size=1.3},
+% %{red, mark=diamond*, mark size=1.5},
+% {red, mark=square*, mark size=1.25},
+% {red, mark=triangle*, mark size=1.6},
+% {blue,mark=o, mark size=1.3},
+% %{blue,mark=diamond, mark size=1.5},
+% {blue,mark=square, mark size=1.25},
+% {blue,mark=triangle, mark size=1.6},
+% }}
+\newtheorem{example}{Example}
+
+
+
+%% Change chapter style
+\usepackage{calc}
+\definecolor{chaptercolor}{gray}{0.8}
+% helper macros
+\newcommand\numlifter[1]{\raisebox{-2cm}[0pt][0pt]{\smash{#1}}}
+\newcommand\numindent{\kern37pt}
+\newlength\chaptertitleboxheight
+\makechapterstyle{hansen}{
+  \renewcommand\printchaptername{\raggedleft}
+  \renewcommand\printchapternum{%
+    \begingroup%
+    \leavevmode%
+    \chapnumfont%
+    \strut%
+    \numlifter{\thechapter}%
+    \numindent%
+\endgroup%
+}
+  \renewcommand*{\printchapternonum}{%
+    \vphantom{\begingroup%
+      \leavevmode%
+      \chapnumfont%
+      \numlifter{\vphantom{9}}%
+      \numindent%
+      \endgroup}
+    \afterchapternum}
+  \setlength\midchapskip{0pt}
+  \setlength\beforechapskip{0.5\baselineskip}
+  \setlength{\afterchapskip}{3\baselineskip}
+  \renewcommand\chapnumfont{%
+    \fontsize{4cm}{5mm}%
+    \bfseries%
+    %\sffamily%
+    \color{chaptercolor}%
+  }
+  \renewcommand\chaptitlefont{%
+    \normalfont%
+    \huge%
+    \bfseries%
+    \raggedleft%
+  }%
+  \settototalheight\chaptertitleboxheight{%
+    \parbox{\textwidth}{\chaptitlefont \strut bg\\bg\strut}}
+  \renewcommand\printchaptertitle[1]{%
+    \parbox[t][\chaptertitleboxheight][t]{\textwidth}{%
+      %\microtypesetup{protrusion=false}% add this if you use microtype
+      \chaptitlefont\strut ##1\strut}%
+}}
+\chapterstyle{hansen}
+\aliaspagestyle{chapter}{empty}
+
+% New additions
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\newcommand{\subcaptationspace}{\captionsetup{skip=2.5pt} }
+\newcommand{\captationspace}{\captionsetup{skip=2.5pt} }
+\newcommand{\subfigurespace}{\par\medskip}%\bigskip or \medskip
+
+% Additions for the DAVIS paper
+\definecolor{rowblue}{RGB}{220,230,240}
+\renewcommand{\bf}{\textbf}
+\newcommand{\namemcg}{MCG}
+\newcommand{\namesfrgb}{SF-LAB}
+\newcommand{\namesfflow}{SF-MOT}
+\newcommand{\namenonlocalconsensus}{NLC}
+\newcommand{\namecvos}{CVOS}
+\newcommand{\nametracingdisco}{TRC}
+\newcommand{\namemoseg}{MSG}
+\newcommand{\namekeysegments}{KEY}
+\newcommand{\namesaliencyseg}{SAL}
+\newcommand{\namefastvideoseg}{FST}
+\newcommand{\nametsp}{TSP}
+\newcommand{\nameseamseg}{SEA}
+\newcommand{\namehvs}{HVS}
+\newcommand{\namejumpcut}{JMP}
+\newcommand{\namefcop}{FCP}
+\newcommand{\cmark}{\checkmark}

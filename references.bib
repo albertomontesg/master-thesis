@@ -1,14 +1,31 @@
-% This file was created with JabRef 2.3.
-% Encoding: ISO-8859-1
 
-% Datasets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Datasets                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% DAVIS 2016
 @inproceedings{Perazzi2016,
   author = {F. Perazzi and J. Pont-Tuset and B. McWilliams and L. {Van Gool} and M. Gross and A. Sorkine-Hornung},
   title = {A Benchmark Dataset and Evaluation Methodology for Video Object Segmentation},
   booktitle = {Computer Vision and Pattern Recognition},
   year = {2016}
 }
+% DAVIS 2017
+@article{Pont-Tuset2017,
+  abstract = {We present the 2017 DAVIS Challenge, a public competition specifically designed for the task of video object segmentation. Following the footsteps of other successful initiatives, such as ILSVRC and PASCAL VOC, which established the avenue of research in the fields of scene classification and semantic segmentation, the DAVIS Challenge comprises a dataset, an evaluation methodology, and a public competition with a dedicated workshop co-located with CVPR 2017. The DAVIS Challenge follows up on the recent publication of DAVIS (Densely-Annotated VIdeo Segmentation), which has fostered the development of several novel state-of-the-art video object segmentation techniques. In this paper we describe the scope of the benchmark, highlight the main characteristics of the dataset and define the evaluation metrics of the competition.},
+  archivePrefix = {arXiv},
+  arxivId = {1704.00675},
+  author = {Pont-Tuset, Jordi and Perazzi, Federico and Caelles, Sergi and Arbel{\'{a}}ez, Pablo and Sorkine-Hornung, Alex and {Van Gool}, Luc},
+  eprint = {1704.00675},
+  file = {:Users/alberto/Library/Application Support/Mendeley Desktop/Downloaded/Pont-Tuset et al. - 2017 - The 2017 DAVIS Challenge on Video Object Segmentation.pdf:pdf},
+  mendeley-groups = {CVL/Master Thesis,CVL/Segmentation},
+  month = {apr},
+  title = {{The 2017 DAVIS Challenge on Video Object Segmentation}},
+  url = {http://arxiv.org/abs/1704.00675},
+  year = {2017}
+}
 
+% PASCAL
 @Article{Everingham10, 
    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.", 
    title = "The Pascal Visual Object Classes (VOC) Challenge", 
@@ -20,10 +37,99 @@
    pages = "303--338", 
 }
 
-% Software
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Software                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 @inproceedings{paszke2017automatic,
   title={Automatic differentiation in PyTorch},
   author={Paszke, Adam and Gross, Sam and Chintala, Soumith and Chanan, Gregory and Yang, Edward and DeVito, Zachary and Lin, Zeming and Desmaison, Alban and Antiga, Luca and Lerer, Adam},
   booktitle={NIPS-W},
   year={2017}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% State of the art                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Stacked Hourglass
+@inproceedings{newell2016stacked,
+  title={Stacked hourglass networks for human pose estimation},
+  author={Newell, Alejandro and Yang, Kaiyu and Deng, Jia},
+  booktitle={European Conference on Computer Vision},
+  pages={483--499},
+  year={2016},
+  organization={Springer}
+}
+
+% MDNET
+@inproceedings{nam2016learning,
+  title={Learning multi-domain convolutional neural networks for visual tracking},
+  author={Nam, Hyeonseob and Han, Bohyung},
+  booktitle={Computer Vision and Pattern Recognition (CVPR), 2016 IEEE Conference on},
+  pages={4293--4302},
+  year={2016},
+  organization={IEEE}
+}
+
+% MaskRCNN
+@inproceedings{he2017mask,
+  title={Mask r-cnn},
+  author={He, Kaiming and Gkioxari, Georgia and Doll{\'a}r, Piotr and Girshick, Ross},
+  booktitle={Computer Vision (ICCV), 2017 IEEE International Conference on},
+  pages={2980--2988},
+  year={2017},
+  organization={IEEE}
+}
+
+% OSVOS
+@inproceedings{caelles2017one,
+  title={One-shot video object segmentation},
+  author={Caelles, Sergi and Maninis, Kevis-Kokitsi and Pont-Tuset, Jordi and Leal-Taix{\'e}, Laura and Cremers, Daniel and Van Gool, Luc},
+  booktitle={CVPR 2017},
+  year={2017},
+  organization={IEEE}
+}
+
+% Proposal Free Network
+@article{liang2015proposal,
+  title={Proposal-free network for instance-level object segmentation},
+  author={Liang, Xiaodan and Wei, Yunchao and Shen, Xiaohui and Yang, Jianchao and Lin, Liang and Yan, Shuicheng},
+  journal={arXiv preprint arXiv:1509.02636},
+  year={2015}
+}
+
+% Deep Metric Learning
+@article{fathi2017semantic,
+  title={Semantic instance segmentation via deep metric learning},
+  author={Fathi, Alireza and Wojna, Zbigniew and Rathod, Vivek and Wang, Peng and Song, Hyun Oh and Guadarrama, Sergio and Murphy, Kevin P},
+  journal={arXiv preprint arXiv:1703.10277},
+  year={2017}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Challenges
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% VOT Challenge
+@article {VOT_TPAMI,
+  author = {Matej Kristan and Jiri Matas and Ale\v{s} Leonardis and Tomas Vojir and Roman Pflugfelder and Gustavo Fernandez and Georg Nebehay and Fatih Porikli and Luka \v{C}ehovin},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  title={A Novel Performance Evaluation Methodology for Single-Target Trackers},
+  year={2016}, month={Nov}, volume={38}, number={11}, pages={2137-2155},
+  doi={10.1109/TPAMI.2016.2516982}, ISSN={0162-8828}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional Works
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Metric Learning
+@inproceedings{balntas2016learning,
+  title={Learning local feature descriptors with triplets and shallow convolutional neural networks.},
+  author={Balntas, Vassileios and Riba, Edgar and Ponsa, Daniel and Mikolajczyk, Krystian},
+  booktitle={BMVC},
+  volume={1},
+  number={2},
+  pages={3},
+  year={2016}
 }

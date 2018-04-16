@@ -1,13 +1,7 @@
 %!TEX root = ../thesis.tex
 
-%% ----------------------------------------------------------------------------
-% BIWI SA/MA thesis template
-%
-% Created 09/29/2006 by Andreas Ess
-% Extended 13/02/2009 by Jan Lesniak - jlesniak@vision.ee.ethz.ch
-%% ----------------------------------------------------------------------------
-\newpage
 \chapter{State of the Art}
+\label{cha:stateofart}
 
 % Describe the other's work in the field, with the following purposes in mind:
 
@@ -17,9 +11,36 @@
 % \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Talk here about the previous works for tracking points (Hourglass, MDNet,...)
 
-And also about previous work on object instance segmentation.
-Most of the previous works come through proposal.
+In this chapter, we summarize the most relevant work on instance object segmentation. 
+First, we focus on tracking implementations and later we talk about state of the art methods for object instance segmentation and some implementations applied to video.
 
-Talk about proposal free network. Deep Metric learning.
+\section{Tracking}
+
+Tracking implementations are mainly focus on object tracking. This conists on taking the bounding box sorrounding and object and make bounding box predictions throught the video that contains the object to track.
+
+One state of the art implementation is called MDNet~\cite{nam2016learning}.
+This implementation was the winner of the VOT Challenge~\cite{VOT_TPAMI} in 2016.
+
+
+Unfortunetly there are not implementations that focus on keypoints tracking which is the idea behind this thesis.
+
+
+For the purpose of tracking two related state of the art works which one is a NN object tracker:
+
+MDNET~\cite{nam2016learning}.
+
+% And the other one is state of the art for pose estimation:
+
+% Stacked Hourglass Networks for Human Pose Estimation~\cite{newell2016stacked}
+
+
+\section{Instance Segmentation}
+
+Mask RCNN~\cite{he2017mask}: Use proposal and comes from work in object detection. Obtain state of the art results. But complex network with multiple proposal candidates.
+
+Proposal Free network~\cite{liang2015proposal}.
+
+OSVOS~\cite{caelles2017one} and ONAVOS make instance segmentation on video.
+
+Deep metric learning for instance object segmentation~\cite{fathi2017semantic}.

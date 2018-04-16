@@ -1,13 +1,10 @@
 %!TEX root = ../thesis.tex
 
-%% ----------------------------------------------------------------------------
-% BIWI SA/MA thesis template
-%
-% Created 09/29/2006 by Andreas Ess
-% Extended 13/02/2009 by Jan Lesniak - jlesniak@vision.ee.ethz.ch
-%% ----------------------------------------------------------------------------
-\newpage
 \chapter{Experiments and Results}
+\label{cha:experimentsandresults}
+
+
+
 % Describe the evaluation you did in a way, such that an independent researcher can repeat it. Cover the following questions:
 % \begin{itemize}
 %  \item \textit{What is the experimental setup and methodology?} Describe the setting of the experiments and give all the parameters in detail which you have used. Give a detailed account of how the experiment was conducted.
@@ -62,16 +59,16 @@ Number of objects per sequence     & 1     & 1    & \textbf{1}     \\
 
 \begin{figure}
 \centering
-\begin{subfigure}{0.25\textwidth}
+\begin{subfigure}{.25\textwidth}
   \includegraphics[width=1.\linewidth]{figures/davis_dataset/blackswan.jpg}
 \end{subfigure}%
-\begin{subfigure}{0.25\textwidth}
+\begin{subfigure}{.25\textwidth}
   \includegraphics[width=1.\linewidth]{figures/davis_dataset/breakdance.jpg}
 \end{subfigure}%
-\begin{subfigure}{0.25\textwidth}
+\begin{subfigure}{.25\textwidth}
   \includegraphics[width=1.\linewidth]{figures/davis_dataset/car-roundabout.jpg}
 \end{subfigure}%
-\begin{subfigure}{0.25\textwidth}
+\begin{subfigure}{.25\textwidth}
   \includegraphics[width=1.\linewidth]{figures/davis_dataset/cow.jpg}
 \end{subfigure}
 \caption{Example of annotations on DAVIS Dataset.}
@@ -148,27 +145,27 @@ Then the results pivoting to instance segmentation. Put here the results of the 
           % legend style={at={(0.5,-0.2)},anchor=north},
           % x tick label style={rotate=90,anchor=east}
         ]
-        \addplot+[smooth, index of colormap=1 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth, cyan, mark=none, line width=1]
         table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Baseline}
 
-        \addplot+[smooth, index of colormap=2 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth, red, mark=none, line width=1]
         table [x=Threshold, y=MDNet, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{MDNet}
 
-        \addplot+[smooth, index of colormap=3 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth, green, mark=none, line width=1]
         table [x=Threshold, y=Hourglass w/o Parent Network 1HG x2 sigma 5, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Hourglass}
 
-        \addplot+[smooth, index of colormap=4 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
         table [x=Threshold, y=ResNet101 sigma20, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{ResNet101}
 
-        \addplot+[smooth, index of colormap=5 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
         table [x=Threshold, y=ResNet50 sigma40, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{ResNet50}
 
-        \addplot+[smooth, index of colormap=6 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
         table [x=Threshold, y=ResNet50 Multiscale sigma964824, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{ResNet50 Multiscale}
 
@@ -206,45 +203,25 @@ Backbone architecture ResNet101.
           % legend style={at={(0.5,-0.2)},anchor=north},
           % x tick label style={rotate=90,anchor=east}
         ]
-        \addplot+[smooth, index of colormap=1 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
         table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Baseline}
 
-        \addplot+[smooth, index of colormap=2 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
         table [x=Threshold, y=Features ResNet Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Pre-Trained VOC D=2048}
 
-        \addplot+[smooth, index of colormap=3 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
           table [x=Threshold, y=Features Metric Learning (480p) Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Triplet Loss D=2048}
 
-        \addplot+[smooth, index of colormap=4 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
           table [x=Threshold, y=Features Metric Learning Triplet Loss (480p) D128 Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Triplet Loss D=128}
 
-        \addplot+[smooth, index of colormap=5 of Set2-8, mark=none, line width=1]
+        \addplot+[smooth,  mark=none, line width=1]
           table [x=Threshold, y=Features Metric Learning Quadplet Loss (480p) Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
         \addlegendentry{Double Triplet Loss D=2048}
-
-        % \addplot+[smooth, index of colormap=2 of Set2-8, mark=none, line width=1]
-        % table [x=Threshold, y=MDNet, col sep=comma] {data/precission_threshold_curves.csv};
-        % \addlegendentry{MDNet}
-
-        % \addplot+[smooth, index of colormap=3 of Set2-8, mark=none, line width=1]
-        % table [x=Threshold, y=Hourglass w/o Parent Network 1HG x2 sigma 5, col sep=comma] {data/precission_threshold_curves.csv};
-        % \addlegendentry{Hourglass}
-
-        % \addplot+[smooth, index of colormap=4 of Set2-8, mark=none, line width=1]
-        % table [x=Threshold, y=ResNet101 sigma20, col sep=comma] {data/precission_threshold_curves.csv};
-        % \addlegendentry{ResNet101}
-
-        % \addplot+[smooth, index of colormap=5 of Set2-8, mark=none, line width=1]
-        % table [x=Threshold, y=ResNet50 sigma40, col sep=comma] {data/precission_threshold_curves.csv};
-        % \addlegendentry{ResNet50}
-
-        % \addplot+[smooth, index of colormap=6 of Set2-8, mark=none, line width=1]
-        % table [x=Threshold, y="ResNet50 Multiscale sigma96,48,24", col sep=comma] {data/precission_threshold_curves.csv};
-        % \addlegendentry{ResNet50 Multiscale}
 
       \end{axis}
     \end{tikzpicture}
