@@ -7,6 +7,7 @@ In this chapter, we summarize the most relevant work on instance object segmenta
 First, we focus on tracking implementations and later we talk about state of the art methods for object instance segmentation and some implementations applied to video.
 
 \section{Tracking}
+\label{sec:soa_tracking}
 
 Tracking implementations are mainly focus on video object tracking.
 This conists on taking the bounding box sorrounding and object and make bounding box predictions throught the video that contains the object to track.
@@ -27,12 +28,11 @@ This showed state-of-the art results on tracking benchmarks and was the winner o
 
 Unfortunetly there are not implementations that focus on keypoints tracking which is the idea behind this thesis.
 
-% And the other one is state of the art for pose estimation:
-
 % Stacked Hourglass Networks for Human Pose Estimation~\cite{newell2016stacked}
 
 
 \section{Instance Segmentation}
+\label{sec:soa_instancesegmentation}
 
 Instance detection and segmentation is one of the most challenging tasks in Computer Vision right now.
 In this section we explore some of the works that tackle instance segmentation in different domains like image and video.
@@ -64,7 +64,5 @@ This work proposes a recurrent neural network approach which fuses in each frame
 The first net is a binary segmentation network providing a mask and the second one is a localization network providing a bounding box.
 Thanks to the recurrent component and the localization component, this method is able to take advantage of long-term temporal structures of the video as well as rejecting outliers.
 This method also provide competitive results with the previous works of OSVOS~\cite{caelles2017one} and OnAVOS~\cite{voigtlaender17BMVC}.
-
-
 
 % \paragraph{Proposal Free Network}~\cite{liang2015proposal}

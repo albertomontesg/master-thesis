@@ -1,0 +1,49 @@
+Baseline	0.42805232558139533
+MDNet	0.8510174418604651
+MDNet VOT bb16	0.6162790697674418
+MDNet VOT bb32	0.8880813953488372
+MDNet DAVIS bb16	0.6395348837209303
+MDNet DAVIS bb32	0.9265988372093024
+MDNet DAVIS bb64	0.9207848837209303
+Hourglass w/ Parent Network 1HG	0.7776162790697675
+Hourglass w/ Parent Network 1HG x2 s5	0.8430232558139535
+Hourglass w/o Parent Network 1HG	0.8372093023255814
+Hourglass w/o Parent Network 2HG	0.8357558139534884
+Hourglass w/o Parent Network 1HG x2 sigma 5	0.8117732558139535
+Hourglass w/o Parent Network 2HG x2 sigma5	0.8335755813953488
+Hourglass Online Training	0.5116279069767442
+ResNet101 sigma40	0.9106104651162791
+ResNet101 sigma40 + Temporal Kalman Filter	0.8953488372093024
+ResNet101 sigma20	0.8561046511627907
+ResNet50 sigma40	0.9120639534883721
+ResNet50 Multiscale sigma964824	0.9396802325581395
+Features ResNet Basic metriceuclidean patchsize1	0.6199127906976745
+Features ResNet Basic metriceuclidean patchsize3	0.6424418604651163
+Features ResNet Basic metriceuclidean patchsize5	0.6795058139534884
+Features ResNet Basic metriccosine patchsize1	0.7264231096006797
+Features ResNet Basic metriccosine patchsize3	0.6888068880688807
+Features ResNet Basic metriccosine patchsize5	0.7252906976744186
+Features Metric Learning (480p) Basic metriceuclidean patchsize1	0.75
+Features Metric Learning (480p) Basic metriceuclidean patchsize3	0.8597383720930233
+Features Metric Learning (480p) Basic metriceuclidean patchsize5	0.8655523255813954
+Features Metric Learning (480p) Basic metriccosine patchsize1	0.7492732558139535
+Features Metric Learning (480p) Basic metriccosine patchsize3	0.9244186046511628
+Features Metric Learning (480p) Basic metriccosine patchsize5	0.9127906976744186
+Features Metric Learning (320p) Basic metriceuclidean patchsize1	0.7943313953488372
+Features Metric Learning (320p) Basic metriceuclidean patchsize3	0.7950581395348837
+Features Metric Learning (320p) Basic metriceuclidean patchsize5	0.7361918604651163
+Features Metric Learning (320p) Basic metriccosine patchsize1	0.7943313953488372
+Features Metric Learning (320p) Basic metriccosine patchsize3	0.8822674418604651
+Features Metric Learning (320p) Basic metriccosine patchsize5	0.8052325581395349
+Features Metric Learning Quadplet Loss (320p) Basic metriccosine patchsize1	0.8284883720930233
+Features Metric Learning Quadplet Loss (320p) Basic metriccosine patchsize3	0.8815406976744186
+Features Metric Learning Quadplet Loss (320p) Basic metriccosine patchsize5	0.8430232558139535
+Features Metric Learning Quadplet Loss (480p) Basic metriccosine patchsize1	0.8299418604651163
+Features Metric Learning Quadplet Loss (480p) Basic metriccosine patchsize3	0.8851744186046512
+Features Metric Learning Quadplet Loss (480p) Basic metriccosine patchsize5	0.877906976744186
+Features Metric Learning Triplet Loss (480p) D128 Basic metriceuclidean patchsize1	0.9106104651162791
+Features Metric Learning Triplet Loss (480p) D128 Basic metriceuclidean patchsize3	0.8982558139534884
+Features Metric Learning Triplet Loss (480p) D128 Basic metriceuclidean patchsize5	0.8175872093023255
+Features Metric Learning Triplet Loss (480p) D128 Basic metriccosine patchsize1	0.9106104651162791
+Features Metric Learning Triplet Loss (480p) D128 Basic metriccosine patchsize3	0.9164244186046512
+Features Metric Learning Triplet Loss (480p) D128 Basic metriccosine patchsize5	0.846656976744186

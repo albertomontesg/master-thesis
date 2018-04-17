@@ -11,7 +11,7 @@
 
 %Font 2
 \usepackage{fourier}
-%\usepackage{mathpple}
+% \usepackage{mtpro2}
 
 %Font 3
 %\usepackage[T1]{fontenc}
@@ -27,7 +27,7 @@
 
 \usepackage[pagebackref=true,bookmarks=true, bookmarksnumbered=true, bookmarksopen=false, colorlinks=true,
     linkcolor= blue, urlcolor = webred, citecolor= webgreen, filecolor = webred]{hyperref}
-\hypersetup{pdftitle={Master's thesis},pdfauthor={Sergi Caelles Prat},
+\hypersetup{pdftitle={Master's thesis},pdfauthor={Alberto Montes G\'omez},
 pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
 
 \usepackage{algpseudocode}
@@ -53,13 +53,32 @@ tick style={ultra thin}}}
 % \PreviewEnvironment{tikzpicture}
 
 %\usepackage{marvosym}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath} %,amssymb,amsthm}
 %\usepackage[latin1]{inputenc}
 \usepackage[english]{babel}
 
 \usepackage[paperheight=297mm,paperwidth=210mm,top=35mm,left=36mm,height=235mm,width=148mm]{geometry}
 %\usepackage{textcomp}
 \usepackage{graphicx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% References
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\equref}[1]{Equation~\ref{eq:#1}}
+\newcommand{\tabref}[1]{Table~\ref{tab:#1}}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Legacy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 % To do heatmaps
@@ -99,21 +118,6 @@ tick style={ultra thin}}}
 \input xy
 \xyoption{all}
 
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{definition}{Definition}
-
-\newtheoremstyle{myproof}% hnamei
-{3pt}% hSpace abovei
-{3pt}% hSpace belowi
-{}% hBody fonti
-{3pt}% hIndent amounti1
-{\itshape}% hTheorem head fonti
-{:}% hPunctuation after theorem headi
-{.5em}% hSpace after theorem headi2
-{}% hTheorem head spec (can be left empty, meaning `normal')i
-
-
 
 
 \usepackage[compact]{titlesec}
@@ -129,37 +133,37 @@ tick style={ultra thin}}}
 \renewcommand{\baselinestretch}{1}
 
 \usepackage{rotating}
-\usepackage{pifont}
+% \usepackage{pifont}
 
-\newcommand{\showglobaldisc}[1]{%
-\mbox{\input{data/flat_meta_soa/global_#1.txt}\hspace{-2.5pt}}%
-}
-\newcommand{\showswappedsoadisc}[1]{%
-\mbox{\input{data/flat_meta_soa/swapped_soa_disc_#1.txt}\hspace{-2.5pt}}%
-}
-\newcommand{\showswappedhumdisc}[1]{%
-\mbox{\input{data/flat_meta_soa/swapped_human_disc_#1.txt}\hspace{-2.5pt}}%
-}
-\newcommand{\showbaselinedisc}[1]{%
-\mbox{\input{data/flat_meta_soa/baseline_disc_#1.txt}\hspace{-2.5pt}}%
-}
+% \newcommand{\showglobaldisc}[1]{%
+% \mbox{\input{data/flat_meta_soa/global_#1.txt}\hspace{-2.5pt}}%
+% }
+% \newcommand{\showswappedsoadisc}[1]{%
+% \mbox{\input{data/flat_meta_soa/swapped_soa_disc_#1.txt}\hspace{-2.5pt}}%
+% }
+% \newcommand{\showswappedhumdisc}[1]{%
+% \mbox{\input{data/flat_meta_soa/swapped_human_disc_#1.txt}\hspace{-2.5pt}}%
+% }
+% \newcommand{\showbaselinedisc}[1]{%
+% \mbox{\input{data/flat_meta_soa/baseline_disc_#1.txt}\hspace{-2.5pt}}%
+% }
 
-\newcommand{\showodsf}[2]{%
-\mbox{\input{data/flat_pr_curves/#1_#2_ods_f.txt}\hspace{-2.5pt}}%
-}
-\newcommand{\showodsfb}[2]{%
-\mbox{\input{data/segm_bsds/test_#1_#2_ods_f.txt}\hspace{-2.5pt}}%
-}
-\newenvironment{llista}{\begin{list}{$\bullet$}{\leftmargin=1em\partopsep=0pt\topsep=0pt\itemsep=0pt}}{\end{list}}
+% \newcommand{\showodsf}[2]{%
+% \mbox{\input{data/flat_pr_curves/#1_#2_ods_f.txt}\hspace{-2.5pt}}%
+% }
+% \newcommand{\showodsfb}[2]{%
+% \mbox{\input{data/segm_bsds/test_#1_#2_ods_f.txt}\hspace{-2.5pt}}%
+% }
+% \newenvironment{llista}{\begin{list}{$\bullet$}{\leftmargin=1em\partopsep=0pt\topsep=0pt\itemsep=0pt}}{\end{list}}
 
-\newenvironment{highlight}{\vspace{5pt}
-\begin{tabular}{@{\hspace{-1.5mm}}c|@{\hspace{4mm}}r}
-&\begin{minipage}{0.95\linewidth}
-}{%
-\end{minipage}
-\end{tabular}
-\vspace{5pt}
-}
+% \newenvironment{highlight}{\vspace{5pt}
+% \begin{tabular}{@{\hspace{-1.5mm}}c|@{\hspace{4mm}}r}
+% &\begin{minipage}{0.95\linewidth}
+% }{%
+% \end{minipage}
+% \end{tabular}
+% \vspace{5pt}
+% }
 
 \usepackage{paralist}
 
@@ -168,67 +172,67 @@ tick style={ultra thin}}}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
-\newcommand{\showone}[1]{%
-\mbox{\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_im.jpg}}
-\hspace{2mm}
-\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_ucm.png}}
-\hspace{2mm}
-\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_gt.png}}
-\hspace{2mm}
-\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_mask_1.png}}}%
-}
+% \newcommand{\showone}[1]{%
+% \mbox{\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_im.jpg}}
+% \hspace{2mm}
+% \fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_ucm.png}}
+% \hspace{2mm}
+% \fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_gt.png}}
+% \hspace{2mm}
+% \fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_mask_1.png}}}%
+% }
 
-\newcommand{\showtwo}[1]{%
-\mbox{\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_im.jpg}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_ucm.png}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_gt.png}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_1.png}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_2.png}}}%
-}
+% \newcommand{\showtwo}[1]{%
+% \mbox{\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_im.jpg}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_ucm.png}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_gt.png}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_1.png}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_2.png}}}%
+% }
 
-\newcommand{\showthree}[1]{%
-\mbox{\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_im.jpg}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_ucm.png}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_gt.png}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_1.png}}
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_2.png}}%
-\hspace{1.5mm}
-\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_3.png}}}%
-}
+% \newcommand{\showthree}[1]{%
+% \mbox{\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_im.jpg}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_ucm.png}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_gt.png}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_1.png}}
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_2.png}}%
+% \hspace{1.5mm}
+% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_3.png}}}%
+% }
 
-\newcommand{\headerone}{\noindent\mbox{\begin{minipage}{0.23\linewidth}\centering Original Image\end{minipage}
-\hspace{2mm}
-\begin{minipage}{0.23\linewidth}\centering Multiscale hier.\end{minipage}
-\hspace{2mm}
-\begin{minipage}{0.23\linewidth}\centering Ground truth\end{minipage}
-\hspace{2mm}
-\begin{minipage}{0.23\linewidth}\centering MCG best cand. among 400\end{minipage}}\\[2mm]}
-
-
-\newcommand{\headertwo}{\noindent\mbox{\begin{minipage}{0.18\linewidth}\centering Original Image\end{minipage}
-\hspace{1.5mm}
-\begin{minipage}{0.18\linewidth}\centering Multiscale hier.\end{minipage}
-\hspace{1.5mm}
-\begin{minipage}{0.18\linewidth}\centering Ground truth\end{minipage}
-\hspace{1.5mm}
-\begin{minipage}{0.39\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
+% \newcommand{\headerone}{\noindent\mbox{\begin{minipage}{0.23\linewidth}\centering Original Image\end{minipage}
+% \hspace{2mm}
+% \begin{minipage}{0.23\linewidth}\centering Multiscale hier.\end{minipage}
+% \hspace{2mm}
+% \begin{minipage}{0.23\linewidth}\centering Ground truth\end{minipage}
+% \hspace{2mm}
+% \begin{minipage}{0.23\linewidth}\centering MCG best cand. among 400\end{minipage}}\\[2mm]}
 
 
-\newcommand{\headerthree}{\noindent\mbox{\begin{minipage}{0.15\linewidth}\centering Original Image\end{minipage}
-\hspace{1.5mm}
-\begin{minipage}{0.15\linewidth}\centering Multiscale hier.\end{minipage}
-\hspace{1.5mm}
-\begin{minipage}{0.15\linewidth}\centering Ground truth\end{minipage}
-\hspace{1.5mm}
-\begin{minipage}{0.48\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
+% \newcommand{\headertwo}{\noindent\mbox{\begin{minipage}{0.18\linewidth}\centering Original Image\end{minipage}
+% \hspace{1.5mm}
+% \begin{minipage}{0.18\linewidth}\centering Multiscale hier.\end{minipage}
+% \hspace{1.5mm}
+% \begin{minipage}{0.18\linewidth}\centering Ground truth\end{minipage}
+% \hspace{1.5mm}
+% \begin{minipage}{0.39\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
+
+
+% \newcommand{\headerthree}{\noindent\mbox{\begin{minipage}{0.15\linewidth}\centering Original Image\end{minipage}
+% \hspace{1.5mm}
+% \begin{minipage}{0.15\linewidth}\centering Multiscale hier.\end{minipage}
+% \hspace{1.5mm}
+% \begin{minipage}{0.15\linewidth}\centering Ground truth\end{minipage}
+% \hspace{1.5mm}
+% \begin{minipage}{0.48\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
 
 
 
@@ -298,8 +302,6 @@ tick style={ultra thin}}}
 \chapterstyle{hansen}
 \aliaspagestyle{chapter}{empty}
 
-% New additions
-\newcommand{\figref}[1]{Figure~\ref{#1}}
 
 \usepackage{caption}
 \usepackage{subcaption}
@@ -308,21 +310,21 @@ tick style={ultra thin}}}
 \newcommand{\subfigurespace}{\par\medskip}%\bigskip or \medskip
 
 % Additions for the DAVIS paper
-\definecolor{rowblue}{RGB}{220,230,240}
-\renewcommand{\bf}{\textbf}
-\newcommand{\namemcg}{MCG}
-\newcommand{\namesfrgb}{SF-LAB}
-\newcommand{\namesfflow}{SF-MOT}
-\newcommand{\namenonlocalconsensus}{NLC}
-\newcommand{\namecvos}{CVOS}
-\newcommand{\nametracingdisco}{TRC}
-\newcommand{\namemoseg}{MSG}
-\newcommand{\namekeysegments}{KEY}
-\newcommand{\namesaliencyseg}{SAL}
-\newcommand{\namefastvideoseg}{FST}
-\newcommand{\nametsp}{TSP}
-\newcommand{\nameseamseg}{SEA}
-\newcommand{\namehvs}{HVS}
-\newcommand{\namejumpcut}{JMP}
-\newcommand{\namefcop}{FCP}
-\newcommand{\cmark}{\checkmark}
+% \definecolor{rowblue}{RGB}{220,230,240}
+% \renewcommand{\bf}{\textbf}
+% \newcommand{\namemcg}{MCG}
+% \newcommand{\namesfrgb}{SF-LAB}
+% \newcommand{\namesfflow}{SF-MOT}
+% \newcommand{\namenonlocalconsensus}{NLC}
+% \newcommand{\namecvos}{CVOS}
+% \newcommand{\nametracingdisco}{TRC}
+% \newcommand{\namemoseg}{MSG}
+% \newcommand{\namekeysegments}{KEY}
+% \newcommand{\namesaliencyseg}{SAL}
+% \newcommand{\namefastvideoseg}{FST}
+% \newcommand{\nametsp}{TSP}
+% \newcommand{\nameseamseg}{SEA}
+% \newcommand{\namehvs}{HVS}
+% \newcommand{\namejumpcut}{JMP}
+% \newcommand{\namefcop}{FCP}
+% \newcommand{\cmark}{\checkmark}
