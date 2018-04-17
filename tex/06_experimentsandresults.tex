@@ -103,8 +103,8 @@ During this thesis, the segmentation annotations from PASCAL VOC 2012 have been 
 \begin{tabular}{l|lll}
 PASCAL VOC 2012                    & train & val  & \textbf{Total} \\
 \hline
-Number of images                & 1464    & 1449   & \textbf{2913}    \\
-Number of instances           & 3507 & 3427 & \textbf{6934} \\
+Number of images                   & 1464  & 1449 & \textbf{2913}  \\
+Number of instances                & 3507  & 3427 & \textbf{6934}  \\
 Mean number of instances per image & 2.40  & 2.37 & \textbf{2.38}  \\
 \end{tabular}
 \caption{Size of the PASCAL VOC 2012 data splits: number of images and annotated objects.}
@@ -151,13 +151,18 @@ Mean number of instances per image & 2.40  & 2.37 & \textbf{2.38}  \\
 
 \subsection{Tracking}
 
-List all the experiments and its results regarding the tracking points on DAVIS\@.
-Put mostly the results in the dashboard here.
+% List all the experiments and its results regarding the tracking points on DAVIS\@.
+% Put mostly the results in the dashboard here.
 
-Show the results of tracking points using triplet sampling. Improving the coverage.
+% Show the results of tracking points using triplet sampling. Improving the coverage.
 
-Then the results pivoting to instance segmentation. Put here the results of the notebook.
+% Then the results pivoting to instance segmentation. Put here the results of the notebook.
 
+Define metrics Precision pixel distance.
+
+Comment training parameters
+
+Results of tracking point regressing a heatmap for his location. Define Baseline and explain MDNET results.
 
 \begin{figure}[h]
 	\centering
@@ -166,10 +171,33 @@ Then the results pivoting to instance segmentation. Put here the results of the 
 	\caption{Precission performance for point regression.}
 \end{figure}
 
+In addition to this metric, in order to see if our model has been able to learn the representation of the object to track, we compute the a coverage factor.
+This coverage factor is defined as the accuracy of the model to predict a tracked point inside the ground truth mask of the object to track.
+These results are showed at \tabref{coverage_tracking_heatmap}.
 
-Tracking the features vector of the ResNet101 pretrained with VOC\@.
-The best tracking was performed using cosine distance and averaging the representation of $3 \times 3$ patches.
-Backbone architecture ResNet101.
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l}
+    \toprule
+    Method              & Coverage \\
+    \midrule
+    Baseline            & 0.428    \\
+    MDNET               & 0.851    \\
+    Hourglass           & 0.812    \\
+    % ResNet101           & 0.912 \\
+    ResNet50            & 0.912    \\
+    ResNet50 Multiscale & 0.940    \\
+    \bottomrule
+  \end{tabular}
+  \caption{Coverage for different methods that regress the heatmap. }
+  \label{tab:coverage_tracking_heatmap}
+\end{table}
+
+
+Then we switched to ResNet101 with the weights pre-trained on VOC.
+% Tracking the features vector of the ResNet101 pretrained with VOC\@.
+% The best tracking was performed using cosine distance and averaging the representation of $3 \times 3$ patches.
+% Backbone architecture ResNet101.
 
 \begin{figure}[h]
   \centering
@@ -177,3 +205,24 @@ Backbone architecture ResNet101.
   \label{fig:tracking_metric_learning}
   \caption{Precission performance for pixel representation tracking.}
 \end{figure}
+
+Then check the coverage on \tabref{coverage_tracking_metric_learning}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l}
+    \toprule
+    Method                       & Coverage \\
+    \midrule
+    Baseline                     & 0.428    \\
+    Pre-Trained VOD $D=2048$     & 0.620    \\
+    Triplet Loss $D=2048$        & 0.750    \\
+    Triplet Loss $D=128$         & 0.911    \\
+    Double Triplet Loss $D=2048$ & 0.885    \\
+    \bottomrule
+  \end{tabular}
+  \caption{Coverage for different tracking methods trained with metric learning. }
+  \label{tab:coverage_tracking_metric_learning}
+\end{table}
+
+

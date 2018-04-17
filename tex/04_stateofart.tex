@@ -14,16 +14,16 @@ This conists on taking the bounding box sorrounding and object and make bounding
 
 One state of the art implementation is MDNet~\cite{nam2016learning}.
 It proposes a Convolutional Neural Network with shared layers and multiple branches of domain-specific layers.
-The architecture overview is showed at Figure~\ref{fig:mdnet}.
+The architecture overview is showed at \figref{mdnet}.
 Each branch is responsible for binary classification to identify the target in each specific video.
 This domain-specific layers are updated online and the online tracking is performed by evaluating the candidate windows randomly sampled around the previous target state.
 This showed state-of-the art results on tracking benchmarks and was the winner of the VOT Challenge~\cite{VOT_TPAMI} in 2016.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=.8\linewidth]{figures/mdnet/architecture.png}
-\label{fig:mdnet}
-\caption{MDNet architecture. }
+  \centering
+  \includegraphics[width=.8\linewidth]{figures/mdnet/architecture.png}
+  \label{fig:mdnet}
+  \caption{MDNet architecture. }
 \end{figure}
 
 Unfortunetly there are not implementations that focus on keypoints tracking which is the idea behind this thesis.
