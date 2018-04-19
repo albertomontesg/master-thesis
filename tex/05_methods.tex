@@ -32,6 +32,18 @@ Point representation.
 \textbf{Right}. Heatmap to represent the point with $\sigma = 32$. }
 \end{figure}
 
+\section{Backbone Architecture}
+\label{sec:methods_backbone_architecture}
+
+General CNN.
+
+Concret resnet
+Resnet for image classification
+Resent for image segmentation: DeepLab v2
+ResNet diagram.
+
+Bottleneck diagram. Plus table of layers in 101 ResNet (from paper).
+
 
 \section{Metric Learning with Triplet Loss}
 \label{sec:methods_metriclearning}
@@ -53,6 +65,7 @@ The triplet loss consists on...anchor positive negative.
     Figure extracted from~\cite{schroff2015facenet}. }
 \end{figure}
 
+% TODO: This paragraph on previous section
 In our escenario, we used an embedding model which is a Convolutional Neural Network.
 To be more precise, we used the pretrained network from DeepLab~\cite{chen2018deeplab}.
 This model has been pretrained with semantic semgnetion from images, and we are using the full network except the last classification part which predicts the pixels class.
@@ -76,7 +89,7 @@ When training the model, there is available the ground truth mask of one object 
   \mathcal{L}_{triplet} = \sum_i^N \max \left( d(x_a^{(i)}, x_p^{(i)}) - d(x_a^{(i)}, x_n^{(i)})  + \alpha, 0 \right)
 \end{equation}
 
-The $\alpha$ term on the triplet loss is the margin used to inforce the minimum diference between the distance of positive pairs and negative pairs. $d$ is the distance function, which in our case the square of the $l^2$ norm is used. So \eqref{triplet_loss_1} will be as follows:
+The $\alpha$ term on the triplet loss is the margin used to inforce the minimum diference between the distance of positive pairs and negative pairs. $d$ is the distance function, which in our case the square of the $l^2$ norm is used. So \equref{triplet_loss_1} will be as follows:
 
 \begin{equation}
   \label{eq:triplet_loss_2}
@@ -87,16 +100,23 @@ The $\alpha$ term on the triplet loss is the margin used to inforce the minimum 
 \end{equation}
 
 
+% TODO:
+At some point we tried to implement 2 triplet loss.
+Explain the precedure for far/close pixels.
 
+\section{Embedding Segmentation}
 
+% TODO:
+The goal is given a point for each object instance segmentation, obtain its mask.
+Using thresholding $\gamma$.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
 
-First study, was to track point on video sequences (DAVIS). Trying different architectures (Hourglass and then ResNet), with different approaches (with and without parent network). First we annotated some points to track, and used and estimation of the heatmap to predict the point (and also multiple scale heatmap).
+% First study, was to track point on video sequences (DAVIS). Trying different architectures (Hourglass and then ResNet), with different approaches (with and without parent network). First we annotated some points to track, and used and estimation of the heatmap to predict the point (and also multiple scale heatmap).
 
-The second approach was using the ResNet middle representation as representation of the pixel and try to track it.
+% The second approach was using the ResNet middle representation as representation of the pixel and try to track it.
 
-This led us to pivot and use this representation to segment the instance.
-Move the dataset to PASCAL VOC. And introduce the metric learning. Explain the metric learning, its algorithmic sampling. Explain the double triplet sampling.
+% This led us to pivot and use this representation to segment the instance.
+% Move the dataset to PASCAL VOC. And introduce the metric learning. Explain the metric learning, its algorithmic sampling. Explain the double triplet sampling.
