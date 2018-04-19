@@ -74,7 +74,40 @@ tick style={ultra thin}}}
 % Coloring
 \definecolor{rowblue}{RGB}{220,230,240}
 
+% Figures
+\newcommand{\showpascalpca}[1]{%
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/image/#1.jpg}
+  \end{subfigure} %
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/annotation/#1.png}
+  \end{subfigure} %
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/pca/#1.jpg}
+  \end{subfigure}
+}
 
+\newcommand{\showpascaldistancemap}[1]{%
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/image/#1.jpg}
+  \end{subfigure} %
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/distance_map/#1_1.jpg}
+  \end{subfigure} %
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/predicted_mask/#1_1.png}
+  \end{subfigure}
+
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/annotation/#1.png}
+  \end{subfigure} %
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/distance_map/#1_2.jpg}
+  \end{subfigure} %
+  \begin{subfigure}{.32\textwidth}
+    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/predicted_mask/#1_2.png}
+  \end{subfigure}
+}
 
 
 
@@ -137,9 +170,9 @@ tick style={ultra thin}}}
 \usepackage{rotating}
 % \usepackage{pifont}
 
-% \newcommand{\showglobaldisc}[1]{%
-% \mbox{\input{data/flat_meta_soa/global_#1.txt}\hspace{-2.5pt}}%
-% }
+\newcommand{\showglobaldisc}[1]{%
+\mbox{\input{data/flat_meta_soa/global_#1.txt}\hspace{-2.5pt}}%
+}
 % \newcommand{\showswappedsoadisc}[1]{%
 % \mbox{\input{data/flat_meta_soa/swapped_soa_disc_#1.txt}\hspace{-2.5pt}}%
 % }

@@ -200,14 +200,14 @@ These results are showed at \tabref{coverage_tracking_heatmap}.
   \centering
   \begin{tabular}{l|l}
     \toprule
-    Method              & Coverage \\
+    Method              & Coverage       \\
     \midrule
-    Baseline            & 0.428    \\
-    MDNET               & 0.851    \\
+    Baseline            & 0.428          \\
+    MDNET               & 0.851          \\
     % Hourglass           & 0.812    \\
     % ResNet101           & 0.912 \\
-    ResNet50            & 0.912    \\
-    ResNet50 Multiscale & 0.940    \\
+    ResNet50            & 0.912          \\
+    ResNet50 Multiscale & \textbf{0.940} \\
     \bottomrule
   \end{tabular}
   \caption{Coverage for different methods that regress the heatmap. }
@@ -243,12 +243,12 @@ Note that this evaluation is performed on DAVIS validation while the trained mod
   \centering
   \begin{tabular}{l|l}
     \toprule
-    Method                       & Coverage \\
+    Method                   & Coverage       \\
     \midrule
-    Baseline                     & 0.428    \\
-    Pre-Trained VOC $D=2048$     & 0.620    \\
-    Triplet Loss $D=2048$        & 0.750    \\
-    Triplet Loss $D=128$         & 0.911    \\
+    Baseline                 & 0.428          \\
+    Pre-Trained VOC $D=2048$ & 0.620          \\
+    Triplet Loss $D=2048$    & 0.750          \\
+    Triplet Loss $D=128$     & \textbf{0.911} \\
     % Double Triplet Loss $D=2048$ & 0.885    \\
     \bottomrule
   \end{tabular}
@@ -268,14 +268,56 @@ That is the reason why we move forward with this approach on the coming experime
 % TODO:
 We apply also this metric learning to obtain a segmentation from the embeddings in addition to tracking.
 
+\begin{table}[h]
+  \centering
+  \begin{tabular}{r|ccccccc}
+    \toprule
+    Margin $\alpha$ & $.5$ & {$\mathbf{.7}$ & $.8$ & $1.0$ & $1.2$ & $1.5$ & $2.0$ \\
+    \midrule
+    $mIoU$ & .6351$$ & $\mathbf{.6464}$ & $.6385$ & $.5620$ & $.5825$ & $.4834$ & $.3977$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Mean intersection over union agains the triplet Loss margin $\alpha$ used to train (ResNet101 with convolution head and $D=128$). }
+  \label{tab:margin_miou}
+\end{table}
+
+
 % TODO:
 Define metric, which is mIoU or Jaccard (there are the same).
 
 % TODO:
 Show some graphical results PCA of embeddings.
 
+\begin{figure}[h]
+  \centering
+  \showpascalpca{2007_000042}
+  \showpascalpca{2007_000129}
+  \showpascalpca{2007_000464}
+  \showpascalpca{2007_001239}
+  \showpascalpca{2007_005331}
+  \showpascalpca{2008_007273}
+  \showpascalpca{2009_002539}
+  % \showpascalpca{2009_005219}
+  \showpascalpca{2010_002868}
+
+  \caption{PCA Embeddings}
+  \label{}
+
+\end{figure}
+
 % TODO:
 Show some results from the segmentation method (thresholding distance function).
+
+\begin{figure}[h]
+  \centering
+
+  \showpascaldistancemap{2007_005331}
+  \showpascaldistancemap{2007_001239}
+  \showpascaldistancemap{2007_006698}
+
+  \caption{Distance maps}
+  \label{}
+\end{figure}
 
 % TODO:
 Show experiments playing with the margin of the triplet loss in order to obtain the segmentation.
@@ -289,8 +331,35 @@ Show experiments playing with the margin of the triplet loss in order to obtain 
 % TODO:
 Last results will be from the tracking points at DAVIS segmenting using as keypoint the gt, the first frame keypoint or the tracked keypoint.
 
+\begin{table}[h]
+  \centering
+  \begin{tabular}{l|l}
+    \toprule
+    Method                       & mIoU  \\
+    \midrule
+    OnAVOS                       & 0.616 \\
+    OSVOS                        & 0.566 \\
+    \midrule
+    Perfect Keypoints            & 0.610 \\
+    First frame keypoint         & 0.426 \\
+    First frame keypoint tracked & 0.432 \\
+    \bottomrule
+  \end{tabular}
+  \caption{ }
+  \label{}
+\end{table}
+
 % TODO:
 show results in mIoU per sequence in val subset.
+
+\begin{figure}[h]
+  \centering
+
+  \input{plots/miou_sequence.tex}
+  \caption{}
+  \label{}
+\end{figure}
+
 
 % TODO:
 Show graphical results of segmentations from DAVIS dataset
