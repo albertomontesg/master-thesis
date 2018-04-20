@@ -3,46 +3,113 @@
 \chapter{Methods}
 \label{cha:methods}
 
-\section{Tracking}
-\label{sec:methods_tracking}
-
-
-
-Point encoding: given the point coordinates $p = (p_x, p_y)$ the generated heatmap $\mathcal{H}$ is as follows:
-
-\begin{equation}
-  \mathcal{H}(x, y) = \exp \left[ -4 \log(2) \frac{ (x - p_x)^2 + (y - p_y)^2 }{ \sigma^2 } \right]
-\end{equation}
-
-
-\begin{figure}[h]
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.8\linewidth]{figures/methods/heatmaps/image_point.png}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.8\linewidth]{figures/methods/heatmaps/heatmap.png}
-\end{subfigure}
-\label{fig:point_representation}
-\caption{
-Point representation.
-\textbf{Left}. Image with the annotated points.
-\textbf{Right}. Heatmap to represent the point with $\sigma = 32$. }
-\end{figure}
+In this chapter we are going to explained the different methods used during this thesis.
+First we are going to explained the backbone architecture used during the whole thesis.
+Then we are going to explain how we performed a model to track points.
+The last section will explain how metric learning works and how we have use it.
 
 \section{Backbone Architecture}
 \label{sec:methods_backbone_architecture}
 
-General CNN.
+The objective of this thesis has been to obtain a deep learning model which is capable of given a point per instance, be able to predict its segmentation through all the videos.
+As it is usual on the literature the best deep learning models for computer vision tasks (and more concretly in segmentation) are the ones that are fully convolutional neural networks.
+This models perform convolution operations over the input which is commonly an image.
 
-Concret resnet
-Resnet for image classification
-Resent for image segmentation: DeepLab v2
-ResNet diagram.
+During the development of this thesis, we have used as a backbone architecture the DeepLab~\cite{chen2018deeplab} model used for semantic segmentation.
+This model is a fully convolutional model based on the ResNet~\cite{he2016deep} architecture which was used for image classification.
+This DeepLab model what does is to keep the convolutional layers from ResNet and add at the end some deconvolutional operatons to obtain as an output a mask instead of an object classifier.
+Doing this allows to be the model fully convolutional and free the constrain about the input images size's.
 
-Bottleneck diagram. Plus table of layers in 101 ResNet (from paper).
+The ResNet architecture are based on layers with residual connections. In \figref{resnet_block} is showed how each layer is build.
+Each layer apply some convolutional operations to the input and then add this result to the original input as a residual.
+
+\begin{figure}[h]
+  \centering
+  \adjincludegraphics[trim={{.5\width} 0 0 0}, clip, width=.5\textwidth]{figures/resnet/block_deeper.pdf}
+  \caption{ResNet residual block architecture. }
+  \label{fig:resnet_block}
+\end{figure}
+
+To check out the whole architecture of the DeepLab convolutional neural network see \tabref{deeplab_arch} where the whole architecture is explained for the two versions used: ResNet50 and ResNet101.
+The architecture is taking as input images of size $512 \times 512$ and outputing this size downsampled by $8$ both in height and width. Also note that output number of channels are 2048, so this output can be used, or a header can be pluged to reduce the dimensionality or build a classifier to obtain a mask.
+Because of these, this architecture is very versatile and easy to use with images.
+
+\newcommand{\blocka}[2]{\multirow{3}{*}{\(\left[\begin{array}{c}\text{3$\times$3, #1}\\[-.1em] \text{3$\times$3, #1} \end{array}\right]\)$\times$#2}
+}
+\newcommand{\blockb}[3]{\multirow{3}{*}{\(\left[\begin{array}{c}\text{1$\times$1, #2}\\[-.1em] \text{3$\times$3, #2}\\[-.1em] \text{1$\times$1, #1}\end{array}\right]\)$\times$#3}
+}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{c|c|c|c}
+    \toprule
+    layer name & output size & 50-layer & 101-layer \\
+    \midrule
+    conv1 & 256$\times$256 & \multicolumn{2}{c}{7$\times$7, 64, stride 2}\\
+    \midrule
+    \multirow{4}{*}{conv2\_x} & \multirow{4}{*}{128$\times$128} & \multicolumn{2}{c}{3$\times$3 max pool, stride 2} \\\cline{3-4}
+      &  &  \blockb{256}{64}{3} & \blockb{256}{64}{3} \\
+      &  &  &\\
+      &  &  &\\
+    \hline
+    \multirow{3}{*}{conv3\_x} &  \multirow{3}{*}{64$\times$64}    & \blockb{512}{128}{4}  & \blockb{512}{128}{4}\\
+      &  &  &\\
+      &  &  & \\
+    \hline
+    \multirow{3}{*}{conv4\_x} & \multirow{3}{*}{64$\times$64}  & \blockb{1024}{256}{6}  & \blockb{1024}{256}{23} \\
+      &  &  &\\
+      &  &  & \\
+    \hline
+    \multirow{3}{*}{conv5\_x} & \multirow{3}{*}{64$\times$64}  &  \blockb{2048}{512}{3}  & \blockb{2048}{512}{3}\\
+      &  &  &\\
+      &  &  & \\
+    \bottomrule
+  \end{tabular}
+  \caption{Architectures for DeepLab using residual blocks.
+    Building blocks are shown in brackets (see also \figref{resnet_block}), with the numbers of blocks stacked.
+  }
+  \label{tab:deeplab_arch}
+\end{table}
+
+
+\section{Tracking}
+\label{sec:methods_tracking}
+
+In order to track points through a video sequence, one approach we have tested consisted on regress the point position in an image usng a heatmap.
+The point representation is inspired by~\cite{nam2016learning} which used heatmaps to predict keypoints positions.
+In our experiments we are going to use the DeepLab ResNet architecture described in Section~\ref{sec:methods_backbone_architecture} plus an additional module, a PSP~\cite{zhao2017pyramid} module that will reduce the last layer channels to a single channel using a pyramid scene parsing.
+This will allow us to regress a heatmap which represent a point using Mean Sequared Error loss.
+
+The heatmap is build given a point coordinates $p = (p_x, p_y)$  computing a guassian arround this point.
+In \equref{heatmap} is shown how to build a heatmap $\mathcal{H}$ which allows some customization with the chosing of the parameter $\sigma$ which is the spreadness of the sigma.
+Note that the values of the heatmap are bounded between $[0, 1]$.
+To observe a graphical example, in \figref{point_representation} there is a point annotated on an image and the resulting heatmap.
+
+\begin{equation}
+  \mathcal{H}(x, y) = \exp \left[ -4 \log(2) \frac{ (x - p_x)^2 + (y - p_y)^2 }{ \sigma^2 } \right]
+  \label{eq:heatmap}
+\end{equation}
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/methods/heatmaps/image_point.png}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/methods/heatmaps/heatmap.png}
+  \end{subfigure}
+  \caption{
+  Point representation.
+  \textbf{Left}. Image with the annotated points (image resolution $854 \times 480$ pixels).
+  \textbf{Right}. Heatmap to represent the point with $\sigma = 32$ pixels. }
+  \label{fig:point_representation}
+\end{figure}
+
+The strategy to train a model that tracks a point given in the first frame will be the same as in the OSVOS~\cite{caelles2017one} approach.
+We will finetune a model pretrained with Visual Object Classes over the first frame of each sequence.
+Adding some data augmentation to enrich the training, we will test each sequence models with the rest of the frames and extract the maximum of the predicted heatmap as tracked object.
+
 
 
 \section{Metric Learning with Triplet Loss}

@@ -293,10 +293,10 @@ On this projection, in most of the cases we can observe how different color tone
 \end{figure}
 
 % TODO: We apply also this metric learning to obtain a segmentation from the embeddings in addition to tracking.
-The next step is to evaluate the instance segmentation given a point per instance. As there exists a one-to-one matching between the ground truth masks and the predicted masks, the evaluation metric used will be the Mean Intersection over Union (mIoU). This is computed as follows, being ...:
+The next step is to evaluate the instance segmentation given a point per instance. As there exists a one-to-one matching between the ground truth masks and the predicted masks, the evaluation metric used will be the Mean Intersection over Union (mIoU). This is computed as follows, being $\mathcal{P}$ the set of pixels which the prediction mask is $1$ and $\mathcal{G}$ the set of pixels which are annotated to $1$:
 
 \begin{equation}
-  mIoU =
+  mIoU = \frac{|\mathcal{P} \cap \mathcal{G}|}{|\mathcal{P} \cup \mathcal{G}|}
 \end{equation}
 
 The segmentation given a point is obtained as follows. Given a point, we obtain the embedding of the pixel $x_k$.
@@ -306,7 +306,7 @@ Because of this in all future steps euclidean distance will be used.
 
 Then, given a distance map, a simple thresholding operation will be able to return the mask for each instance.
 Some examples of this procedure are shown at \figref{fig:distance_maps} where the image and the ground truth are show at the left column.
-On the middle column are shown the distance maps for different instances in the image and in the right column there are the predicted masks after thresholding the distance masp.
+On the middle column are shown the distance maps for different instances in the image and in the right column there are the predicted masks after thresholding the distance maps.
 For this example, the threshold used has been $\gamma = 0.5$.
 
 \begin{figure}[h]
