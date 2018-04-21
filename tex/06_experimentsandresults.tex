@@ -41,14 +41,16 @@ Some examples of the annotations are shown in \figref{davis} and information abo
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{l|lllll}
+  \begin{tabular}{l|llll|l}
+    \toprule
     DAVIS 2017                          & train & val  & test-dev & test-challenge & \textbf{Total} \\
-    \hline
+    \midrule
     Number of sequences                 & 60    & 30   & 30       & 30             & \textbf{50}    \\
     Number of frames                    & 4219  & 2023 & 2037     & 2180           & \textbf{10459} \\
     Mean number of frames per sequence  & 70.3  & 67.4 & 67.9     & 72.7           & \textbf{69.7}  \\
     Number of objects                   & 138   & 59   & 89       & 90             & \textbf{376}   \\
-    Mean number of objects per sequence & 2.30  & 1.97 & 2.97     & 3.00           & \textbf{2.51}
+    Mean number of objects per sequence & 2.30  & 1.97 & 2.97     & 3.00           & \textbf{2.51} \\
+    \bottomrule
   \end{tabular}
   \caption{Size of the DAVIS 2017 data splits: number of sequences, frames and annotated objects.}
   \label{tab:davis}
@@ -56,19 +58,13 @@ Some examples of the annotations are shown in \figref{davis} and information abo
 
 \begin{figure}[h]
   \centering
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth]{figures/davis_dataset/image_1.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth]{figures/davis_dataset/image_2.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth]{figures/davis_dataset/image_3.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth]{figures/davis_dataset/image_4.jpg}
-  \end{subfigure}
-  \caption{Example of annotations on DAVIS 2017 Dataset.}
+  \davisdatasetrow{bike-packing}{blackswan}{bmx-trees}{breakdance}{camel}
+  \davisdatasetrow{car-roundabout}{car-shadow}{cows}{dance-twirl}{dog}
+  \davisdatasetrow{dogs-jump}{drift-chicane}{drift-straight}{goat}{gold-fish}
+  \davisdatasetrow{horsejump-high}{india}{judo}{kite-surf}{lab-coat}
+  \davisdatasetrow{libby}{loading}{mbike-trick}{motocross-jump}{paragliding-launch}
+  \davisdatasetrow{parkour}{pigs}{scooter-black}{shooting}{soapbox}
+  \caption{First frame annotation for all the sequences in validation subset at DAVIS 2017~\cite{PontTuset2017}.}
   \label{fig:davis}
 \end{figure}
 
@@ -102,12 +98,14 @@ During this thesis, the segmentation annotations from PASCAL VOC 2012 have been 
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{l|lll}
+  \begin{tabular}{l|ll|l}
+  \toprule
   PASCAL VOC 2012                    & train & val  & \textbf{Total} \\
-  \hline
+  \midrule
   Number of images                   & 1464  & 1449 & \textbf{2913}  \\
   Number of instances                & 3507  & 3427 & \textbf{6934}  \\
   Mean number of instances per image & 2.40  & 2.37 & \textbf{2.38}  \\
+  \bottomrule
   \end{tabular}
   \caption{Size of the PASCAL VOC 2012 data splits: number of images and annotated objects.}
   \label{tab:pascal}
@@ -117,32 +115,13 @@ During this thesis, the segmentation annotations from PASCAL VOC 2012 have been 
 \begin{figure}[h]
   \centering
   % Images
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/image-1.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/image-2.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/image-3.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/image-4.jpg}
-  \end{subfigure}
-  % Annotations
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/annotation-1.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/annotation-2.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/annotation-3.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.25\textwidth}
-    \includegraphics[width=1.\linewidth,height=0.618\linewidth]{figures/pascal_dataset/annotation-4.jpg}
-  \end{subfigure}
-  \caption{Example of images (top) and annotations (bottom) on PASCAL VOC 2012 Dataset.}
+  \pascaldatasetrow{2011_002575}{2007_001774}{2008_003329}{2008_001640}{2010_000372}
+  \pascaldatasetrow{2008_005650}{2007_009655}{2009_003933}{2010_004550}{2009_004494}
+  \pascaldatasetrow{2007_002954}{2009_001391}{2010_003798}{2008_004701}{2010_004577}
+  \pascaldatasetrow{2010_001160}{2008_002504}{2011_000105}{2007_007591}{2007_008571}
+  \pascaldatasetrow{2007_001677}{2010_004056}{2008_003926}{2011_000893}{2009_001197}
+  \pascaldatasetrow{2008_005245}{2011_002767}{2007_000999}{2011_001082}{2008_000785}
+  \caption{Example of images and annotation from PASCAL VOC 2012 Dataset~\cite{Everingham10}.}
   \label{fig:pascal}
 \end{figure}
 
@@ -392,8 +371,17 @@ In addition, on \figref{pred_masks_davis} are ploted the prediction of the mask 
 \begin{figure}[h]
   \centering
   \showdavisresults{car-roundabout}
-  \showdavisresults{pigs}
+  \showdavisresults{dog}
+  \showdavisresults{camel}
   \showdavisresults{judo}
+  \showdavisresults{loading}
+  \showdavisresults{libby}
+  \showdavisresults{pigs}
+  \showdavisresults{breakdance}
+  \showdavisresults{gold-fish}
+  \showdavisresults{bmx-trees}
+  \showdavisresults{dogs-jump}
+  \showdavisresults{paragliding-launch}
   \showdavisresults{soapbox}
   \caption{Mask prediction results on some sequences in DAVIS 2017 validation set. }
   \label{fig:pred_masks_davis}

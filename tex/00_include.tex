@@ -76,6 +76,67 @@ tick style={ultra thin}}}
 \definecolor{rowblue}{RGB}{220,230,240}
 
 % Figures
+\newcommand{\instancesegmentation}[1]{%
+  \begin{subfigure}{.33\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/instance_segmentation/overlay_#1.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.33\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/instance_segmentation/distance_map_#1.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.33\textwidth}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/instance_segmentation/predicted_mask_#1.png}
+  \end{subfigure}
+}
+
+\newcommand{\davisdatasetrow}[5]{%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_dataset/#1.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_dataset/#2.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_dataset/#3.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_dataset/#4.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_dataset/#5.jpg}
+  \end{subfigure}%
+}
+
+\newcommand{\pascaldatasetrow}[5]{%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/pascal_dataset/#1.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/pascal_dataset/#2.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/pascal_dataset/#3.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/pascal_dataset/#4.jpg}
+  \end{subfigure}%
+  \begin{subfigure}{.20\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/pascal_dataset/#5.jpg}
+  \end{subfigure}%
+}
+
 \newcommand{\showpascalpca}[1]{%
   \begin{subfigure}{.33\textwidth}
     \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/image/#1.jpg}
