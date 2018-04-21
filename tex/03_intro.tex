@@ -11,85 +11,26 @@
 \chapter{Introduction}
 \label{cha:introduction}
 
-Main goal: \textbf{weakly semi-supervised} instance object video segmentation.
+During the last year Computer Vision... % blabla
 
-% Give an introduction to the topic you have worked on:
+This thesis focuses on the problem of video object segmentation. ...
 
-% \begin{itemize}
-%  \item \textit{What is the rationale for your work?} Give a sufficient description of the problem, e.g. with a general description of the problem setting, narrowing down to the particular problem you have been working on in your thesis. Allow the reader to understand the problem setting.
-%  \item \textit{What is the scope of your work?} Given the above background, state briefly the focus of the work, what and how you did.
-%  \item \textit{How is your thesis organized?} It helps the reader to pick the interesting points by providing a small text or graph which outlines the organization of the thesis. The structure given in this document shows how the general structuring shall look like. However, you may fuse chapters or change their names according to the requirements of your thesis.
-% \end{itemize}
+In previous works there has been mainly two different approaches to tackle this problem, semi-supervised and unsupervised.
+% Talk about them
 
+% We present a new way to tackle this problem in a waekly semi-supervised manner.
 
-% \section{Focus of this Work}
+% Our method propose to perform two tasks and fuse them to obtain a final prediction: point tracking and instance segmentation from point.
+% Methods used.
 
-% Which is the problem
-The problem that this thesis have been trying to solve has been the segmentation of instances on images and videos.
+% To evaluate our methods we have use the DAVIS dataset and PASCAL dataset as suport to train a model to be able to embed images with different instances of the same class.
 
-% Who I tackled the problem
-The solution proposed at the beggining consisted on focusing on video, try to track key points from instances.
-The results weren't good, and that's why the we tried to tackle the problem using pixel embeddings.
-With the pixel embeddings the instance segmentation on images was tackled.
+% The document is structured as folows
+
 
 
 % Aditional contributions I have made during my thesis
-In adition to the research, I have contributed in side projects and research related with segmentation.
-To help my research, and the others in the Segmentation Group at CVL, I developed a web interface which allowes to annotate and visualize results.
-Also I have contributed on preparing the a new track on the segmentation field which consists on interactive segmentation. In relation with this, I helped collecting data with the annotation tool, and also develop a framework to evaluate interactive segmentation using human and automatic generated scribbles.
+% In adition to the research, I have contributed in side projects and research related with segmentation.
+% To help my research, and the others in the Segmentation Group at CVL, I developed a web interface which allowes to annotate and visualize results.
+% Also I have contributed on preparing the a new track on the segmentation field which consists on interactive segmentation. In relation with this, I helped collecting data with the annotation tool, and also develop a framework to evaluate interactive segmentation using human and automatic generated scribbles.
 
-
-
-
-Structure:
-
-Possible: One point to instance object segmentation on videos.
-
-Talk about point tracking, and show results (Hourglass and ResNet heatmaps tracking).
-Instance segmentation using metric learning a nd segment through similarity with keypoint.
-
-1. State of the art
-
-Point tracking with Hourglass to pose estimation
-
-Instance object segmentation using metric learning
-
-
-2. Method presented
-
-Talk about the DeepLab ResNet architecture
-
-Talked about the architecture to track the points
-
-Talke about metric learning.
-
-3. Experiments and Results
-
-Talk about the datasets: PASCAL and DAVIS
-
-Results on tracking points.
-
-Results on Instance Segmentation with metric learning on Pascal
-
-Show visual results on instance enbedding. Plot PCA for images and show that is possible to separate the instances.
-
-Results on instance segmentation in DAVIS taking a GT keypoint (maximum performance on J gerater than OSVOS and nearly equal to ONAVOS).
-
-Segmenting from keypoint on first frame gives 0.44
-
-Traking the keypoint on first frame and segment from tracked keypoints gives almost the same result.
-
-Point tracking should be improved.
-
-4. Conclusion and Future Work
-
-Very few methods for point tracking (mostly for object tracking). Tracking embeddings seems to not be a good solution, neither using resnet and finetune on a single instance (The method would require a high computational cost)
-
-Use some method that capture more contest from the point sorrounding.
-
-Embedding learning looks promising.
-
-
-
-Then give results
-% \section{Thesis Organization}
