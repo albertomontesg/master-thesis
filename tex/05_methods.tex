@@ -15,9 +15,9 @@ The objective of this thesis has been to obtain a deep learning model which is c
 As it is usual on the literature, the best deep learning models for computer vision tasks (and more concretly in segmentation) are the ones that are fully convolutional neural networks.
 This models perform convolution operations over the input which is commonly an image.
 
-During the development of this thesis, we have used as a backbone architecture the DeepLab~\cite{chen2018deeplab} model used for semantic segmentation.
-This model is a fully convolutional model based on the ResNet~\cite{he2016deep} architecture which was used for image classification.
-The DeepLab~\cite{chen2018deeplab} model what does is to keep the convolutional layers from ResNet~\cite{he2016deep} and add at the end some deconvolutional operatons to obtain as an output a mask instead of an object classifier.
+During the development of this thesis, we have used as a backbone architecture the DeepLab~\deeplab used model for semantic segmentation.
+This model is a fully convolutional model based on the ResNet~\resnet architecture which was used for image classification.
+The DeepLab~\deeplab model what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operatons to obtain as an output a mask instead of an object classifier.
 Doing this allows to be the model fully convolutional and free the constrain about the input images size's.
 
 The ResNet architecture are based on layers with residual connections. In \figref{resnet_block} is showed how each bottleneck layer block is build, which is the mainly used.
@@ -26,11 +26,11 @@ Each layer apply some convolutional operations to the input and then add this re
 \begin{figure}[h]
   \centering
   \adjincludegraphics[trim={{.5\width} 0 0 0}, clip, width=.5\textwidth]{figures/resnet/block_deeper.pdf}
-  \caption{ResNet residual block architecture. }
+  \caption{ResNet~\resnet residual block architecture. }
   \label{fig:resnet_block}
 \end{figure}
 
-To check out the whole architecture of the DeepLab convolutional neural network see \tabref{deeplab_arch} where the whole architecture is explained for the two versions used: ResNet50 and ResNet101.
+To check out the whole architecture of the DeepLab~\deeplab convolutional neural network see \tabref{deeplab_arch} where the whole architecture is explained for the two versions used: ResNet50 and ResNet101.
 The architecture is taking as input images of size $512 \times 512$ and outputing this size downsampled by $8$ both in height and width. Also note that output number of channels are 2048, so this output can be used, or a header can be pluged to reduce the dimensionality or build a classifier to obtain a mask.
 Because of these, this architecture is very versatile and easy to use with images.
 
@@ -64,7 +64,7 @@ Because of these, this architecture is very versatile and easy to use with image
       &  &  & \\
     \bottomrule
   \end{tabular}
-  \caption{Architectures for DeepLab using residual blocks.
+  \caption{Architectures for DeepLab~\deeplab using residual blocks.
     Building blocks are shown in brackets (see also \figref{resnet_block}), with the numbers of blocks stacked.
   }
   \label{tab:deeplab_arch}
@@ -75,8 +75,8 @@ Because of these, this architecture is very versatile and easy to use with image
 \label{sec:methods_tracking}
 
 In order to track points through a video sequence, one approach we have tested consisted on regress the point position in an image usng a heatmap.
-The point representation is inspired by~\cite{nam2016learning} which used heatmaps to predict keypoints positions.
-In our experiments we are going to use the DeepLab ResNet architecture described in Section~\ref{sec:methods_backbone_architecture} plus an additional module, a PSP~\cite{zhao2017pyramid} module that will reduce the last layer channels to a single channel using a pyramid scene parsing.
+The point representation is inspired by~\hourglass which used heatmaps to predict keypoints positions.
+In our experiments we are going to use the DeepLab ResNet architecture described in Section~\ref{sec:methods_backbone_architecture} plus an additional module, a PSP~\pspnet module that will reduce the last layer channels to a single channel using a pyramid scene parsing.
 This will allow us to regress a heatmap representation of a point using Mean Sequared Error loss.
 
 The heatmap is build given a point coordinates $p = (p_x, p_y)$ and computing a guassian arround this point.
@@ -106,7 +106,7 @@ To observe a graphical example, in \figref{point_representation} there is a poin
   \label{fig:point_representation}
 \end{figure}
 
-The strategy to train a model that tracks a point given in the first frame will be the same as in the OSVOS~\cite{caelles2017one} approach.
+The strategy to train a model that tracks a point given in the first frame will be the same as in the OSVOS~\osvos approach.
 We will finetune a model pretrained with Visual Object Classes over the first frame of each sequence.
 Adding some data augmentation to enrich the training, we will test each sequence models with the rest of the frames and extract the maximum of the predicted heatmap as tracked object.
 
@@ -116,8 +116,8 @@ Adding some data augmentation to enrich the training, we will test each sequence
 Another method we have tried during the devleopment of this thesis consist on train a model which outputs an embedding for each pixel that can be meaningfull to obtain an instance segmentation.
 In order to obtain a good embedding, metric learning has been used which consists on the task of learning a distance function over objects, which in our case are embeddings.
 
-One way to apply metric learning is using the Triplet Loss which was first introduced in~\cite{balntas2016learning}.
-One famous implementation of this Triplet Loss was used in FaceNet~\cite{schroff2015facenet} where they train a model to embed face images and predict similarity between them.
+One way to apply metric learning is using the Triplet Loss which was first introduced in~\metriclearning.
+One famous implementation of this Triplet Loss was used in FaceNet~\facenet where they train a model to embed face images and predict similarity between them.
 
 The objective of the triplet loss consists on learning a distance difference between triplets of points.
 The triplet consists on three points that are called: anchor, positive and negative.
@@ -135,7 +135,7 @@ On \figref{triplet_loss_viz} there is a diagram about the learning procedure.
 \end{figure}
 
 % TODO: This paragraph on previous section
-In our escenario, we used an embedding model which is a the DeepLab~\cite{chen2018deeplab} explained in detail in Section~\ref{sec:methods_backbone_architecture}.
+In our escenario, we used an embedding model which is a the DeepLab~\deeplab explained in detail in Section~\ref{sec:methods_backbone_architecture}.
 This model has been pretrained with semantic semgnetion from images, and we are using the full network except the last classification part which predicts the pixels class.
 By default this model given an image of size $H \times W$ output a features map of size $H' \times W' = \frac{H}{8} \times \frac{W}{8}$ with $2048$ dimensions.
 A convolutional head can be plugged to reduce this dimensionality to a lower dimension $D$ which may lead to a better embedding.

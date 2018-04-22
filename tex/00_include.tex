@@ -71,11 +71,29 @@ tick style={ultra thin}}}
 \newcommand{\figref}[1]{Figure~\ref{fig:#1}}
 \newcommand{\equref}[1]{Equation~\ref{eq:#1}}
 \newcommand{\tabref}[1]{Table~\ref{tab:#1}}
+\newcommand{\charef}[1]{Chapter~\ref{cha:#1}}
+\newcommand{\secref}[1]{Section~\ref{sec:#1}}
 
 % Cites
-\newcommand{\citedavisboth}[0]{\cite{Perazzi2016, PontTuset2017} }
-\newcommand{\citedavilast}[0]{\cite{PontTuset2017} }
-\newcommand{\citedavisold}[0]{\cite{Perazzi2016} }
+\newcommand{\davisboth}[0]{\cite{Perazzi2016, PontTuset2017} }
+\newcommand{\davislast}[0]{\cite{PontTuset2017} }
+\newcommand{\davisold}[0]{\cite{Perazzi2016} }
+\newcommand{\pascal}[0]{\cite{Everingham10} }
+\newcommand{\pytorch}[0]{\cite{paszke2017automatic} }
+\newcommand{\hourglass}[0]{\cite{newell2016stacked} }
+\newcommand{\mdnet}[0]{\cite{nam2016learning} }
+\newcommand{\maskrcnn}[0]{\cite{he2017mask} }
+\newcommand{\osvos}[0]{\cite{caelles2017one} }
+\newcommand{\onavos}[0]{\cite{voigtlaender17BMVC} }
+\newcommand{\deepml}[0]{\cite{fathi2017semantic} }
+\newcommand{\maskrnn}[0]{\cite{NIPS2017_6636} }
+\newcommand{\votchallenge}[0]{\cite{VOT_TPAMI} }
+\newcommand{\metriclearning}[0]{\cite{balntas2016learning} }
+\newcommand{\facenet}[0]{\cite{schroff2015facenet} }
+\newcommand{\deeplab}[0]{\cite{chen2018deeplab} }
+\newcammand{\pckmetric}[0]{\cite{sapp2013modec} }
+\newcommand{\pspnet}[0]{\cite{zhao2017pyramid} }
+\newcommand{\resnet}[0]{\cite{he2016deep} }
 
 
 % Coloring
@@ -95,6 +113,29 @@ tick style={ultra thin}}}
     \centering
     \includegraphics[width=1\linewidth]{figures/instance_segmentation/predicted_mask_#1.png}
   \end{subfigure}
+}
+
+\newcommand{\davissequencerow}[5]{%
+  \begin{subfigure}{.25\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_sequence/#1_#2.jpg}
+    \subcaption{Frame #2}
+  \end{subfigure}%
+  \begin{subfigure}{.25\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_sequence/#1_#3.jpg}
+    \subcaption{Frame #3}
+  \end{subfigure}%
+  \begin{subfigure}{.25\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_sequence/#1_#4.jpg}
+    \subcaption{Frame #4}
+  \end{subfigure}%
+  \begin{subfigure}{.25\textwidth}
+    \centering
+    \includegraphics[width=.98\linewidth, height=.618\linewidth]{figures/davis_sequence/#1_#5.jpg}
+    \subcaption{Frame #5}
+  \end{subfigure}%
 }
 
 \newcommand{\davisdatasetrow}[5]{%

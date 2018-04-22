@@ -39,20 +39,25 @@ In addition to this a model has been trained to learn an embedding representatio
 Combining this two methods leads us to a method that is capable to perform the task of weakly semi-supervised video instance segmentation.
 
 In order to train and evaluate our method the use of a dataset is required.
-To evaluate our method, we have used the the DAVIS~\citedavisboth dataset which provides instance segmentation masks for multiple video sequences.
+To evaluate our method, we have used the the DAVIS~\davisboth dataset which provides instance segmentation masks for multiple video sequences.
 This dataset is well know in the research community for being a benchmark to evaluate video segmentation models.
 In \figref{intro:davis} we can see a sequence and its mask annotation overlaid to it for each instance in the video.
 
 \begin{figure}[h]
   \centering
-  \caption{}
+  \davissequencerow{dogs-jump}{1}{5}{10}{15}
+  \davissequencerow{dogs-jump}{20}{25}{30}{35}
+  \davissequencerow{dogs-jump}{40}{45}{50}{55}
+  \caption{\textit{Dogs Jump} annotated video sequence with all the instance masks overlaid in different colors. }
   \label{fig:intro:davis}
 \end{figure}
 
+In addition, the PASCAL~\citepascal has been used. It provides segmentation masks for different object instances in images. This dataset has helped us to train the embedding model to be able to obtain a good pixel representation that know the difference between two instances of the same class.
 
-To evaluate our methods we have use the DAVIS dataset and PASCAL dataset as suport to train a model to be able to embed images with different instances of the same class.
-
-The document is structured as follows
+The document is structured in the following way. First, in \charef{stateofart}, the current state of the art techniques in image and video instance segmentation are reviewed in order to have an idea of which are the advantages and drawbacks of the other methods.
+Then, in \charef{methods}, our proposed method is defeined and explained in detail.
+After that, in \charef{experimentsandresults}, the different experiments to test our method are detailed in addition to its results.
+Finally, in \charef{conclusionsfuturework}, the conclusions about the benefits and drawbacks of our proposed method are explained.
 
 
 
