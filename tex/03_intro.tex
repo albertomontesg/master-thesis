@@ -11,21 +11,50 @@
 \chapter{Introduction}
 \label{cha:introduction}
 
-During the last year Computer Vision... % blabla
+During the last year Computer Vision has grow in popularity as a tool to perform tasks as humans do.
+Moreover, with the introduction of deep learning techniques, which try to mimic how the human brain works, the field has lived an explosion on speed and performance which has fostered the research on the topic.
+Furthermore, many products currently avaiable already use this techniques such as image and video processing software, video classification at video portals or in language translation.
+% But the explosion of products using computer vision techniques is just beginning, as for example autonomous driving is just around the corner and rely on this techniques to provide which can be a huge revolution in humanity.
+Thus, this is an exciting field to work nowadays as it will help to solve new problems arising and provide us with great products.
 
-This thesis focuses on the problem of video object segmentation. ...
 
-In previous works there has been mainly two different approaches to tackle this problem, semi-supervised and unsupervised.
+This thesis focuses on the problem of video instance segmentation.
+We refer as segmentation the partition of the pixels from a video in different classes.
+This classes we partition the pixels into will be different instances appearing in the video plus the background.
+This is an important task that has been trying to be solved in the Computer Vision field during the lasts years and can be a core block for numerous applications like video editing and post-processing, video retrieval activity recognition and much more.
+
+In previous works there has been mainly two different approaches to tackle this problem, unsupervised or semi-supervised.
+In the unsupervised methods, the model tries to infer which instances or objects are the protagonists during the whole video and then output a segmentation mask for each instance.
+On the other hand, in the semi-supervised methods, the instances that we want to segment are given to the model in the form of the mask in the first frame.
+Thus the model already have information about which instances must be segmented and can propagate this initial mask through all the sequence to output a prediction.
 % Talk about them
 
-% We present a new way to tackle this problem in a waekly semi-supervised manner.
+Our proposed method during this thesis tries to solve the problem of video instance segmentation with a new approach.
+We call it a weakly semi-supervised approach which instead of be given the whole mask of the instance to segment through the video, a single point per instance is given.
+Developing a method which tries to solve this problem with this approach may lead to some utility in real applications as points annotations are more easy and fast to perform rather than a full segmentation mask on the first frame.
 
-% Our method propose to perform two tasks and fuse them to obtain a final prediction: point tracking and instance segmentation from point.
-% Methods used.
+Our method propose to perform two tasks and fuse them to obtain a final prediction: point tracking and instance segmentation from point.
+With point tracking we could be able to keep track at every frame of a point per each instance.
+In addition to this a model has been trained to learn an embedding representation that can be used to, given a point and its label, label the rest of the pixels with similarity computation.
+Combining this two methods leads us to a method that is capable to perform the task of weakly semi-supervised video instance segmentation.
 
-% To evaluate our methods we have use the DAVIS dataset and PASCAL dataset as suport to train a model to be able to embed images with different instances of the same class.
+In order to train and evaluate our method the use of a dataset is required.
+To evaluate our method, we have used the the DAVIS~\citedavisboth dataset which provides instance segmentation masks for multiple video sequences.
+This dataset is well know in the research community for being a benchmark to evaluate video segmentation models.
+In \figref{intro:davis} we can see a sequence and its mask annotation overlaid to it for each instance in the video.
 
-% The document is structured as folows
+\begin{figure}[h]
+  \centering
+  \caption{}
+  \label{fig:intro:davis}
+\end{figure}
+
+
+To evaluate our methods we have use the DAVIS dataset and PASCAL dataset as suport to train a model to be able to embed images with different instances of the same class.
+
+The document is structured as follows
+
+
 
 
 
@@ -33,4 +62,3 @@ In previous works there has been mainly two different approaches to tackle this 
 % In adition to the research, I have contributed in side projects and research related with segmentation.
 % To help my research, and the others in the Segmentation Group at CVL, I developed a web interface which allowes to annotate and visualize results.
 % Also I have contributed on preparing the a new track on the segmentation field which consists on interactive segmentation. In relation with this, I helped collecting data with the annotation tool, and also develop a framework to evaluate interactive segmentation using human and automatic generated scribbles.
-
