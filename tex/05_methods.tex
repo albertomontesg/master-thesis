@@ -73,7 +73,10 @@ Because of these, this architecture is very versatile and easy to use with image
   \label{tab:deeplab_arch}
 \end{table}
 
-% TODO: add a paragraph about dilation
+In the original ResNet architecture downsampling with stride 2 was performed at layers \textit{conv3\_1}, \textit{conv4\_1} and \textit{conv5\_1}.
+On DeepLab, the downsampling with stride 2 is only performed at \textit{conv3\_1}.
+In contrast, in \textit{conv4\_x} and \textit{conv5\_x} all the convolutions are performed with dilation $2$ and $4$ respectively.
+The dilated convolution was presented in~\dilatedconv and support expansion of the receptive field without loss of spatial resolution.
 
 
 \section{Tracking}
