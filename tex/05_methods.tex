@@ -17,8 +17,8 @@ This models perform convolution operations over the input which is usually an im
 
 During the development of this thesis, we have used as a backbone architecture the DeepLab~\deeplab model for semantic segmentation.
 This model is fully convolutional and it is based on the ResNet~\resnet architecture which was used for image classification.
-% TODO: Reformulate
-The DeepLab~\deeplab model what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operations to obtain as an output a mask instead of an object classifier.
+The DeepLab~\deeplab model take the convolutional layers from and instead of a classifier, plugs at the end some deconvolutional operation to obtain a mask as an output.
+%what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operations to obtain as an output a mask instead of an object classifier.
 Doing this allows to be the model fully convolutional and free the constrain about the input images size's.
 
 The ResNet architecture is based on layers with residual connections.
@@ -106,8 +106,8 @@ To observe a graphical example, in \figref{point_representation} there is a poin
   \end{subfigure}
   \caption{
   Point representation.
-  \textbf{Left}. Image with the annotated points (image resolution $854 \times 480$ pixels).
-  \textbf{Right}. Heatmap to represent the point with $\sigma = 32$ pixels. }
+  \textbf{Left}: Image with the annotated points (image resolution $854 \times 480$ pixels).
+  \textbf{Right}: Heatmap to represent the point with $\sigma = 32$ pixels. }
   \label{fig:point_representation}
 \end{figure}
 
@@ -121,8 +121,8 @@ Adding some data augmentation to enrich the training, we will test each sequence
 \label{sec:methods_metriclearning}
 
 Another approach to track a point in a video sequence could consist on training a model which outputs an embedding for each pixel that can be meaningful to obtain instance segmentation.
-% TODO: reformulate
-In order to obtain a good embedding, metric learning has been used which consists on the task of learning a distance function over objects, which in our case are embeddings.
+In order to obtain a good embedding, metric learning has been used.
+Metric learning performs the task of learning a distance function over objects, which in our case, the objects are embeddings.
 
 One way to apply metric learning is using a Triplet Loss which was first introduced in~\metriclearning.
 One famous implementation of this Triplet Loss was used in FaceNet~\facenet where they train a model to embed face images and predict similarity between them.
@@ -142,7 +142,7 @@ In \figref{triplet_loss_viz} a diagram about the learning procedure is shown.
   \label{fig:triplet_loss_viz}
 \end{figure}
 
-In our escenario, we use DeepLab~\deeplab explained in detail in Section~\ref{sec:methods_backbone_architecture}.
+In our scenario, we use DeepLab~\deeplab explained in detail in Section~\ref{sec:methods_backbone_architecture}.
 This has is pretrained for semantic segmentation, and we use the full network except the last classification part which predicts the pixels class.
 By default, this model given an image of size $H \times W$ output a features map of size $H' \times W' = \frac{H}{8} \times \frac{W}{8}$ with $2048$ dimensions.
 A convolutional head can be plugged to reduce this dimensionality to a lower dimension $D$ which may lead to a better embedding.
@@ -157,8 +157,8 @@ Let be the Convolutional Neural Network be the embedding model $f(\mathcal{I}; \
 \end{equation}
 
 When training the model,
-% TODO: reformulate
-there is available the ground truth mask of one object instance in the image.
+there is only available the mask of a single object, so the learning only pushes the embeddings of one instance at each time.
+% there is available the ground truth mask of one object instance in the image.
 When the image is forwarded through the model and the embeddings computed, $N$ triplets of pixels are sampled.
 For each triplet, two pixels belonging to the mask are sampled and assigned as anchor and positive pixels ($x_a$ and $x_p$ respectively).
 Finally, a pixel not belonging to the mask is sampled and assigned as negative pixel $x_n$.
@@ -181,8 +181,9 @@ So \equref{triplet_loss_1} will end up as follows:
 \end{equation}
 
 This learned embedding can be very useful for example to implement a second approach for tracking.
-% TODO: reformulate
-A similarity between pixel's embedding in the next frame and the embedding of the point to track in order to obtain its location on the next frame.
+This can be done computing the similarity between the embedding of the pixel to track with respect all the pixels in the future frames.
+The tracked point can be extracted from the most similar.
+% A similarity between pixel's embedding in the next frame and the embedding of the point to track in order to obtain its location on the next frame.
 
 
 % At some point we tried to implement 2 triplet loss.

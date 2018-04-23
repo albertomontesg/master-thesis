@@ -35,7 +35,7 @@ Unfortunetly there are not implementations that focus on keypoints tracking whic
 \label{sec:soa:instancesegmentation}
 
 Instance detection and segmentation is one of the most challenging tasks in Computer Vision right now.
-In this section we explore some of the works that tackle instance segmentation in image domain. 
+In this section we explore some of the works that tackle instance segmentation in image domain.
 
 \paragraph{Mask R-CNN~\maskrcnn}
 This work come from a series of works that started with object detection on images using Convolutional Neural Networks.
@@ -44,7 +44,7 @@ The last iteration consisted on predicting not only the bounding box of the dete
 The idea behind this method consists on a CNN that with a forward pass extract the features at the last convolutional layer.
 Then a set of bounding box proposals are generated and the features in each proposed bounding box are used in one branch to predict a objectiveness score and bounding box regressions.
 With this branch a set of bounding box are obtained and score predicted. With this values, a second branch is responsible to predict a mask from each proposal.
-The final prediction use maximum supression to reduce the proposals to the final prediction masks.
+The final prediction use non-maximum suppression to reduce the proposals to the final prediction masks.
 This approach show state of the art results on multiple datasets at the cost of using a very large amount (in the order of 1000) proposals per a single image.
 Some qualitative results can be found on \figref{maskrcnn}.
 
@@ -59,7 +59,7 @@ Some qualitative results can be found on \figref{maskrcnn}.
 This works also focus in instance object segmentation on images.
 They use a Convolutional Neural Network to predict an embedding representation per each pixel.
 This network is trained using metric learning, regressing how likely two pixels are to belong to the same object.
-Then they propose the use of seed points and its pariwise similarity to predict the instances and its masks on an image once the embedding for each pixels is computed.
+Then they propose the use of seed points and its pairwise similarity to predict the instances and its masks on an image once the embedding for each pixels is computed.
 Some results of the segmentations can be found on \figref{deep_metric_learning}.
 
 \begin{figure}[h]

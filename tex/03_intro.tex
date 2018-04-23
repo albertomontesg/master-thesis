@@ -5,7 +5,7 @@
 
 During the last decade Computer Vision has grown in popularity as a tool to perform tasks as humans do.
 Moreover, with the introduction of deep learning techniques, which try to mimic how the human brain works, the field has experienced an explosion on speed and performance which has fostered a lot of research in the topic.
-Furthermore, many products currently already avaiable use these techniques in products such as image and video processing software, video classification at video portals or language translation.
+Furthermore, many products currently already available use these techniques in products such as image and video processing software, video classification at video portals or language translation.
 % But the explosion of products using computer vision techniques is just beginning, as for example autonomous driving is just around the corner and rely on this techniques to provide which can be a huge revolution in humanity.
 % Thus, this is an exciting field to work nowadays as it will help to solve new problems arising and provide us with great products.
 Thus, this is an exciting field to work nowadays as new results can be around the corner and can lead us to great new products.
@@ -24,20 +24,15 @@ Thus, the model has already information about which instances must be segmented 
 
 Our proposed method during this thesis tries to solve the problem of video instance segmentation from a new perspective.
 We call it a "weakly semi-supervised" approach which instead of using the whole mask of the instance to segment the whole video, a single point per instance is given.
-This approach present some benefits when applied to real user applications as points annotations are more easy and fast to performn than full mask segmentations.
-% TODO: reformulate
-% Developing a method which tries to solve this problem with this approach may lead to some utility in real applications as points annotations are more easy and fast to perform rather than a full segmentation mask on the first frame.
+This approach present some benefits when applied to real user applications as points annotations are more easy and fast to perform than full mask segmentations.
 
 Our proposed method performs two tasks and fuses them to obtain a final prediction: point tracking and instance segmentation from point.
 With point tracking, we are able to keep track at every frame of a point per each instance.
 In addition to this, a model has been trained to learn an embedding representation that can be used, given a point and its label, to label the rest of the pixels with a similarity computation.
-% TODO: reformulate
-A combination of this two tasks gives us a method
-% Combining this two methods leads us to a method
-that is capable of performing the task of weakly semi-supervised video instance segmentation.
+A combination of this two tasks gives us a method that is capable of performing the task of weakly semi-supervised video instance segmentation.
 
 In order to train and evaluate our method, a dataset is required.
-To evaluate our method, we have used the the DAVIS~\davisboth dataset which provides instance segmentation masks for multiple video sequences.
+To evaluate our method, we have used the DAVIS~\davisboth dataset which provides instance segmentation masks for multiple video sequences.
 This dataset is well know in the research community for being a benchmark to evaluate video segmentation models.
 In \figref{intro:davis} we can see a sequence and its mask annotation overlaid to it for each instance in the video.
 
@@ -50,18 +45,11 @@ In \figref{intro:davis} we can see a sequence and its mask annotation overlaid t
   \label{fig:intro:davis}
 \end{figure}
 
-In addition, the PASCAL~\pascal has been used. It provides segmentation masks for different object instances in images. This dataset has helped us to train the embedding model to be able to obtain a good pixel representation that know the difference between two instances of the same class.
+In addition, the PASCAL~\pascal has been used.
+It provides segmentation masks for different object instances in images.
+This dataset has helped us to train the embedding model to be able to obtain a good pixel representation that know the difference between two instances of the same class.
 
 The document is structured in the following way. First, in \charef{stateofart}, the current state of the art techniques in image and video instance segmentation are reviewed in order to have an idea of which are the advantages and drawbacks of the other methods.
-Then, in \charef{methods}, our proposed method is defeined and explained in detail.
+Then, in \charef{methods}, our proposed method is defined and explained in detail.
 After that, in \charef{experimentsandresults}, the different experiments to test our method are detailed in addition to its results.
 Finally, in \charef{conclusionsfuturework}, the conclusions about the benefits and drawbacks of our proposed method are explained.
-
-
-
-
-
-% Aditional contributions I have made during my thesis
-% In adition to the research, I have contributed in side projects and research related with segmentation.
-% To help my research, and the others in the Segmentation Group at CVL, I developed a web interface which allowes to annotate and visualize results.
-% Also I have contributed on preparing the a new track on the segmentation field which consists on interactive segmentation. In relation with this, I helped collecting data with the annotation tool, and also develop a framework to evaluate interactive segmentation using human and automatic generated scribbles.
