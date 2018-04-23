@@ -3,36 +3,38 @@
 \chapter{Experiments and Results}
 \label{cha:experimentsandresults}
 
-In this chapter its going to be explained the setup required to run the experiments,
+In this chapter is going to be explained the setup required to run the experiments,
 the datasets used during this experiments and its numerical and qualitative results.
 
 \section{Setup}
 \subsection{Workstation}
 
 The main developing tool has been a laptop which has been used for a huge variaty of tasks: write code, debug, check papers and documentation, write notes, etc.
-In order to train and make prediciton with deep learning models, an intensive computational resources are required.
+In order to train and make prediction with deep learning models, an intensive computational resources are required.
 
 This is why in addition, access to a GPU cluster has been provided in order to train models using GPUs.
-The Computer Vision Lab provide access to BIWI cluster which has been used to store datasets and models and also as a computation resource. The BIWI cluster consists on 70 computational nodes (CPU only) with a total of 556 processors, 8328 cores and 13.3TB of RAM memory.
+The Computer Vision Lab provide access to the BIWI cluster which has been used to store datasets and models and also as a computational resource.
+The BIWI cluster consists on 70 computational nodes (CPU only) with a total of 556 processors, 8328 cores and 13.3TB of RAM memory.
 In addition, there are the GPU nodes which consists in 75 GPUs with 12GB of GPU memory each one.
 
 \subsection{Software}
 
-All the code developement has been done using the Python3 language.
+All the code development has been done using the Python3 language.
 Python is commonly extended in computer vision and deep learning applications because all the available libraries that provides computational frameworks and also because its easiness developing.
 
-The main library used to develop deep learning models has been PyTorch~\pytorch. This library provides high-level features for tensor computation and deep neural networks.
-This library is a wrapper in Python which under the hood is writen in C allowing fast performance and strong GPU acceleration.
+The main library used to develop deep learning models has been PyTorch~\pytorch.
+This library provides high-level features for tensor computation and deep neural networks.
+It is a wrapper in Python which under the hood is written in C allowing fast performance and strong GPU acceleration.
 This library is usually used in the research community because its flexibility, fast code prototyping and easily debugging capabilities.
 
 \section{Datasets}
 
 During the development of this thesis, two segmentation datasets have been used: DAVIS~\davisboth and PASCAL~\pascal.
-DAVIS~\davisboth was used to evaluate the instance segmentation in videos while the PASCAL~\pascal was used as additional data as provides a huge set of instance annotations on images.
+DAVIS~\davisboth was used to evaluate the instance segmentation in videos while the PASCAL~\pascal was used as additional data, as it provides a huge set of instance annotations on images.
 
 \subsection{DAVIS Dataset}
 
-The DAVIS Dataset~\davisboth consists on a Densely Annotated Video Segmentation dataset.
+The DAVIS Dataset~\davisboth consists in a Densely Annotated Video Segmentation dataset.
 It provides a curated densely annotations for object instances in video sequences.
 There are two versions of the dataset: DAVIS 2016~\davisold and DAVIS 2017~\davislast.
 The 2016 version provides foreground/background annotations while the 2017 provides annotations for multiple objects and instances in the foreground.
@@ -75,26 +77,27 @@ This challenge have two branches which are the following:
 \paragraph{Semi-supervised}
 
 Consists on generate a prediction given only the ground truth mask of the first frame.
-This gives information to the about which is the object intended to be segmented.
+This gives information about which is the object intended to be segmented.
 
 \paragraph{Unsupervised}
 
 As the name specifies, no information is given about the object that must be segmented.
-To solve this, the segmentation methods rely on the frames to infer the foreground and background.
+To solve this, the segmentation methods rely only on the frames to infer the foreground and background.
 
 As our goal consists on weakly semi-supervised instance segmentation using tracked points, some additional annotation was required.
 To obtain more data, which in this case was point trajectories inside each sequence, a manual annotation by the Segmentation Group at the Computer Vision Lab was performed.
-The annotation was done using an existing tool developed inside the group by Dr. Jordi Pont-Tuset.
-The annotation consisted on fixed points of the object along all the frames as well the annotation of its visibility.
+The annotation was done using an existing tool developed inside the group by Dr.~Jordi Pont-Tuset.
+The annotation consisted on fixed points of the object along all the frames and also its visibility.
 An example of a fixed point in an object will be an animal's eye, a person point in the head or the center of a wheel.
 
 \subsection{PASCAL Dataset}
 
 PASCAL Dataset~\pascal is a dataset used to benchmark vision object category recognition, detections and segmentation.
-Consist on images containing 20 visual object classes and provides multiple annotation for different computer vision tasks: detection and segmentation.
+Consist on images containing 20 visual object classes and provides multiple annotations for different computer vision tasks: detection and segmentation.
 The segmentation annotations consist on masks over instances belonging to the 20 classes, which lead with images with multiple instance annotations.
 
-During this thesis, the segmentation annotations from PASCAL VOC 2012 have been used. The information about the number of instances per split can be found on \tabref{pascal} and some samples of the dataset at \figref{pascal}.
+During this thesis, the segmentation annotations from PASCAL VOC 2012 have been used.
+The information about the number of instances per split can be found on \tabref{pascal} and some samples of the dataset at \figref{pascal} are shown.
 
 \begin{table}[h]
   \centering
@@ -121,7 +124,7 @@ During this thesis, the segmentation annotations from PASCAL VOC 2012 have been 
   \pascaldatasetrow{2010_001160}{2008_002504}{2011_000105}{2007_007591}{2007_008571}
   \pascaldatasetrow{2007_001677}{2010_004056}{2008_003926}{2011_000893}{2009_001197}
   \pascaldatasetrow{2008_005245}{2011_002767}{2007_000999}{2011_001082}{2008_000785}
-  \caption{Example of images and annotation from PASCAL VOC 2012 Dataset~\pascal.}
+  \caption{Example of images and annotations from PASCAL VOC 2012 Dataset~\pascal.}
   \label{fig:pascal}
 \end{figure}
 
@@ -131,47 +134,47 @@ During this thesis, the segmentation annotations from PASCAL VOC 2012 have been 
 \section{Experiments}
 
 To test our proposed method we divide the experimentation in three steps.
-The first step consist in test the tracking of the points.
+The first step consists in test the tracking of the points.
 The second one will consist on instance segmentation, once given a point belonging to an instance.
 The last step consists in evaluate on video sequences the weakly semi-supervised method for video instance segmentation.
 
 \subsection{Tracking}
 
 In order to perform tracking of single points in video sequences we have performed two approaches.
-The first approach is inspired by OSVOS~\osvos work where a model is finetuned per each sequence with the information of the first frame available.
+The first approach is inspired by OSVOS~\osvos where a model is finetuned for each sequence with the information of the first frame available.
 In our case the point representation as a heatmap is being used and tested against the DAVIS 2017 validation subset.
 
-% TODO: define metric
 Before presenting the results some metric should be defined.
-For point tracking PCK metric can be used as it has been widely used in pose estimation to evaluate keypoint position prediction~\pckmetric.
-This metric plots for a range of distance in pixels in the original resolution of the image (480p in our case) the detection rate. The detection rate can be seen as the percentage of samples that the prediction is as furthest the distance in pixels.
+For point tracking PCK metric~\pckmetric can be used as it has been widely used in pose estimation to evaluate keypoint position prediction.
+This metric plots for a range of distance in pixels in the original resolution of the image (480p in our case), the detection rate.
+The detection rate can be seen as the percentage of samples that the prediction is as furthest the distance in pixels.
 
-
-% TODO: Comment training parameters (learning rate, ...)
 For the following experiments a ResNet50 backbone architecture has been used with a PSP module~\pspnet plug at the end.
-No major diference was observing using ResNet101 architecture so ResNet50 was mainly used because of its lower training time as it has less parameters to train.
+No major difference was observed using ResNet101 architecture so ResNet50 was mainly used because of its lower training time as it has less parameters to train.
 The image data was fed to the model at the resolution of $512 \times 896$ pixels.
-As training parameters, an SGD optimizer was used with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay $0.0005$. The training for each sequence consisted on 3000 iterations with batch size $2$.
+As training parameters, a SGD optimizer was used with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay $0.0005$. The training for each sequence consisted on 3000 iterations with batch size $2$.
 
-% TODO: Define Baseline and define MDNET experiments.
 To compare our results, we set two baselines to compare with.
-The first one consist on a single baseline where the predicted point at each frame of the sequence is the same as the point given at the first frame.
-The second baseline consisted on running the MDNet~\mdnet tracker on the smallest bounding box that fit the ground truth mask of the sequence. The testing was performed comparing the center of the predicted bounding box against the ground truth bounding box.
+The first one consist on a simple baseline where the predicted point at each frame of the sequence is the same as the point given at the first frame.
+The second baseline consisted on running the MDNet~\mdnet tracker on the smallest bounding box that fit the ground truth mask of the sequence.
+The testing was performed comparing the center of the predicted bounding box against the ground truth bounding box.
 
-% TODO: Results of tracking point regressing a heatmap for his location.
-We tested two variations of the model. The first one using a single channel prediction trained with a heatmap of $\sigma = 40$ pixels.
-The second variation consisted in a multiscale heatmap. In the experiment we trained using three channels with a heatmap each one of $\sigma$ equals to 24, 48 and 96 respectively.
-The prediction of the point at all time was performed computing the position of the maximum value and in the case of the last variation, all the three channels were summed along the channel dimension before predicting the point position. The results are ploted on \figref{tracking_point_regression}.
+We tested two variations of the model.
+The first one using a single channel prediction trained with a heatmap of $\sigma = 40$ pixels.
+The second variation consisted in a multiscale heatmap.
+In the experiment we trained using three channels with a heatmap in each one of $\sigma$ equals to 24, 48 and 96 respectively.
+The prediction of the point at all time was performed computing the position of the maximum value.
+In the case of the last configuration, all the three channels were summed along the channel dimension before predicting the point position.
+The results are plotted on \figref{tracking_point_regression}.
 
 \begin{figure}[h]
 	\centering
 	\input{plots/tracking_point_regression.tex}
-	\caption{Precission performance for point regression.}
+	\caption{Precision performance for point regression.}
   \label{fig:tracking_point_regression}
 \end{figure}
 
-%TODO:
-In addition to this metric, in order to see if our model has been able to learn the representation of the object to track, we compute the a coverage factor.
+In addition to this metric, in order to see if our model has been able to learn the representation of the object to track, we compute a coverage factor.
 This coverage factor is defined as the accuracy of the model to predict a tracked point inside the ground truth mask of the object to track.
 These results are showed at \tabref{coverage_tracking_heatmap}.
 
@@ -193,29 +196,31 @@ These results are showed at \tabref{coverage_tracking_heatmap}.
   \label{tab:coverage_tracking_heatmap}
 \end{table}
 
-%TODO:
-This experiments presents good results in localization precission and coverage (at least we know that if the tracked point is not precise is consistent with the object to track.)
-The big setback is regarding the training model. We need to train a model per each sequence which may leed to a big prediction time for new sequences (for the order of 10-30 minutes per sequence).
+This experiments presents good results in localization precision and coverage (at least we know that if the tracked point is not precise is consistent with the object to track).
+The big setback is regarding the training model.
+We need to train a model per each sequence which may lead to a big prediction time for new sequences (for the order of 10-30 minutes per sequence).
 
-For this main reason and in order to obtain a single model to be not dependent to the sequence to track we try using unsupervised learning via metric learning. This is the second approach we tried.
-Given the ResNet model, we tested this architecture with a pre-trained weights, performing some training with the triplet loss and expanding this acrhitecture with a convolutional head to reduce the embedding dimensions.
+For this main reason and in order to obtain a single model to be not dependent on the sequence to track, we try using unsupervised learning via metric learning.
+This is the second approach we tried.
+Given the ResNet model, we tested this architecture with a pre-trained weights, performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.
 
-The training was performed using Adagrad optimizer with learning rate 0.001 for 100 epochs over PASCAL dataset with batch size 8. The triplet loss margin was set to $\alpha = 0.7$ and 64 triplets were sampled per image.
-It was tested with the original embedding ($D=2048$) and adding a convolutional head to reduce its dimensionality.
-$D=128$ was the dimensionality that presented better results. For this experiments the backbone architecture used was ResNet101 as was the only one available with pretrained weights on Video Object Classes.
+The training was performed using Adagrad optimizer with learning rate $0.001$ for 100 epochs over PASCAL~\pascal dataset with batch size $8$.
+The Triplet Loss margin was set to $\alpha = 0.7$ and $64$ triplets were sampled per image.
+It was tested with the original embedding dimension $D=2048$, and then adding a convolutional head to reduce its dimensionality.
+$D=128$ was the dimensionality that presented better results.
+For this experiments the backbone architecture used was ResNet101 as was the only one available with pretrained weights on semantic segmentation.
 
 
 \begin{figure}[h]
   \centering
   \input{plots/tracking_metric_learning.tex}
-  \caption{Precission performance for pixel representation tracking.}
+  \caption{Precision performance for pixel representation tracking.}
   \label{fig:tracking_metric_learning}
 \end{figure}
 
-%TODO:
-As can be seen on \figref{tracking_metric_learning} the localization precission is really poor, even in comparison with the previous experiments.
+As can be seen on \figref{tracking_metric_learning} the localization precision is really poor, even in comparison with the previous experiments.
 In contrast, the coverage results available in \tabref{coverage_tracking_metric_learning} increase as long as training is being performed and the dimensionality is being reduced achieving in the last configuration almost the same result with a dedicated network for each sequence.
-Note that this evaluation is performed on DAVIS validation while the trained model has not seen any information from this dataset as it has been trained with the PASCAL dataset.
+Note that this evaluation is performed on DAVIS~\davislast validation while the trained model has not seen any information from this dataset as it has been trained with the PASCAL~\pascal dataset.
 
 
 \begin{table}[h]
@@ -235,25 +240,26 @@ Note that this evaluation is performed on DAVIS validation while the trained mod
   \label{tab:coverage_tracking_metric_learning}
 \end{table}
 
-From this model trained using the triplet loss, we can conclude that the embeddings obtained for each pixel are representative for the instance the pixels belongs but not much from the specific point of the objet.
-Even though the tracking performance is not good enought, we think that the good coverage and the good embedding quality can make this architecture valid for both tracking and segmentation using a single model which is sequence independent.
-That is the reason why we move forward with this approach on the coming experiments.
+From the last model trained using the Triplet Loss at $D=128$, we can conclude that the embeddings obtained for each pixel are representative for the instance the pixels belongs to, but not much from the specific point of the object.
+Even though the tracking performance is not good enough, we think that the good coverage and the good embedding quality can make this architecture valid for both tracking and segmentation using a single model which is sequence independent.
+That is the reason why we move forward with this model on the coming experiments.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Instance Segmentation}
 
-We wanted to test the model trained using the triplet loss applied to instance segmentation.
+We wanted to test the model trained using the Triplet Loss applied to instance segmentation.
 Our purpose is to obtain the instance segmentation given a point per instance.
-To test the instance segmentation the PASCAL dataset has been used and the point from which segment each distance has been chosen as the point furthest from the contour of the instance.
-This point will have an embedding representation that is descriptive enough for the instance.
+To test the instance segmentation, the PASCAL~\pascal dataset has been used.
+The point used to test the segmentation has been chosen computing the distance to the ground truth mask contour and take the coordinate which is furthest.
+This point will have an embedding representation that is descriptive enough for the instance to be segmented.
 
-As the triplet loss is a unsupervised training no metric is used to check the training in addition to the validation loss.
-Nevertheless, a qualitative visualization can be performed to check the quality of the embedings obtained.
-To visualize it, for each image the embeddings have been computed and a PCA decomposition has been done over the embeddings of all pixels.
+As the Triplet Loss is a unsupervised training no metric is used to check the training in addition to the validation loss.
+Nevertheless, a qualitative visualization can be performed to check the quality of the embeddings obtained.
+To visualize it, for each image the embeddings have been computed and then a PCA decomposition has been computed over the embeddings of all pixels.
 The decomposition is perform to reduce the dimensionality into 3 dimensions and then scale the values of this 3 dimensions to obtain a RGB image.
-In \figref{pca_embeddings} are ploted some examples of PASCAL validation images.
+In \figref{pca_embeddings} are shown some examples of PASCAL~\pascal validation images.
 On this projection, in most of the cases we can observe how different color tones show differences between instances even for the same class.
 
 \begin{figure}[h]
@@ -267,18 +273,20 @@ On this projection, in most of the cases we can observe how different color tone
   \showpascalpca{2009_002539}
   % \showpascalpca{2009_005219}
   \showpascalpca{2010_002868}
-  \caption{PASCAL validation images which embeddings have projected to RGB using PCA. }
+  \caption{PASCAL~\pascal validation images which embeddings have projected to RGB using PCA. }
   \label{fig:pca_embeddings}
 \end{figure}
 
-% TODO: We apply also this metric learning to obtain a segmentation from the embeddings in addition to tracking.
-The next step is to evaluate the instance segmentation given a point per instance. As there exists a one-to-one matching between the ground truth masks and the predicted masks, the evaluation metric used will be the Mean Intersection over Union (mIoU). This is computed as follows, being $\mathcal{P}$ the set of pixels which the prediction mask is $1$ and $\mathcal{G}$ the set of pixels which are annotated to $1$:
+The next step is to evaluate the instance segmentation given a point per instance.
+As there exists a one-to-one matching between the ground truth masks and the predicted masks, the evaluation metric used will be the Mean Intersection over Union (mIoU).
+This is computed as follows, being $\mathcal{P}$ the set of pixels which the prediction mask is $1$ and $\mathcal{G}$ the set of pixels which are annotated to $1$:
 
 \begin{equation}
   mIoU = \frac{|\mathcal{P} \cap \mathcal{G}|}{|\mathcal{P} \cup \mathcal{G}|}
 \end{equation}
 
-The segmentation given a point is obtained as follows. Given a point, we obtain the embedding of the pixel $x_k$.
+The segmentation given a point is computed as it is specified in \secref{methods:embeddingsegmentation}.
+Given a point, we obtain the embedding of the pixel $x_k$.
 The next step is compute a distance metric between this pixel embedding $x_k$ and the rest of the pixels in the image $\mathcal{X}$.
 We have observed that the distance function (between euclidean distance and cosine distance which are commonly used for embedding similarity) do not present any difference on the results.
 Because of this in all future steps euclidean distance will be used.
@@ -297,8 +305,7 @@ For this example, the threshold used has been $\gamma = 0.5$.
   \label{fig:distance_maps}
 \end{figure}
 
-% TODO: Show experiments playing with the margin of the triplet loss in order to obtain the segmentation.
-We have observe that the value of the margin $\alpha$ used at training with the metric loss have impact on the performance of the segmentation.
+We have observed that the value of the margin $\alpha$ used at training with the metric loss have impact on the performance of the segmentation.
 In order to test the results for different margin values $\alpha$, we have build the \tabref{margin_miou}.
 It can be observed how the best value to train the model and obtain a good segmentation is $\alpha = .7$.
 
@@ -308,10 +315,10 @@ It can be observed how the best value to train the model and obtain a good segme
     \toprule
     Margin $\alpha$ & $.5$    & $\mathbf{.7}$    & $.8$    & $1.0$   & $1.2$   & $1.5$   & $2.0$   \\
     \midrule
-    $mIoU$          & .6351$$ & $\mathbf{.6464}$ & $.6385$ & $.5620$ & $.5825$ & $.4834$ & $.3977$ \\
+    $mIoU$          & $.6351$ & $\mathbf{.6464}$ & $.6385$ & $.5620$ & $.5825$ & $.4834$ & $.3977$ \\
     \bottomrule
   \end{tabular}
-  \caption{Mean intersection over union agains the triplet Loss margin $\alpha$ used to train (ResNet101 with convolution head and $D=128$). }
+  \caption{Mean intersection over union against the Triplet Loss margin $\alpha$ used to train (ResNet101 with a convolution head and $D=128$). }
   \label{tab:margin_miou}
 \end{table}
 
@@ -319,15 +326,17 @@ It can be observed how the best value to train the model and obtain a good segme
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Video Instance Segmentation}
 
-% TODO: Last results will be from the tracking points at DAVIS segmenting using as keypoint the gt, the first frame keypoint or the tracked keypoint.
 The last experiment is related with fusing both previous approaches.
-We are going to test the performance of the instance segmentation on the video dataset DAVIS 2017 over the sequences at the validation subset.
-Out approach is going to be compared against the two available methods tested against the DAVIS 2017 dataset are have made their predictions publicly available wich are OnAVOS~\onavos and OSVOS~\osvos.
-We compare this two methods with different variations of ours.
+We have tested the performance of the instance segmentation on the video dataset DAVIS~\davislast 2017 over the sequences at the validation subset.
+Out approach is going to be compared against the two available methods tested against the DAVIS~\davislast 2017 dataset which have made their predictions publicly available.
+These are OnAVOS~\onavos and OSVOS~\osvos.
+We compare this two methods against different variations of ours.
+
 The first comparison is against the segmentation using perfect keypoints (keypoints obtained from the ground truth mask) which in this case the segmentation method is being tested.
 The second approach is segment each frame of the sequence using the embedding of the keypoint given in the first frame.
-The third and last configuration is find at each frame the pixel which has higher similarity to the annotated pixel in the first frame and then for each frame, at this found keypoint tracked from the first frame, segment the frame.
-The results in terms on mIoU can be found on \tabref{davis_miou}.
+The third and last configuration is find at each frame the pixel which has higher similarity to the annotated pixel in the first frame.
+Then for each frame, with this found keypoint tracked from the first frame, segment the frame as explained in \secref{methods:embeddingsegmentation}.
+The results in terms of mIoU are shown in \tabref{davis_miou}.
 
 \begin{table}[h]
   \centering
@@ -335,21 +344,17 @@ The results in terms on mIoU can be found on \tabref{davis_miou}.
     \toprule
     Method                       & mIoU  \\
     \midrule
-    OnAVOS                       & 0.616 \\
-    OSVOS                        & 0.566 \\
+    OnAVOS~\onavos               & 0.616 \\
+    OSVOS~\osvos                 & 0.566 \\
     \midrule
     Perfect Keypoints            & 0.610 \\
-    First frame keypoint         & 0.426 \\
-    First frame keypoint tracked & 0.432 \\
+    First Frame Keypoint         & 0.426 \\
+    First Frame Keypoint tracked & 0.432 \\
     \bottomrule
   \end{tabular}
   \caption{Comparison on overall performance for different methods and our different approaches. }
   \label{tab:davis_miou}
 \end{table}
-
-As can be seen on the \tabref{davis_miou}, the segmentation taking into consideration that we are computing it from the best pixel, leads to performance compared with the state of the art.
-In contrast, when only the information from the first frame is used, the performance drops drastically.
-Nevertheless, the tracking operation seems to give a little boost in comparison with only use the first frame embedding.
 
 \begin{figure}[H]
   \centering
@@ -358,12 +363,15 @@ Nevertheless, the tracking operation seems to give a little boost in comparison 
   \label{fig:per_sequence_miou}
 \end{figure}
 
-% TODO: show results in mIoU per sequence in val subset.
-To dig a little bit more on the results, the performance per sequence when tracking the keypoints is plot at \figref{per_sequence_miou}.
+As can be seen on the \tabref{davis_miou}, the segmentation taking into consideration that we are computing it from the best pixel, leads to performance compared with the state of the art.
+In contrast, when only the information from the first frame is used, the performance drops drastically.
+Nevertheless, the tracking operation seems to give a little boost in comparison with only use the first frame embedding.
+
+To dig a little bit more on the results, the performance per sequence when tracking the keypoints is shown at \figref{per_sequence_miou}.
 Here can be observe the big disparity of results between sequences.
 It seems that the biggest problems are present on sequences where the object on the first frame start being very distant and small.
 During all the experimentation we have experienced some difficulties with embeddings of small objects and also embeddings very close to the contour so very thick objects (e.g. bicycles) present very bad performance.
-In addition, on \figref{pred_masks_davis} are ploted the prediction of the mask for different sequences and on different frames of the sequence.
+In addition, on \figref{pred_masks_davis} are plotted the prediction of the mask for different sequences.
 
 \begin{figure}[ht]
   \centering

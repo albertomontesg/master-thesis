@@ -23,25 +23,26 @@
       % legend style={at={(0.5,-0.2)},anchor=north},
       % x tick label style={rotate=90,anchor=east}
     ]
-    \addplot+[smooth,  mark=none, line width=1]
-    table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{Baseline}
+
+    % \addplot+[smooth,  mark=none, line width=1]
+    %   table [x=Threshold, y=Features Metric Learning Quadplet Loss (480p) Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
+    % \addlegendentry{Double Triplet Loss D=2048}
 
     \addplot+[smooth,  mark=none, line width=1]
-    table [x=Threshold, y=Features ResNet Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{Pre-Trained VOC D=2048}
+      table [x=Threshold, y=Features Metric Learning Triplet Loss (480p) D128 Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{Triplet Loss D=128}
 
     \addplot+[smooth,  mark=none, line width=1]
       table [x=Threshold, y=Features Metric Learning (480p) Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
     \addlegendentry{Triplet Loss D=2048}
 
     \addplot+[smooth,  mark=none, line width=1]
-      table [x=Threshold, y=Features Metric Learning Triplet Loss (480p) D128 Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{Triplet Loss D=128}
+    table [x=Threshold, y=Features ResNet Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{Pre-Trained VOC D=2048}
 
-    % \addplot+[smooth,  mark=none, line width=1]
-    %   table [x=Threshold, y=Features Metric Learning Quadplet Loss (480p) Basic metriccosine patchsize3, col sep=comma] {data/precission_threshold_curves.csv};
-    % \addlegendentry{Double Triplet Loss D=2048}
+    \addplot+[smooth,  mark=none, line width=1]
+    table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{Baseline}
 
   \end{axis}
 \end{tikzpicture}

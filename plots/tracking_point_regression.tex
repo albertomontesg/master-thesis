@@ -23,13 +23,14 @@
       % legend style={at={(0.5,-0.2)},anchor=north},
       % x tick label style={rotate=90,anchor=east}
     ]
-    \addplot+[smooth, cyan, mark=none, line width=1]
-    table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{Baseline}
 
-    \addplot+[smooth, red, mark=none, line width=1]
-    table [x=Threshold, y=MDNet, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{MDNet}
+    \addplot+[smooth,  mark=none, line width=1]
+    table [x=Threshold, y=ResNet50 Multiscale sigma964824, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{ResNet50 Multiscale Finetune}
+
+    \addplot+[smooth,  mark=none, line width=1]
+    table [x=Threshold, y=ResNet50 sigma40, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{ResNet50 Finetune}
 
     % \addplot+[smooth, green, mark=none, line width=1]
     % table [x=Threshold, y=Hourglass w/o Parent Network 1HG x2 sigma 5, col sep=comma] {data/precission_threshold_curves.csv};
@@ -39,13 +40,13 @@
     % table [x=Threshold, y=ResNet101 sigma20, col sep=comma] {data/precission_threshold_curves.csv};
     % \addlegendentry{ResNet101}
 
-    \addplot+[smooth,  mark=none, line width=1]
-    table [x=Threshold, y=ResNet50 sigma40, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{ResNet50}
+    \addplot+[smooth, red, mark=none, line width=1]
+    table [x=Threshold, y=MDNet, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{MDNet}
 
-    \addplot+[smooth,  mark=none, line width=1]
-    table [x=Threshold, y=ResNet50 Multiscale sigma964824, col sep=comma] {data/precission_threshold_curves.csv};
-    \addlegendentry{ResNet50 Multiscale}
+    \addplot+[smooth, cyan, mark=none, line width=1]
+    table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
+    \addlegendentry{Baseline}
 
   \end{axis}
 \end{tikzpicture}

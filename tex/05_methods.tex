@@ -3,7 +3,7 @@
 \chapter{Methods}
 \label{cha:methods}
 
-In this chapter we are going to explainthe different methods used during this thesis.
+In this chapter we are going to explain the different methods used during this thesis.
 First, we are going to explain the backbone architecture used during the whole thesis.
 Then, we are going to explain how we performed a model to track points.
 The last section will explain how metric learning works and how we have use it.
@@ -18,7 +18,7 @@ This models perform convolution operations over the input which is usually an im
 During the development of this thesis, we have used as a backbone architecture the DeepLab~\deeplab model for semantic segmentation.
 This model is fully convolutional and it is based on the ResNet~\resnet architecture which was used for image classification.
 % TODO: Reformulate
-The DeepLab~\deeplab model what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operatons to obtain as an output a mask instead of an object classifier.
+The DeepLab~\deeplab model what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operations to obtain as an output a mask instead of an object classifier.
 Doing this allows to be the model fully convolutional and free the constrain about the input images size's.
 
 The ResNet architecture is based on layers with residual connections.
@@ -82,9 +82,9 @@ Because of these, this architecture is very versatile and easy to use with image
 In order to track points through a video sequence, one possible approach is to regress the point position in an image using a heatmap.
 The point representation is inspired by~\hourglass which used heatmaps to predict keypoints positions.
 In our experiments, we are going to use the DeepLab ResNet architecture described in Section~\ref{sec:methods_backbone_architecture} plus an additional module, a PSP~\pspnet module that will reduce the output to a single channel mask to represent the heatmap using a pyramid scene parsing.
-This will allow us to regress a heatmap representation of a point using the Mean Sequared Error loss function.
+This will allow us to regress a heatmap representation of a point using the Mean Squared Error loss function.
 
-The heatmap is built using the coordinate of a point $p = (p_x, p_y)$ and computing a guassian arround this point.
+The heatmap is built using the coordinate of a point $p = (p_x, p_y)$ and computing a guassian around this point.
 In \equref{heatmap} is shown how to build a heatmap $\mathcal{H}$ which allows some customization with the parameter $\sigma$ which is the spreadness of the sigma.
 Note that the values of the heatmap are bounded between $[0, 1]$.
 To observe a graphical example, in \figref{point_representation} there is a point annotated on an image and the resulting heatmap.
@@ -114,13 +114,13 @@ To observe a graphical example, in \figref{point_representation} there is a poin
 The strategy to train a model that tracks a point given in the first frame will be the same used in OSVOS~\osvos.
 % TODO: Explain VOC
 We finetune a model pretrained with Visual Object Classes over the first frame of each sequence.
-% TODO: reformulte
+% TODO: reformulate
 Adding some data augmentation to enrich the training, we will test each sequence models with the rest of the frames and extract the maximum of the predicted heatmap as tracked object.
 
 \section{Metric Learning with Triplet Loss}
 \label{sec:methods_metriclearning}
 
-Another approach to track a point in a video sequence could consist on training a model which outputs an embedding for each pixel that can be meaningfull to obtain instance segmentation.
+Another approach to track a point in a video sequence could consist on training a model which outputs an embedding for each pixel that can be meaningful to obtain instance segmentation.
 % TODO: reformulate
 In order to obtain a good embedding, metric learning has been used which consists on the task of learning a distance function over objects, which in our case are embeddings.
 
@@ -159,9 +159,9 @@ Let be the Convolutional Neural Network be the embedding model $f(\mathcal{I}; \
 When training the model,
 % TODO: reformulate
 there is available the ground truth mask of one object instance in the image.
-When the image is forwarded throught the model and the embeddings computed, $N$ triplets of pixels are sampled.
+When the image is forwarded through the model and the embeddings computed, $N$ triplets of pixels are sampled.
 For each triplet, two pixels belonging to the mask are sampled and assigned as anchor and positive pixels ($x_a$ and $x_p$ respectively).
-Finally, a pixel not belonging to the mask is sampled and assigened as negative pixel $x_n$.
+Finally, a pixel not belonging to the mask is sampled and assigned as negative pixel $x_n$.
 
 \begin{equation}
   \label{eq:triplet_loss_1}
@@ -188,7 +188,8 @@ A similarity between pixel's embedding in the next frame and the embedding of th
 % At some point we tried to implement 2 triplet loss.
 % Explain the precedure for far/close pixels.
 
-\section{Embedding Segmentation}
+\section{From Embedding to Segmentation}
+\label{sec:methods:embeddingsegmentation}
 
 Once we have learned a good embedding for each pixel of the image, the embedding can not give us directly the segmentation of every instance.
 As our approach will consists on tracking a point for every instance in the video sequence, an already annotated pixel will be provided.
