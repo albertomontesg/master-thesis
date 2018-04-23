@@ -3,26 +3,26 @@
 \chapter{Methods}
 \label{cha:methods}
 
-In this chapter we are going to explain the different methods used during this thesis.
-First, we are going to explain the backbone architecture used during the whole thesis.
-Then, we are going to explain how we performed a model to track points.
-The last section will explain how metric learning works and how we have use it.
+In this chapter we are going to explain the different methods developed during this thesis.
+First, we are going to explain the backbone architecture used during the entire thesis.
+Then, we are going to explain how we train a CNN model to track points.
+The last section will explain how metric learning works and how we have used it.
 
 \section{Backbone Architecture}
 \label{sec:methods_backbone_architecture}
 
 The objective of this thesis has been to obtain a deep learning model which is capable of, given a point per instance, being able to predict its segmentation through all the videos.
-As it is usual on the literature, the best deep learning models for computer vision tasks (and more precisely in segmentation) are the ones that are fully convolutional neural networks.
-This models perform convolution operations over the input which is usually an image.
+As it is usual on the literature, current best performing deep learning models for computer vision tasks (and more precisely in segmentation) use fully convolutional neural networks.
+These models perform convolution operations over the input which is usually an image.
 
 During the development of this thesis, we have used as a backbone architecture the DeepLab~\deeplab model for semantic segmentation.
 This model is fully convolutional and it is based on the ResNet~\resnet architecture which was used for image classification.
-The DeepLab~\deeplab model take the convolutional layers from and instead of a classifier, plugs at the end some deconvolutional operation to obtain a mask as an output.
+The DeepLab~\deeplab model applies a sequence of convolutional layers to the input image, and instead of a classifier, plugs some deconvolutional\ToDo{There are no deconv layers for deeplab} operations at the very last part of the architecture to obtain a segmentation mask.
 %what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operations to obtain as an output a mask instead of an object classifier.
-Doing this allows to be the model fully convolutional and free the constrain about the input images size's.
+Doing this allows the model to be fully convolutional and free of the constraint about the input image size.
 
 The ResNet architecture is based on layers with residual connections.
-In \figref{resnet_block} is shown how each bottleneck layer block is built.
+\figref{resnet_block} illustrates how each bottleneck layer block is built.
 Each layer applies some convolutional operations to the input and then adds this result to the original input as a residual.
 
 \begin{figure}[h]
@@ -34,7 +34,7 @@ Each layer applies some convolutional operations to the input and then adds this
 
 For a more detailed description of the whole architecture of the DeepLab~\deeplab convolutional neural network see \tabref{deeplab_arch}, where two versions used are described: ResNet50 and ResNet101.
 The architecture takes as input images of size $512 \times 512$ and outputs the input size downsampled by $8$ both in height and width.
-Also, note that the number of output channels is 2048, so this output can be used directly, or a header can be plugged to reduce the dimensionality (in the case of classification, reduce the dimensionality to the number of classes).
+Also, note that the number of output channels is 2048, so this output can be used directly, or a header\ToDo{Explain what a header is} can be plugged to reduce the dimensionality (in the case of classification, reduce the dimensionality to the number of classes).
 Because of these, this architecture is very versatile and easy to use with images.
 
 \newcommand{\blocka}[2]{\multirow{3}{*}{\(\left[\begin{array}{c}\text{3$\times$3, #1}\\[-.1em] \text{3$\times$3, #1} \end{array}\right]\)$\times$#2}
@@ -75,8 +75,8 @@ Because of these, this architecture is very versatile and easy to use with image
 
 In the original ResNet architecture downsampling with stride 2 was performed at layers \textit{conv3\_1}, \textit{conv4\_1} and \textit{conv5\_1}.
 On DeepLab, the downsampling with stride 2 is only performed at \textit{conv3\_1}.
-In contrast, in \textit{conv4\_x} and \textit{conv5\_x} all the convolutions are performed with dilation $2$ and $4$ respectively.
-The dilated convolution was presented in~\dilatedconv and support expansion of the receptive field without loss of spatial resolution.
+In contrast, in \textit{conv4\_x} and \textit{conv5\_x} all the convolutions are performed with dilation $2$ and $4$, respectively.
+The dilated convolution was presented in~\dilatedconv and supports expansion of the receptive field without loss of spatial resolution.
 
 
 \section{Tracking}
@@ -84,7 +84,7 @@ The dilated convolution was presented in~\dilatedconv and support expansion of t
 
 In order to track points through a video sequence, one possible approach is to regress the point position in an image using a heatmap.
 The point representation is inspired by~\hourglass which used heatmaps to predict keypoints positions.
-In our experiments, we are going to use the DeepLab ResNet architecture described in Section~\ref{sec:methods_backbone_architecture} plus an additional module, a PSP~\pspnet module that will reduce the output to a single channel mask to represent the heatmap using a pyramid scene parsing.
+In our experiments, we are going to use the DeepLab ResNet architecture described in Section~\ref{sec:methods_backbone_architecture} plus an additional module, a PSP~\pspnet module that will reduce the output to a single channel mask to represent the heatmap using a pyramid scene parsing.\ToDo{Reformulate text}
 This will allow us to regress a heatmap representation of a point using the Mean Squared Error loss function.
 
 The heatmap is built using the coordinate of a point $p = (p_x, p_y)$ and computing a guassian around this point.
@@ -125,7 +125,7 @@ Adding some data augmentation to enrich the training, we will test each sequence
 
 Another approach to track a point in a video sequence could consist on training a model which outputs an embedding for each pixel that can be meaningful to obtain instance segmentation.
 In order to obtain a good embedding, metric learning has been used.
-Metric learning performs the task of learning a distance function over objects, which in our case, the objects are embeddings.
+Metric learning performs the task of learning a distance function over objects, which in our case, the objects are embeddings.\ToDo{Reformulate}
 
 One way to apply metric learning is using a Triplet Loss which was first introduced in~\metriclearning.
 One famous implementation of this Triplet Loss was used in FaceNet~\facenet where they train a model to embed face images and predict similarity between them.
@@ -133,7 +133,7 @@ One famous implementation of this Triplet Loss was used in FaceNet~\facenet wher
 The objective of the Triplet Loss consists on learning a distance difference between triplets of points.
 The triplet consists on three points that are called: anchor, positive and negative.
 It must fill the condition that the label of the anchor and the positive point are the same, while the label of the negative is different.
-The objective of the Triplet Loss is push the distance of the anchor and positive points to be closer than the distance between the anchor and negative by some margin $\alpha$.
+The objective of the Triplet Loss is to push the distance of the anchor and positive points to be closer than the distance between the anchor and negative by some margin $\alpha$.
 In \figref{triplet_loss_viz} a diagram about the learning procedure is shown.
 
 \begin{figure}[h]
@@ -146,23 +146,23 @@ In \figref{triplet_loss_viz} a diagram about the learning procedure is shown.
 \end{figure}
 
 In our scenario, we use DeepLab~\deeplab explained in detail in Section~\ref{sec:methods_backbone_architecture}.
-This has is pretrained for semantic segmentation, and we use the full network except the last classification part which predicts the pixels class.
+We use a model that is pretrained for semantic segmentation, and we use the full network except the last classification part which predicts the pixels class.
 By default, this model given an image of size $H \times W$ output a features map of size $H' \times W' = \frac{H}{8} \times \frac{W}{8}$ with $2048$ dimensions.
 A convolutional head can be plugged to reduce this dimensionality to a lower dimension $D$ which may lead to a better embedding.
 
-Before giving the equations of the Triple Loss, lets define some notation.
-Be $\mathcal{I} \in \mathbb{R}^{H \times W}$ the input image of size $H \times W$.
+Before giving the equations of the Triple Loss, we define the following notation.
+Let $\mathcal{I} \in \mathbb{R}^{H \times W}$ be the input image of size $H \times W$.
 The output size of the model will be $H' \times W' = \frac{H}{8} \times \frac{W}{8}$ and the output embedding will be $\mathcal{X} = \{x_i\}^{H' \times W'}$ where $x_i \in \mathbb{R}^D$ is the i-th output pixel embedding.
-Let be the Convolutional Neural Network be the embedding model $f(\mathcal{I}; \Theta)$ which computes the embedding from a single image:
+Let the Convolutional Neural Network be the embedding model $f(\mathcal{I}; \Theta)$ which computes the embedding from a single image:
 
 \begin{equation}
   \mathcal{X} = f(\mathcal{I}; \Theta)
 \end{equation}
 
 When training the model,
-there is only available the mask of a single object, so the learning only pushes the embeddings of one instance at each time.
+only the mask of a single object is available , so the learning only pushes the embeddings of one instance at each time.
 % there is available the ground truth mask of one object instance in the image.
-When the image is forwarded through the model and the embeddings computed, $N$ triplets of pixels are sampled.
+When the image is forwarded through the model and the embeddings are computed, $N$ triplets of pixels are sampled.
 For each triplet, two pixels belonging to the mask are sampled and assigned as anchor and positive pixels ($x_a$ and $x_p$ respectively).
 Finally, a pixel not belonging to the mask is sampled and assigned as negative pixel $x_n$.
 
@@ -184,7 +184,7 @@ So \equref{triplet_loss_1} will end up as follows:
 \end{equation}
 
 This learned embedding can be very useful for example to implement a second approach for tracking.
-This can be done computing the similarity between the embedding of the pixel to track with respect all the pixels in the future frames.
+This can be done by computing the similarity between the embedding of the pixel to track with respect all the pixels in the future frames.
 The tracked point can be extracted from the most similar.
 % A similarity between pixel's embedding in the next frame and the embedding of the point to track in order to obtain its location on the next frame.
 
@@ -192,16 +192,16 @@ The tracked point can be extracted from the most similar.
 % At some point we tried to implement 2 triplet loss.
 % Explain the precedure for far/close pixels.
 
-\section{From Embedding to Segmentation}
+\section{From Embeddings to Segmentation}
 \label{sec:methods:embeddingsegmentation}
 
 Once we have learned a good embedding for each pixel of the image, the embedding can not give us directly the segmentation of every instance.
-As our approach will consists on tracking a point for every instance in the video sequence, an already annotated pixel will be provided.
-This pixel, we are going to call it keypoint and it has an associated embedding $x_k \in \mathbb{R}^D$.
+As our approach will consist in tracking a point for every instance in the video sequence, an already annotated pixel will be provided.
+We are going to call this pixel keypoint and its associated embedding $x_k \in \mathbb{R}^D$.
 This point can come from the ground truth, from tracking or from another frame annotation.
 
-In order to obtain the segmentation for multiple instances in an images given a keypoint for each instance, we can compute the distance of every pixel embedding against all keypoint's embeddings.
-Then, every pixel will be assigned to the label of the closest keypoint embedding only if this distance is lower than a threshold $\gamma$, otherwise will be assign to background.
+In order to obtain the segmentation for multiple instances in an images given a keypoint for each instance, we can compute the distance of every pixel embedding against all keypoint embeddings.
+Then, every pixel will be assigned to the label of the closest keypoint embedding only if this distance is lower than a threshold $\gamma$, otherwise will be assigned to background.
 All of these can be formulated mathematically taking into account and image embedding $\mathcal{X} = {x_i}^{H \times W}$ with $N$ instances and each instance with a keypoint embedding $x_k^{(n)}$.
 Every keypoint will have a label $m_k^{(n)} \in [1, N]$ and label $0$ will belong to the background.
 The distance map for every image will be:
@@ -219,7 +219,7 @@ Then the prediction label can be computed as follows:
    \end{cases}
 \end{equation}
 
-All this steps can be visualized in \figref{instance_segmentation} where the ground truth mask and a keypoint per each dog instance, the distance map of the embeddings against the keypoint embedding and finally the predicted mask are displayed.
+All these steps can be visualized in \figref{instance_segmentation} where the ground-truth mask and a keypoint per each dog instance, the distance map of the embeddings against the keypoint embedding and finally the predicted mask are displayed.
 
 \begin{figure}[h]
   \centering
