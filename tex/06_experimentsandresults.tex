@@ -3,42 +3,42 @@
 \chapter{Experiments and Results}
 \label{cha:experimentsandresults}
 
-In this chapter is going to be explained the setup required to run the experiments,
-the datasets used during this experiments and its numerical and qualitative results.
+In this chapter, we are going to explain the setup required to run the experiments,
+the datasets used in these experiments and its quantitative and qualitative results.
 
 \section{Setup}
 \subsection{Workstation}
 
-The main developing tool has been a laptop which has been used for a huge variaty of tasks: write code, debug, check papers and documentation, write notes, etc.
-In order to train and make prediction with deep learning models, an intensive computational resources are required.
+The main developing tool during this thesis has been a laptop which has been used for a huge variety of tasks: writing code, debugging, reading papers and documentation, writing notes, etc.
+In order to train and evaluate deep learning models, computationally intensive hardware is required.
 
-This is why in addition, access to a GPU cluster has been provided in order to train models using GPUs.
-The Computer Vision Lab provide access to the BIWI cluster which has been used to store datasets and models and also as a computational resource.
-The BIWI cluster consists on 70 computational nodes (CPU only) with a total of 556 processors, 8328 cores and 13.3TB of RAM memory.
-In addition, there are the GPU nodes which consists in 75 GPUs with 12GB of GPU memory each one.
+Therefore, access to a GPU cluster has been provided in order to train models using GPUs.
+The Computer Vision Lab provides access to the BIWI cluster which has been used to store datasets, models and also for computation.
+The BIWI cluster consists in 70 computational nodes (CPU only) with a total of 556 processors, 8328 cores and 13.3TB of RAM memory.
+In addition, there are GPU nodes which consists in 75 GPUs with 12GB of GPU memory each one.
 
 \subsection{Software}
 
-All the code development has been done using the Python3 language.
-Python is commonly extended in computer vision and deep learning applications because all the available libraries that provides computational frameworks and also because its easiness developing.
+All the code had been developed using Python3.
+Python is commonly used in computer vision and deep learning applications because most of the available libraries that provides computational frameworks provide a Python interface and also due to its easiness in developing.
 
 The main library used to develop deep learning models has been PyTorch~\pytorch.
 This library provides high-level features for tensor computation and deep neural networks.
-It is a wrapper in Python which under the hood is written in C allowing fast performance and strong GPU acceleration.
-This library is usually used in the research community because its flexibility, fast code prototyping and easily debugging capabilities.
+It is a Python wrapper which under the hood is written in C allowing fast performance and strong GPU acceleration.
+This library is usually used in the research community due to its flexibility, fast code prototyping and debugging capabilities.
 
 \section{Datasets}
 
 During the development of this thesis, two segmentation datasets have been used: DAVIS~\davisboth and PASCAL~\pascal.
-DAVIS~\davisboth was used to evaluate the instance segmentation in videos while the PASCAL~\pascal was used as additional data, as it provides a huge set of instance annotations on images.
+DAVIS~\davisboth was used to evaluate the instance segmentation in videos while PASCAL~\pascal was used as additional data, as it provides a huge set of instance annotations on images.
 
 \subsection{DAVIS Dataset}
 
-The DAVIS Dataset~\davisboth consists in a Densely Annotated Video Segmentation dataset.
-It provides a curated densely annotations for object instances in video sequences.
+The DAVIS Dataset~\davisboth stands for Densely Annotated Video Segmentation dataset.
+It provides curated densely annotations for object instances in video sequences.
 There are two versions of the dataset: DAVIS 2016~\davisold and DAVIS 2017~\davislast.
 The 2016 version provides foreground/background annotations while the 2017 provides annotations for multiple objects and instances in the foreground.
-During the work done on this thesis, DAVIS 2017~\davislast version has been used.
+During the work done in this thesis, the DAVIS 2017~\davislast version has been used.
 Some examples of the annotations are shown in \figref{davis} and information about the dataset is also given in \tabref{davis}.
 
 \begin{table}[h]
@@ -66,38 +66,38 @@ Some examples of the annotations are shown in \figref{davis} and information abo
   \davisdatasetrow{horsejump-high}{india}{judo}{kite-surf}{lab-coat}
   \davisdatasetrow{libby}{loading}{mbike-trick}{motocross-jump}{paragliding-launch}
   \davisdatasetrow{parkour}{pigs}{scooter-black}{shooting}{soapbox}
-  \caption{First frame annotation for all the sequences in validation subset at DAVIS 2017~\davislast.}
+  \caption{First frame annotation for all the sequences in the validation subset of DAVIS 2017~\davislast.}
   \label{fig:davis}
 \end{figure}
 
 
-The DAVIS dataset owners also organize a challenge to evaluate the performance of different segmentation method.
-This challenge have two branches which are the following:
+The DAVIS dataset has been used mainly in the two following setups:
 
 \paragraph{Semi-supervised}
 
-Consists on generate a prediction given only the ground truth mask of the first frame.
-This gives information about which is the object intended to be segmented.
+A mask in the first frame of a sequence is provided to the algorithms. 
+The task is to output a mask for the rest of the frames in the video sequence. 
+The initial mask gives information about which is the object intended to be segmented.
 
 \paragraph{Unsupervised}
 
 As the name specifies, no information is given about the object that must be segmented.
 To solve this, the segmentation methods rely only on the frames to infer the foreground and background.
 
-As our goal consists on weakly semi-supervised instance segmentation using tracked points, some additional annotation was required.
-To obtain more data, which in this case was point trajectories inside each sequence, a manual annotation by the Segmentation Group at the Computer Vision Lab was performed.
+The method presented in this thesis falls in the semi-supervised category but instead of using the full mask, a single point is used. Therefore, we call our approach weakly-supervised.
+
+To obtain more data, in this case point trajectories inside each sequence, a manual annotation by the Segmentation Group at the Computer Vision Lab was performed.
 The annotation was done using an existing tool developed inside the group by Dr.~Jordi Pont-Tuset.
-The annotation consisted on fixed points of the object along all the frames and also its visibility.
-An example of a fixed point in an object will be an animal's eye, a person point in the head or the center of a wheel.
+It consisted in annotating a fixed point of a certain object along all the frames, moreover the visibility of the point was also annotated.
+For example, a fixed point in an object can be an animal's eye, a person point in the head or the center of a wheel.
 
 \subsection{PASCAL Dataset}
 
-PASCAL Dataset~\pascal is a dataset used to benchmark vision object category recognition, detections and segmentation.
-Consist on images containing 20 visual object classes and provides multiple annotations for different computer vision tasks: detection and segmentation.
-The segmentation annotations consist on masks over instances belonging to the 20 classes, which lead with images with multiple instance annotations.
+PASCAL Dataset~\pascal is a popular computer vision benchmark that consists in images containing 20 object classes and provides multiple annotations for different tasks like detection and segmentation.
+The segmentation annotations consist in masks over instances belonging to the 20 classes, which leads to images with multiple instance annotations.
 
-During this thesis, the segmentation annotations from PASCAL VOC 2012 have been used.
-The information about the number of instances per split can be found on \tabref{pascal} and some samples of the dataset at \figref{pascal} are shown.
+During this thesis, the segmentation annotations from PASCAL VOC 2012 has been used.
+The information about the number of instances per split can be found on \tabref{pascal} and some examples of the dataset are shown in \figref{pascal}.
 
 \begin{table}[h]
   \centering
@@ -133,38 +133,38 @@ The information about the number of instances per split can be found on \tabref{
 
 \section{Experiments}
 
-To test our proposed method we divide the experimentation in three steps.
-The first step consists in test the tracking of the points.
-The second one will consist on instance segmentation, once given a point belonging to an instance.
-The last step consists in evaluate on video sequences the weakly semi-supervised method for video instance segmentation.
+In order to test the proposed method, we divide the experimentation in three steps.
+The first step consists in testing the tracking of the points.
+The second one consists in instance segmentation, assuming that a point belonging to an instance is given.
+The last step consists in evaluating video sequences considering the weakly-supervised setup.
 
 \subsection{Tracking}
 
-In order to perform tracking of single points in video sequences we have performed two approaches.
-The first approach is inspired by OSVOS~\osvos where a model is finetuned for each sequence with the information of the first frame available.
-In our case the point representation as a heatmap is being used and tested against the DAVIS 2017 validation subset.
+In order to perform tracking of a single point in a video sequence, we have developed two different approaches.
+The first approach is inspired by OSVOS~\osvos where a model is finetuned for each sequence with the information available in the first frame.
+In our case the point represented as a heatmap is being used and it is tested against the DAVIS 2017 validation subset.
 
-Before presenting the results some metric should be defined.
-For point tracking PCK metric~\pckmetric can be used as it has been widely used in pose estimation to evaluate keypoint position prediction.
-This metric plots for a range of distance in pixels in the original resolution of the image (480p in our case), the detection rate.
-The detection rate can be seen as the percentage of samples that the prediction is as furthest the distance in pixels.
+To asses the performance of the algorithms, we have to define a metric.
+For point tracking, the PCK metric~\pckmetric is chosen as it has been widely used in pose estimation to evaluate keypoint position prediction.
+This metric plots, for a range of distance in pixels in the original resolution of the image (480p in our case), the detection rate.
+The detection rate can be seen as the percentage of samples where the prediction is as furthest the distance in pixels.\ToDo{Rephrase this sentence}
 
-For the following experiments a ResNet50 backbone architecture has been used with a PSP module~\pspnet plug at the end.
-No major difference was observed using ResNet101 architecture so ResNet50 was mainly used because of its lower training time as it has less parameters to train.
-The image data was fed to the model at the resolution of $512 \times 896$ pixels.
-As training parameters, a SGD optimizer was used with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay $0.0005$. The training for each sequence consisted on 3000 iterations with batch size $2$.
+In the following experiments, a ResNet50 backbone architecture has been used with a PSP module~\pspnet plug on top.
+No major difference was observed using a ResNet101 architecture so the ResNet50 was used due to its lower training time as it has less training parameters.
+The resolution of the images fed to the network was $512 \times 896$ pixels.
+Regarding the training parameters, SGD optimizer with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay of $0.0005$ was used. The training for each sequence consisted in 3000 iterations with batch size of $2$.
 
-To compare our results, we set two baselines to compare with.
-The first one consist on a simple baseline where the predicted point at each frame of the sequence is the same as the point given at the first frame.
-The second baseline consisted on running the MDNet~\mdnet tracker on the smallest bounding box that fit the ground truth mask of the sequence.
+To compare our results, we designed two baselines to compare with.
+The first one consist in predicting a point at each frame of the sequence as the same point given at the first frame.
+The second baseline consisted in running the MDNet~\mdnet tracker on the smallest bounding box that fit the ground truth mask of the sequence.
 The testing was performed comparing the center of the predicted bounding box against the ground truth bounding box.
 
 We tested two variations of the model.
-The first one using a single channel prediction trained with a heatmap of $\sigma = 40$ pixels.
+The first one used a single channel prediction trained with a heatmap of $\sigma = 40$ pixels.
 The second variation consisted in a multiscale heatmap.
-In the experiment we trained using three channels with a heatmap in each one of $\sigma$ equals to 24, 48 and 96 respectively.
-The prediction of the point at all time was performed computing the position of the maximum value.
-In the case of the last configuration, all the three channels were summed along the channel dimension before predicting the point position.
+In the second setup, we trained using three channels with a heatmap in each one with a $\sigma$ equal to 24, 48 and 96 , respectively.
+The prediction of the point was always performed computing the position of the maximum value.
+In the case of the last configuration, the three channels were summed along the channel dimension before predicting the point position.
 The results are plotted on \figref{tracking_point_regression}.
 
 \begin{figure}[h]
@@ -176,7 +176,7 @@ The results are plotted on \figref{tracking_point_regression}.
 
 In addition to this metric, in order to see if our model has been able to learn the representation of the object to track, we compute a coverage factor.
 This coverage factor is defined as the accuracy of the model to predict a tracked point inside the ground truth mask of the object to track.
-These results are showed at \tabref{coverage_tracking_heatmap}.
+These results are shown in \tabref{coverage_tracking_heatmap}.
 
 \begin{table}[h]
   \centering
@@ -196,19 +196,18 @@ These results are showed at \tabref{coverage_tracking_heatmap}.
   \label{tab:coverage_tracking_heatmap}
 \end{table}
 
-This experiments presents good results in localization precision and coverage (at least we know that if the tracked point is not precise is consistent with the object to track).
-The big setback is regarding the training model.
-We need to train a model per each sequence which may lead to a big prediction time for new sequences (for the order of 10-30 minutes per sequence).
+These experiments present good results in localization precision and coverage (at least we know that if the tracked point is not precise is consistent with the object to track).
+The biggest setback is training the model.
+We need to train a model for each sequence which may lead to a big prediction time for new sequences (in the order of 10-30 minutes per sequence).
 
-For this main reason and in order to obtain a single model to be not dependent on the sequence to track, we try using unsupervised learning via metric learning.
-This is the second approach we tried.
-Given the ResNet model, we tested this architecture with a pre-trained weights, performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.
+For this reason and in order to obtain a single model independent on the sequence to track, we try using unsupervised learning \ToDo{Why unsupervised?} via metric learning.
+Given the ResNet model, we tested this architecture with pre-trained weights, performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.\ToDo{Rephrase}
 
 The training was performed using Adagrad optimizer with learning rate $0.001$ for 100 epochs over PASCAL~\pascal dataset with batch size $8$.
 The Triplet Loss margin was set to $\alpha = 0.7$ and $64$ triplets were sampled per image.
 It was tested with the original embedding dimension $D=2048$, and then adding a convolutional head to reduce its dimensionality.
 $D=128$ was the dimensionality that presented better results.
-For this experiments the backbone architecture used was ResNet101 as was the only one available with pretrained weights on semantic segmentation.
+For this experiments, the only backbone architecture used was ResNet101 as it is the only one available with pretrained weights on semantic segmentation.
 
 
 \begin{figure}[h]
@@ -218,9 +217,9 @@ For this experiments the backbone architecture used was ResNet101 as was the onl
   \label{fig:tracking_metric_learning}
 \end{figure}
 
-As can be seen on \figref{tracking_metric_learning} the localization precision is really poor, even in comparison with the previous experiments.
-In contrast, the coverage results available in \tabref{coverage_tracking_metric_learning} increase as long as training is being performed and the dimensionality is being reduced achieving in the last configuration almost the same result with a dedicated network for each sequence.
-Note that this evaluation is performed on DAVIS~\davislast validation while the trained model has not seen any information from this dataset as it has been trained with the PASCAL~\pascal dataset.
+As can be seen in \figref{tracking_metric_learning}, the localization precision is really poor, in comparison with the previous experiments.
+In contrast, the coverage results in \tabref{coverage_tracking_metric_learning} increase once training is done and the dimensionality is being reduced. The last configuration almost achieves the same result that a dedicated network for each sequence.
+Note that this evaluation is performed in DAVIS~\davislast validation while the trained model has not seen any images from this dataset as it has been trained using the PASCAL~\pascal dataset.
 
 
 \begin{table}[h]
