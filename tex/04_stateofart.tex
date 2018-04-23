@@ -37,6 +37,7 @@ Different to MDNet, the idea behind this thesis focuses on keypoint tracking, ra
 Semantic instance detection and segmentation is one of the most challenging tasks in Computer Vision right now.
 In this section we explore some of the works that tackle instance segmentation in image domain. 
 
+
 \paragraph{Mask R-CNN~\maskrcnn}
 This work come from a series of works that started with object detection on images using Convolutional Neural Networks.\ToDo{Cite FastRCNN}
 In a follow-up work, the same authors modify the architecture to make it differentiable, being able to train it end-to-end.\ToDo{Cite FasterRCNN}
@@ -46,6 +47,7 @@ Then a set of bounding box proposals are generated and the features in each prop
 On this branch, a set of bounding boxes are obtained and score predicted. With these values, a second branch is responsible to predict a mask from each proposal.
 The final prediction uses non-maximum suppression to reduce the number of the object proposals.
 This approach shows state-of-the-art results on multiple datasets at the cost of using a very large amount (in the order of 1000s) proposals per image.
+
 Some qualitative results can be found on \figref{maskrcnn}.
 
 \begin{figure}[h]
