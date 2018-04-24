@@ -182,14 +182,14 @@ These results are shown in \tabref{experiments:tracking:coveragepointregression}
   \centering
   \begin{tabular}{l|l}
     \toprule
-    Method              & Coverage       \\
+    Method                       & Coverage       \\
     \midrule
-    Baseline            & 0.428          \\
-    MDNET               & 0.851          \\
+    Baseline                     & 0.428          \\
+    MDNET~\mdnet                 & 0.851          \\
     % Hourglass           & 0.812    \\
     % ResNet101           & 0.912 \\
-    ResNet50            & 0.912          \\
-    ResNet50 Multiscale & \textbf{0.940} \\
+    ResNet50 Finetune            & 0.912          \\
+    ResNet50 Multiscale Finetune & \textbf{0.940} \\
     \bottomrule
   \end{tabular}
   \caption{Coverage for different methods that regress the heatmap. }
@@ -279,7 +279,7 @@ On this projection, we can observe in most of the cases how different color tone
 \end{figure}
 
 The next step is to evaluate the instance segmentation given a point per instance.
-As we have a one-to-one matching between the ground truth masks and the predicted masks, we use the Mean Intersection over Union (mIoU) as the evaluation metric.
+As we have a one-to-one matching between the ground truth masks and the predicted masks, we use the Mean Intersection over Union ($mIoU$) as the evaluation metric.
 It is computed as follows, being $\mathcal{P}$ the set of pixels which the prediction mask is $1$ and $\mathcal{G}$ the set of pixels which are annotated as $1$:
 
 \begin{equation}
