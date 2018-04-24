@@ -3,7 +3,7 @@
 \chapter{Conclusion and Future Work}
 \label{cha:conclusionsfuturework}
 
-In this Master Thesis, we have tackled the weakly-supervised video object segmentation problem, i.e., 
+In this Master Thesis, we have tackled the task if weakly supervised video object segmentation, i.e., 
 the segmentation of multiple objects of interest in a video sequence given a point per object in the first frame.
 We have presented several methods and combined two of them to obtain the final solution.
 First, we have presented two ways to track a point on a video sequence.
@@ -14,8 +14,7 @@ However, its major weaknesses are its speed and generalization as a model has to
 
 The second approach presented to track points consisted in training an embedding model which outputs an embedding representation for every pixel.
 The training was performed using metric learning, more specifically, the Triplet Loss was used and the distances to the initial point was computed.
-Precision was really low, but in contrast, 
-the coverage result was as good as in the previous method.
+Despite of the fact that precision was low, the coverage result was as good as in the previous method.
 This model was completely sequence agnostic and it could perform fast inference without any additional training.
 
 After being able to track points, the following method consisted in obtaining the mask of an object given a point belonging to it.
@@ -24,11 +23,11 @@ We tested different margins of the Triplet Loss in order to obtain the best segm
 This model presented good results in many situation where multiple objects, even from the same class, 
 could be distinguished as different instances.
 On the other hand, 
-this model presented low performance when small objects had to be segmented and also the quality of the pixels embeddings belonging to object contours was not very good.
+this model presented low performance when small objects had to be segmented and also the quality of the pixels of the embeddings close to object contours was not very good.
 
-We combined the two metric learning approaches to perform video object segmentation by tracking a point. The final performance falls behind the current state of the art, but we have to take into account that we are only using a point and not the full mask in the first frame to perform the segmentation in the rest of the video sequence.
+We combined the two metric learning approaches to perform video object segmentation by tracking a point. The final performance falls behind the current state of the art semi-supervised methods, but we have to take into account that we are only using a point and not the full mask in the first frame to perform the segmentation in the rest of the video sequence.
 The main weakness of our method is in tracking the points. The performance of our model drops when the object to track in the first frame is very small, also occlusions pose a difficult challenge.
-A possible solution to mitigate this drawbacks is to train and infer the embeddings using multiple scales of an image as has been done previously in the literature.
-This could lead to a model that outputs an embedding with more contextual information on each pixel embedding, which can lead in an increase of performance on tracking and segmenting.
+A possible solution to mitigate these drawbacks is to train and infer the embeddings using multiple scales of an image as has been done previously in the literature.
+This could lead to a model that outputs an embedding with more contextual information on each pixel embedding, which can lead to an increase in performance on tracking and segmenting.
 
 To conclude, we believe that the presented method could lead to promising results in the segmentation field when using embedding representation of pixels, but further exploration is required. 
