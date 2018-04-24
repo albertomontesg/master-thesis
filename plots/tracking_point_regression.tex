@@ -2,10 +2,9 @@
 
 \begin{tikzpicture}
   \begin{axis}[
-      set layers,
+      % set layers,
       width=\textwidth,
       height=.5\textwidth,
-      width=\linewidth, % Scale the plot to \linewidth
       grid=both,
       grid style=dotted,
       minor ytick={0,0.05,...,1.1},
@@ -16,19 +15,15 @@
       xlabel=Distance (pixels), % Set the labels
       ylabel=Detection Rate,
       legend columns=1,
-      %transpose legend,
-      cycle list name=exotic,
-      legend pos= south east,
+      legend pos=south east,
       legend style={/tikz/every even column/.append style={column sep=3mm}},
-      % legend style={at={(0.5,-0.2)},anchor=north},
-      % x tick label style={rotate=90,anchor=east}
     ]
 
-    \addplot+[smooth,  mark=none, line width=1]
+    \addplot+[smooth, mark=none, line width=1]
     table [x=Threshold, y=ResNet50 Multiscale sigma964824, col sep=comma] {data/precission_threshold_curves.csv};
     \addlegendentry{ResNet50 Multiscale Finetune}
 
-    \addplot+[smooth,  mark=none, line width=1]
+    \addplot+[smooth, mark=none, line width=1]
     table [x=Threshold, y=ResNet50 sigma40, col sep=comma] {data/precission_threshold_curves.csv};
     \addlegendentry{ResNet50 Finetune}
 
@@ -40,11 +35,11 @@
     % table [x=Threshold, y=ResNet101 sigma20, col sep=comma] {data/precission_threshold_curves.csv};
     % \addlegendentry{ResNet101}
 
-    \addplot+[smooth, red, mark=none, line width=1]
+    \addplot+[smooth, mark=none, line width=1]
     table [x=Threshold, y=MDNet, col sep=comma] {data/precission_threshold_curves.csv};
     \addlegendentry{MDNet}
 
-    \addplot+[smooth, cyan, mark=none, line width=1]
+    \addplot+[smooth, mark=none, line width=1]
     table [x=Threshold, y=Baseline, col sep=comma] {data/precission_threshold_curves.csv};
     \addlegendentry{Baseline}
 
