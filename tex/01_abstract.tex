@@ -1,23 +1,16 @@
 %!TEX root = ../thesis.tex
 
-%% ----------------------------------------------------------------------------
-% BIWI SA/MA thesis template
-%
-% Created 09/29/2006 by Andreas Ess
-% Extended 13/02/2009 by Jan Lesniak - jlesniak@vision.ee.ethz.ch
-%% ----------------------------------------------------------------------------
-
-
 \chapter*{Abstract}
 \label{cha:abstract}
 
-% \noindent The abstract gives a concise overview of the work you have done. The reader shall be able to decide whether the work which has been done is interesting for him by reading the abstract. Provide a brief account on the following questions:
+In this thesis, we tackle the problem of video object segmentation where we have to give the mask of every annotated object.
+Our implementation relies on a single point annotated on the first frame per object in order to obtain its mask.
 
-% \begin{itemize}
-%  \item What is the problem you worked on? (Introduction)
-%  \item How did you tackle the problem? (Materials and Methods)
-%  \item What were your results and findings? (Results)
-%  \item Why are your findings significant? (Conclusion)
-% \end{itemize}
+To solve this problem, we present two subtasks to obtain the desired output: 
+track a point through the video,
+and given a point for an instance obtain its segmentation mask.
+We present a Fully Convolutiona Neural Network model that learn an embedding representation for every image pixel.
+This embedding representation is trained using the Triplet Loss which performs the task of learning a good embedding using distance comparison.
+Also, this embedding is used to track points and obtain segmentation masks with the use of similarity between embeddings.
 
-% \noindent The abstract should approximately cover half of a page, and does generally not contain citations.
+The presented method presents promising results on segmentation while leaves some margin for improvement on the task of tracking object points.
