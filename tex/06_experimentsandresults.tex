@@ -201,7 +201,7 @@ The biggest setback is training the model.
 We need to train a model for each sequence which may lead to a big prediction time for new sequences (in the order of 10-30 minutes per sequence).
 
 For this reason and in order to obtain a single model independent on the sequence to track, we try using unsupervised learning \ToDo{Why unsupervised?} via metric learning.
-Given the ResNet model, we tested this architecture with pre-trained weights, performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.\ToDo{Rephrase}
+Given the ResNet model, we tested this architecture with pretrained weights, performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.\ToDo{Rephrase}
 
 The training was performed using Adagrad optimizer with learning rate $0.001$ for 100 epochs over PASCAL~\pascal dataset with batch size $8$.
 The Triplet Loss margin was set to $\alpha = 0.7$ and $64$ triplets were sampled per image.
@@ -248,18 +248,18 @@ That is the reason why we move forward with this model on the coming experiments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Instance Segmentation}
 
-We wanted to test the model trained using the Triplet Loss applied to instance segmentation.
-Our purpose is to obtain the instance segmentation given a point per instance.
-To test the instance segmentation, the PASCAL~\pascal dataset has been used.
-The point used to test the segmentation has been chosen computing the distance to the ground truth mask contour and take the coordinate which is furthest.
-This point will have an embedding representation that is descriptive enough for the instance to be segmented.
+In order to perform instance segmentation, we tested the model that was trained using the Triplet Loss.
+Given a point per object, we obtain a mask corresponding to that object.
+To evaluate our model for this task, the PASCAL~\pascal dataset has been used.
+The point used to test the segmentation is obtained computing the distance to the ground truth mask contour and taking the coordinate which maximizes this distance.
+This point has an embedding representation that is descriptive enough for the instance to be segmented.
 
-As the Triplet Loss is a unsupervised training no metric is used to check the training in addition to the validation loss.
-Nevertheless, a qualitative visualization can be performed to check the quality of the embeddings obtained.
-To visualize it, for each image the embeddings have been computed and then a PCA decomposition has been computed over the embeddings of all pixels.
-The decomposition is perform to reduce the dimensionality into 3 dimensions and then scale the values of this 3 dimensions to obtain a RGB image.
-In \figref{pca_embeddings} are shown some examples of PASCAL~\pascal validation images.
-On this projection, in most of the cases we can observe how different color tones show differences between instances even for the same class.
+As the Triplet Loss only maximizes and minimizes the distance of embedding pairs, no metric is used during the training apart from the validation loss.
+However, a qualitative visualization can be performed to check the quality of the obtained embeddings.
+For this visualization, the embeddings for each image are computed  and then a PCA decomposition over the embeddings of all pixels is done.
+The PCA decomposition is performed to reduce the dimensionality to 3 dimensions and the values of this 3 dimensions are scaled to obtain a RGB image.
+In \figref{pca_embeddings}, some examples of PASCAL~\pascal validation images are shown.
+On this projection, we can observe in most of the cases how different color tones show differences between instances even for the same class.
 
 \begin{figure}[h]
   \centering
@@ -272,41 +272,41 @@ On this projection, in most of the cases we can observe how different color tone
   \showpascalpca{2009_002539}
   % \showpascalpca{2009_005219}
   \showpascalpca{2010_002868}
-  \caption{PASCAL~\pascal validation images which embeddings have projected to RGB using PCA. }
+  \caption{PASCAL~\pascal validation images where the embeddings have been projected to RGB using PCA.}
   \label{fig:pca_embeddings}
 \end{figure}
 
 The next step is to evaluate the instance segmentation given a point per instance.
-As there exists a one-to-one matching between the ground truth masks and the predicted masks, the evaluation metric used will be the Mean Intersection over Union (mIoU).
-This is computed as follows, being $\mathcal{P}$ the set of pixels which the prediction mask is $1$ and $\mathcal{G}$ the set of pixels which are annotated to $1$:
+As we have a one-to-one matching between the ground truth masks and the predicted masks, we use the Mean Intersection over Union (mIoU) as the evaluation metric.
+It is computed as follows, being $\mathcal{P}$ the set of pixels which the prediction mask is $1$ and $\mathcal{G}$ the set of pixels which are annotated as $1$:
 
 \begin{equation}
   mIoU = \frac{|\mathcal{P} \cap \mathcal{G}|}{|\mathcal{P} \cup \mathcal{G}|}
 \end{equation}
 
-The segmentation given a point is computed as it is specified in \secref{methods:embeddingsegmentation}.
-Given a point, we obtain the embedding of the pixel $x_k$.
-The next step is compute a distance metric between this pixel embedding $x_k$ and the rest of the pixels in the image $\mathcal{X}$.
-We have observed that the distance function (between euclidean distance and cosine distance which are commonly used for embedding similarity) do not present any difference on the results.
-Because of this in all future steps euclidean distance will be used.
+The segmentation given a point is computed as explained in \secref{methods:embeddingsegmentation}.
+Therefore, given a point, we obtain the embedding of the pixel $x_k$.
+The next step is to compute a distance metric between this pixel embedding $x_k$ and the rest of the pixels in the image $\mathcal{X}$.
+We have observed that the distance function (using the euclidean distance or the cosine distance which are commonly used for embedding similarity) does not present any difference on the results.
+Thus, in all future steps euclidean distance is used.
 
-Then, given a distance map, a simple thresholding operation will be able to return the mask for each instance.
-Some examples of this procedure are shown at \figref{distance_maps} where the image and the ground truth are show at the left column.
-On the middle column are shown the distance maps for different instances in the image and in the right column there are the predicted masks after thresholding the distance maps.
-For this example, the threshold used has been $\gamma = 0.5$.
+Then, the output is a distance map and a simple thresholding operation is able to return the mask for each instance.
+Some examples of results are shown in \figref{distance_maps} where the images and the ground truths are in the left column.
+In the middle column, the distance maps for different instances in the image are shown and in the right column, the predicted masks after thresholding the distance maps are displayed.
+For this example, the used threshold is $\gamma = 0.5$.
 
 \begin{figure}[h]
   \centering
   \showpascaldistancemap{2007_005331}
   \showpascaldistancemap{2007_001239}
   \showpascaldistancemap{2007_006698}
-  \caption{Instance segmentation procedure computing the distance map}
+  \caption{Instance segmentation procedure computing the distance map.}
   \label{fig:distance_maps}
 \end{figure}
 
-We have observed that the value of the margin $\alpha$ used at training with the metric loss have impact on the performance of the segmentation.
-In order to test the results for different margin values $\alpha$, we have build the \tabref{margin_miou}.
-It can be observed how the best value to train the model and obtain a good segmentation is $\alpha = .7$.
+We have observed that the value of the margin $\alpha$ used at training with the metric loss has impact on the performance of the segmentation.
+In order to test different margin values $\alpha$, the result of several experiments is shown in \tabref{margin_miou}.
+We can conclude that the best value to train the model and obtain a good segmentation result is $\alpha = .7$.
 
 \begin{table}[h]
   \centering
@@ -325,16 +325,14 @@ It can be observed how the best value to train the model and obtain a good segme
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Video Instance Segmentation}
 
-The last experiment is related with fusing both previous approaches.
-We have tested the performance of the instance segmentation on the video dataset DAVIS~\davislast 2017 over the sequences at the validation subset.
-Out approach is going to be compared against the two available methods tested against the DAVIS~\davislast 2017 dataset which have made their predictions publicly available.
-These are OnAVOS~\onavos and OSVOS~\osvos.
-We compare this two methods against different variations of ours.
+In the last experiments section, we fused the two previous approaches.
+We have tested the performance of instance segmentation on the video dataset DAVIS~\davislast 2017 in the sequences of the validation subset.
+Our approach is compared against OnAVOS~\onavos and OSVOS~\osvos which are state-of-the-art methods that made their predictions publicly available in the DAVIS~\davislast 2017 dataset. We compare this two methods against different configurations of our method.
 
-The first comparison is against the segmentation using perfect keypoints (keypoints obtained from the ground truth mask) which in this case the segmentation method is being tested.
-The second approach is segment each frame of the sequence using the embedding of the keypoint given in the first frame.
-The third and last configuration is find at each frame the pixel which has higher similarity to the annotated pixel in the first frame.
-Then for each frame, with this found keypoint tracked from the first frame, segment the frame as explained in \secref{methods:embeddingsegmentation}.
+In the first configuration, we compute the segmentation using perfect keypoints (keypoints obtained from the ground truth mask) which in this case the segmentation method is being tested.
+The second approach consist in segmenting each frame of the sequence using the embedding of the keypoint given in the first frame.
+The third and last configuration is finding the pixel at each frame which has the higher similarity to the annotated pixel in the first frame.
+Then, for each frame, using the keypoint tracked from the first frame, segmentation is done as explained in \secref{methods:embeddingsegmentation}.
 The results in terms of mIoU are shown in \tabref{davis_miou}.
 
 \begin{table}[h]
@@ -351,7 +349,7 @@ The results in terms of mIoU are shown in \tabref{davis_miou}.
     First Frame Keypoint tracked & 0.432 \\
     \bottomrule
   \end{tabular}
-  \caption{Comparison on overall performance for different methods and our different approaches. }
+  \caption{Overall performance comparison for different methods and our different approaches. }
   \label{tab:davis_miou}
 \end{table}
 
@@ -362,15 +360,15 @@ The results in terms of mIoU are shown in \tabref{davis_miou}.
   \label{fig:per_sequence_miou}
 \end{figure}
 
-As can be seen on the \tabref{davis_miou}, the segmentation taking into consideration that we are computing it from the best pixel, leads to performance compared with the state of the art.
-In contrast, when only the information from the first frame is used, the performance drops drastically.
-Nevertheless, the tracking operation seems to give a little boost in comparison with only use the first frame embedding.
+As can be seen in \tabref{davis_miou}, the segmentation using the ground truth to compute a point in every frame, leads to a similar performance compared with the state of the art.
+In contrast, when only the information from the first frame is used, the performance drops considerably.
+Nevertheless, the tracking operation gives a little boost in comparison with only using the first frame embedding.
 
-To dig a little bit more on the results, the performance per sequence when tracking the keypoints is shown at \figref{per_sequence_miou}.
-Here can be observe the big disparity of results between sequences.
-It seems that the biggest problems are present on sequences where the object on the first frame start being very distant and small.
-During all the experimentation we have experienced some difficulties with embeddings of small objects and also embeddings very close to the contour so very thick objects (e.g. bicycles) present very bad performance.
-In addition, on \figref{pred_masks_davis} are plotted the prediction of the mask for different sequences.
+If we further analyze the results, the per sequence performance when tracking the keypoints is shown in \figref{per_sequence_miou}.
+Here, we can observe the a big disparity of results among sequences.
+It seems that the biggest challenge for our method is when the object in the first frame is small.
+Throughout the experiments, we have already found out that a drop in performance of the embeddings in small objects and also when they are very close to the contour so very thin objects (e.g. bicycles) present very bad performance.
+In addition, the prediction of the mask for different sequences are plotted in \figref{pred_masks_davis}.
 
 \begin{figure}[ht]
   \centering
@@ -387,6 +385,6 @@ In addition, on \figref{pred_masks_davis} are plotted the prediction of the mask
   \showdavisresults{dogs-jump}
   \showdavisresults{paragliding-launch}
   \showdavisresults{soapbox}
-  \caption{Mask prediction results on some sequences in DAVIS~\davislast 2017 validation set. }
+  \caption{Mask prediction results on some sequences in the DAVIS~\davislast 2017 validation set. }
   \label{fig:pred_masks_davis}
 \end{figure}
