@@ -62,6 +62,7 @@ tick style={ultra thin}}}
 %\usepackage{textcomp}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
+\usepackage{cite}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,28 +77,28 @@ tick style={ultra thin}}}
 \newcommand{\secref}[1]{Section~\ref{sec:#1}}
 
 % Cites
-\newcommand{\davisboth}[0]{\cite{Perazzi2016, PontTuset2017} }
-\newcommand{\davislast}[0]{\cite{PontTuset2017} }
-\newcommand{\davisold}[0]{\cite{Perazzi2016} }
-\newcommand{\pascal}[0]{\cite{Everingham10} }
-\newcommand{\pytorch}[0]{\cite{paszke2017automatic} }
-\newcommand{\hourglass}[0]{\cite{newell2016stacked} }
-\newcommand{\mdnet}[0]{\cite{nam2016learning} }
-\newcommand{\fastrcnn}[0]{\cite{girshick2015fast} }
-\newcommand{\fasterrcnn}[0]{\cite{ren2015faster} }
-\newcommand{\maskrcnn}[0]{\cite{he2017mask} }
-\newcommand{\osvos}[0]{\cite{caelles2017one} }
-\newcommand{\onavos}[0]{\cite{voigtlaender17BMVC} }
-\newcommand{\deepml}[0]{\cite{fathi2017semantic} }
-\newcommand{\maskrnn}[0]{\cite{NIPS2017_6636} }
-\newcommand{\votchallenge}[0]{\cite{VOT_TPAMI} }
-\newcommand{\metriclearning}[0]{\cite{balntas2016learning} }
-\newcommand{\facenet}[0]{\cite{schroff2015facenet} }
-\newcommand{\deeplab}[0]{\cite{chen2018deeplab} }
-\newcommand{\pckmetric}[0]{\cite{sapp2013modec} }
-\newcommand{\pspnet}[0]{\cite{zhao2017pyramid} }
-\newcommand{\resnet}[0]{\cite{he2016deep} }
-\newcommand{\dilatedconv}[0]{\cite{yu2015multi} }
+\newcommand{\davisboth}[0]{\cite{Perazzi2016, PontTuset2017}}
+\newcommand{\davislast}[0]{\cite{PontTuset2017}}
+\newcommand{\davisold}[0]{\cite{Perazzi2016}}
+\newcommand{\pascal}[0]{\cite{Everingham10}}
+\newcommand{\pytorch}[0]{\cite{paszke2017automatic}}
+\newcommand{\hourglass}[0]{\cite{newell2016stacked}}
+\newcommand{\mdnet}[0]{\cite{nam2016learning}}
+\newcommand{\fastrcnn}[0]{\cite{girshick2015fast}}
+\newcommand{\fasterrcnn}[0]{\cite{ren2015faster}}
+\newcommand{\maskrcnn}[0]{\cite{he2017mask}}
+\newcommand{\osvos}[0]{\cite{caelles2017one}}
+\newcommand{\onavos}[0]{\cite{voigtlaender17BMVC}}
+\newcommand{\deepml}[0]{\cite{fathi2017semantic}}
+\newcommand{\maskrnn}[0]{\cite{NIPS2017_6636}}
+\newcommand{\votchallenge}[0]{\cite{VOT_TPAMI}}
+\newcommand{\metriclearning}[0]{\cite{balntas2016learning}}
+\newcommand{\facenet}[0]{\cite{schroff2015facenet}}
+\newcommand{\deeplab}[0]{\cite{chen2018deeplab}}
+\newcommand{\pckmetric}[0]{\cite{sapp2013modec}}
+\newcommand{\pspnet}[0]{\cite{zhao2017pyramid}}
+\newcommand{\resnet}[0]{\cite{he2016deep}}
+\newcommand{\dilatedconv}[0]{\cite{yu2015multi}}
 
 
 % Coloring
@@ -220,6 +221,7 @@ tick style={ultra thin}}}
   \begin{subfigure}{.33\textwidth}
     \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/pascal/predicted_mask/#1_2.png}
   \end{subfigure}
+  \\[1 em]
 }
 
 \newcommand{\showdavisresults}[1]{%
