@@ -225,20 +225,16 @@ tick style={ultra thin}}}
 }
 
 \newcommand{\showdavisresults}[1]{%
-  \begin{subfigure}{.2\textwidth}
-    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/davis/results/#1_1.jpg}
+  % \rotatebox{90}{\centering \hspace{5.5mm}\vphantom{tg}#1}
+  \begin{subfigure}{.02\textwidth}
+    \rotatebox{90}{\centering \fontsize{5}{6}\selectfont #1}
   \end{subfigure}%
-  \begin{subfigure}{.2\textwidth}
-    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/davis/results/#1_2.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.2\textwidth}
-    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/davis/results/#1_3.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.2\textwidth}
-    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/davis/results/#1_4.jpg}
-  \end{subfigure}%
-  \begin{subfigure}{.2\textwidth}
-    \includegraphics[width=1.\linewidth,height=.618\linewidth]{figures/davis/results/#1_5.jpg}
+  \begin{subfigure}{.98\textwidth}
+    \includegraphics[width=.20\linewidth,height=.1236\linewidth]{figures/davis/results/#1_1.jpg}%
+    \includegraphics[width=.20\linewidth,height=.1236\linewidth]{figures/davis/results/#1_2.jpg}%
+    \includegraphics[width=.20\linewidth,height=.1236\linewidth]{figures/davis/results/#1_3.jpg}%
+    \includegraphics[width=.20\linewidth,height=.1236\linewidth]{figures/davis/results/#1_4.jpg}%
+    \includegraphics[width=.20\linewidth,height=.1236\linewidth]{figures/davis/results/#1_5.jpg}
   \end{subfigure}
 }
 
@@ -246,39 +242,7 @@ tick style={ultra thin}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Legacy
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% To do heatmaps
 \usepackage{collcell}
-
-\newcommand*{\MinNumber}{0}%
-\newcommand*{\MaxNumber}{1}%
-
-\newcommand{\ApplyGradient}[1]{%
-        \pgfmathsetmacro{\PercentColor}{100.0*(#1-\MinNumber)/(\MaxNumber-\MinNumber)}
-        \hspace{-0.33em}\colorbox{blue!\PercentColor!white}{}
-}
-
-\newcolumntype{R}{>{\collectcell\ApplyGradient}c<{\endcollectcell}}
-
-
-
-
-% \usepackage{algorithmic}
-% \usepackage{algorithm}
-% \usepackage[algo2e,ruled,lined]{algorithm2e}
-
-%\usepackage{glossaries}
-%\makeglossaries
-%
-%
-%\newglossaryentry{uv}
-%{name={$[u,v]$},
-% description={Image pixel coordinates used in this work, where the origin is
-%placed at the up-left corner of the image, $u$ is the horizontal direction,
-%and $v$ the vertical one}
-%}
-
 \usepackage{booktabs}
 
 \usepackage{etex}
@@ -292,8 +256,6 @@ tick style={ultra thin}}}
 \titlespacing{\subsection}{0pt}{8pt}{0pt}
 %\titlespacing{\subsubsection}{0pt}{*0}{*0}
 
-%\usepackage[small,bf, justification=centering]{caption}
-%\usepackage[format=hang]{caption}
 
 \setlength{\parskip}{0.7\baselineskip}
 \setlength{\parindent}{0pt}
@@ -302,35 +264,6 @@ tick style={ultra thin}}}
 \usepackage{rotating}
 % \usepackage{pifont}
 
-\newcommand{\showglobaldisc}[1]{%
-\mbox{\input{data/flat_meta_soa/global_#1.txt}\hspace{-2.5pt}}%
-}
-% \newcommand{\showswappedsoadisc}[1]{%
-% \mbox{\input{data/flat_meta_soa/swapped_soa_disc_#1.txt}\hspace{-2.5pt}}%
-% }
-% \newcommand{\showswappedhumdisc}[1]{%
-% \mbox{\input{data/flat_meta_soa/swapped_human_disc_#1.txt}\hspace{-2.5pt}}%
-% }
-% \newcommand{\showbaselinedisc}[1]{%
-% \mbox{\input{data/flat_meta_soa/baseline_disc_#1.txt}\hspace{-2.5pt}}%
-% }
-
-% \newcommand{\showodsf}[2]{%
-% \mbox{\input{data/flat_pr_curves/#1_#2_ods_f.txt}\hspace{-2.5pt}}%
-% }
-% \newcommand{\showodsfb}[2]{%
-% \mbox{\input{data/segm_bsds/test_#1_#2_ods_f.txt}\hspace{-2.5pt}}%
-% }
-% \newenvironment{llista}{\begin{list}{$\bullet$}{\leftmargin=1em\partopsep=0pt\topsep=0pt\itemsep=0pt}}{\end{list}}
-
-% \newenvironment{highlight}{\vspace{5pt}
-% \begin{tabular}{@{\hspace{-1.5mm}}c|@{\hspace{4mm}}r}
-% &\begin{minipage}{0.95\linewidth}
-% }{%
-% \end{minipage}
-% \end{tabular}
-% \vspace{5pt}
-% }
 
 \usepackage{paralist}
 
@@ -338,84 +271,6 @@ tick style={ultra thin}}}
 \pagestyle{myheadings}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-
-% \newcommand{\showone}[1]{%
-% \mbox{\fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_im.jpg}}
-% \hspace{2mm}
-% \fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_ucm.png}}
-% \hspace{2mm}
-% \fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_gt.png}}
-% \hspace{2mm}
-% \fbox{\includegraphics[width=0.23\linewidth]{figures/obj_cands/PASCAL_1_#1_mask_1.png}}}%
-% }
-
-% \newcommand{\showtwo}[1]{%
-% \mbox{\fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_im.jpg}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_ucm.png}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_gt.png}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_1.png}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.18\linewidth]{figures/obj_cands/PASCAL_2_#1_mask_2.png}}}%
-% }
-
-% \newcommand{\showthree}[1]{%
-% \mbox{\fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_im.jpg}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_ucm.png}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_gt.png}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_1.png}}
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_2.png}}%
-% \hspace{1.5mm}
-% \fbox{\includegraphics[width=0.15\linewidth]{figures/obj_cands/PASCAL_3_#1_mask_3.png}}}%
-% }
-
-% \newcommand{\headerone}{\noindent\mbox{\begin{minipage}{0.23\linewidth}\centering Original Image\end{minipage}
-% \hspace{2mm}
-% \begin{minipage}{0.23\linewidth}\centering Multiscale hier.\end{minipage}
-% \hspace{2mm}
-% \begin{minipage}{0.23\linewidth}\centering Ground truth\end{minipage}
-% \hspace{2mm}
-% \begin{minipage}{0.23\linewidth}\centering MCG best cand. among 400\end{minipage}}\\[2mm]}
-
-
-% \newcommand{\headertwo}{\noindent\mbox{\begin{minipage}{0.18\linewidth}\centering Original Image\end{minipage}
-% \hspace{1.5mm}
-% \begin{minipage}{0.18\linewidth}\centering Multiscale hier.\end{minipage}
-% \hspace{1.5mm}
-% \begin{minipage}{0.18\linewidth}\centering Ground truth\end{minipage}
-% \hspace{1.5mm}
-% \begin{minipage}{0.39\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
-
-
-% \newcommand{\headerthree}{\noindent\mbox{\begin{minipage}{0.15\linewidth}\centering Original Image\end{minipage}
-% \hspace{1.5mm}
-% \begin{minipage}{0.15\linewidth}\centering Multiscale hier.\end{minipage}
-% \hspace{1.5mm}
-% \begin{minipage}{0.15\linewidth}\centering Ground truth\end{minipage}
-% \hspace{1.5mm}
-% \begin{minipage}{0.48\linewidth}\centering MCG best candidates among 400\end{minipage}}\\[2mm]}
-
-
-
-% \pgfplotsset{
-% cycle list={%
-% {red, mark=*, mark size=1.3},
-% %{red, mark=diamond*, mark size=1.5},
-% {red, mark=square*, mark size=1.25},
-% {red, mark=triangle*, mark size=1.6},
-% {blue,mark=o, mark size=1.3},
-% %{blue,mark=diamond, mark size=1.5},
-% {blue,mark=square, mark size=1.25},
-% {blue,mark=triangle, mark size=1.6},
-% }}
-\newtheorem{example}{Example}
-
 
 
 %% Change chapter style
@@ -476,23 +331,3 @@ tick style={ultra thin}}}
 \newcommand{\captationspace}{\captionsetup{skip=2.5pt} }
 \newcommand{\subfigurespace}{\par\medskip}%\bigskip or \medskip
 \newcommand{\ToDo}[1]{{\small\color{cyan}[ToDo]: #1}}
-
-% Additions for the DAVIS paper
-% \definecolor{rowblue}{RGB}{220,230,240}
-% \renewcommand{\bf}{\textbf}
-% \newcommand{\namemcg}{MCG}
-% \newcommand{\namesfrgb}{SF-LAB}
-% \newcommand{\namesfflow}{SF-MOT}
-% \newcommand{\namenonlocalconsensus}{NLC}
-% \newcommand{\namecvos}{CVOS}
-% \newcommand{\nametracingdisco}{TRC}
-% \newcommand{\namemoseg}{MSG}
-% \newcommand{\namekeysegments}{KEY}
-% \newcommand{\namesaliencyseg}{SAL}
-% \newcommand{\namefastvideoseg}{FST}
-% \newcommand{\nametsp}{TSP}
-% \newcommand{\nameseamseg}{SEA}
-% \newcommand{\namehvs}{HVS}
-% \newcommand{\namejumpcut}{JMP}
-% \newcommand{\namefcop}{FCP}
-% \newcommand{\cmark}{\checkmark}
