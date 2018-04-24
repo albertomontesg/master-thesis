@@ -1,7 +1,7 @@
 %!TEX root = ../thesis.tex
 
 \usepackage{subfiles}
-%Font 
+%Font
 \usepackage{fourier}
 
 \usepackage[usenames,table]{xcolor}
@@ -53,6 +53,11 @@ pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
 % Reset caligraphic font to default
 \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 
+% Hyphenation
+\tolerance=1000
+\emergencystretch=10pt
+\hyphenation{OSVOS}
+
 % References
 \newcommand{\figref}[1]{Figure~\ref{fig:#1}}
 \newcommand{\equref}[1]{Equation~\ref{eq:#1}}
@@ -83,6 +88,7 @@ pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
 \newcommand{\pspnet}[0]{\cite{zhao2017pyramid}}
 \newcommand{\resnet}[0]{\cite{he2016deep}}
 \newcommand{\dilatedconv}[0]{\cite{yu2015multi}}
+
 
 
 % Coloring

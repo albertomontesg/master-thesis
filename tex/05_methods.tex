@@ -211,7 +211,7 @@ This point can come from the ground truth, from tracking or from another frame a
 
 In order to obtain the segmentation for multiple instances in an images given a keypoint for each instance, we can compute the distance of every pixel embedding against all keypoint embeddings.
 Then, every pixel will be assigned to the label of the closest keypoint embedding only if this distance is lower than a threshold $\gamma$, otherwise will be assigned to background.
-All of these can be formulated mathematically taking into account and image embedding $\mathcal{X} = {x_i}^{H \times W}$ with $N$ instances and each instance with a keypoint embedding $x_k^{(n)}$.
+All of these can be formulated mathematically taking into account and image embedding $\mathcal{X}~=~\{x_i\}^{H \times W}$ with $N$ instances and each instance with a keypoint embedding $x_k^{(n)}$.
 Every keypoint will have a label $m_k^{(n)} \in [1, N]$ and label $0$ will belong to the background.
 The distance map for every image will be:
 
