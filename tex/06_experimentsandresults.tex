@@ -200,8 +200,10 @@ These experiments present good results in localization precision and coverage (a
 The biggest setback is training the model.
 We need to train a model for each sequence which may lead to a big prediction time for new sequences (in the order of 10-30 minutes per sequence).
 
-For this reason and in order to obtain a single model independent on the sequence to track, we try using unsupervised learning \ToDo{Why unsupervised?} via metric learning.
-Given the ResNet model, we tested this architecture with pretrained weights, performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.\ToDo{Rephrase}
+For this reason and in order to obtain a single model independent on the sequence to track, we try using metric learning.
+Given the ResNet model, we trained this architecture, with pretrained weights on semantic segmentation, using the Triplet Loss.
+We also tested the possibility to reduce the output dimension plugging a convolutional layer at the end and reducing the number of output channels into $D$ (same as embedding dimension)
+% .performing some training with the Triplet Loss and expanding this architecture with a convolutional head to reduce the embedding dimensions.\ToDo{Rephrase}
 
 The training was performed using Adagrad optimizer with learning rate $0.001$ for 100 epochs over PASCAL~\pascal dataset with batch size $8$.
 The Triplet Loss margin was set to $\alpha = 0.7$ and $64$ triplets were sampled per image.
