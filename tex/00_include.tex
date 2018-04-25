@@ -259,7 +259,19 @@ pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
 \usepackage{paralist}
 
 %********Capcalera i peu de pagina**********
-\pagestyle{myheadings}
+% \pagestyle{plain}
+% \pagestyle{myheadings}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+
+\fancyfoot[RO, LE]{\thepage}
+\fancyfoot[LO]{\leftmark}
+\fancyfoot[RE]{\rightmark}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
@@ -313,7 +325,8 @@ pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
       \chaptitlefont\strut ##1\strut}%
 }}
 \chapterstyle{hansen}
-\aliaspagestyle{chapter}{empty}
+\aliaspagestyle{chapter}{fancy}
+\aliaspagestyle{bibliography}{plain}
 
 
 \usepackage{caption}
