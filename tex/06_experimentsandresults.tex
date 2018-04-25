@@ -19,12 +19,12 @@ In addition, there are GPU nodes which consists in 75 GPUs with 12GB of GPU memo
 
 \subsection{Software}
 
-All the code had been developed using Python3.
+All the code has been developed using Python3.
 Python is commonly used in computer vision and deep learning applications because most of the available libraries that provide computational frameworks provide a Python interface, and also due to the simple, straightforward way to develop code.
 
 The main library used to develop deep learning models has been PyTorch~\pytorch{}.
 This library provides high-level features for tensor computation and deep neural networks.
-It is a Python wrapper which under the hood is written in C allowing fast performance and strong GPU acceleration.
+It is a Python wrapper which under the hood is written in C, allowing fast performance and strong GPU acceleration.
 This library is usually used in the research community due to its flexibility, fast code prototyping and debugging capabilities.
 
 \section{Datasets}
@@ -77,7 +77,7 @@ The DAVIS dataset has been used mainly in the two following setups:
 
 A mask in the first frame of a sequence is provided to the algorithms.
 The task is to output a mask for the rest of the frames in the video sequence.
-The initial mask gives information about which is the object intended to be segmented.
+The initial mask gives information about the object intended to be segmented.
 
 \paragraph{Unsupervised}
 
@@ -96,7 +96,7 @@ For example, a fixed point in an object can be an animal's eye, a person point o
 PASCAL Dataset~\pascal{} is a popular computer vision benchmark that consists of images with labels for 20 object classes and provides multiple annotations for different tasks like detection and segmentation.
 The segmentation annotations consist of masks over instances belonging to the 20 classes, which leads to images with multiple instance annotations.
 
-During this thesis, the segmentation annotations from PASCAL VOC 2012 has been used.
+During this thesis, the segmentation annotations from PASCAL VOC 2012 have been used.
 The information about the number of instances per split can be found on \tabref{datasets:pascal} and some examples of the dataset are shown in \figref{datasets:pascal}.
 
 \begin{table}[h]
@@ -151,13 +151,14 @@ PCK metric illustrates, for a range of distance in pixels in the original resolu
 At each distance in pixels, the detection rate can be seen as the percentage of samples where the prediction is as furthest this distance. % \ToDo{Rephrase this sentence}
 
 In the following experiments, a ResNet50 backbone architecture has been used with a PSP module~\pspnet{} plugged on top.
-No major difference was observed using a ResNet101 architecture so the ResNet50 was used due to its lower training time as it has less training parameters.
+No major difference was observed using a ResNet101 architecture, so the ResNet50 was used due to its lower training time as it has less training parameters.
 The resolution of the images fed to the network was $512 \times 896$ pixels.
-Regarding the training parameters, SGD optimizer with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay of $0.0005$ was used. The training for each sequence consisted in 3000 iterations with batch size of $2$.
+Regarding the training parameters, SGD optimizer with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay of $0.0005$ was used.
+The training for each sequence consisted of 3000 iterations with batch size of $2$.
 
 To compare our results, we designed two baselines to compare with.
-The first one consists of predicting a point at each frame of the sequence as the same point given at the first frame.
-The second baseline consists of running the MDNet~\mdnet{} tracker on the smallest bounding box that fit the ground truth mask of the sequence.
+The first one consists in predicting a point at each frame of the sequence as the same point given at the first frame.
+The second baseline consists in running the MDNet~\mdnet{} tracker on the smallest bounding box that fit the ground truth mask of the sequence.
 The testing was performed comparing the center of the predicted bounding box against the ground truth bounding box.
 
 We tested two variations of the model.
@@ -344,8 +345,9 @@ In the last experiments section, we put everything together, by fusing the two p
 We have tested the performance of instance segmentation on DAVIS~\davislast{} 2017 in the sequences of the validation subset.
 Our approach is compared against OnAVOS~\onavos{} and OSVOS~\osvos{} which are state-of-the-art methods that made their predictions publicly available in the DAVIS 2017 dataset. We compare these two methods against different configurations of our method.
 
-In the first configuration, we compute the segmentation using perfect keypoints (keypoints obtained from the ground truth mask) which in this case the segmentation method is being tested.
-The second approach consists of segmenting each frame of the sequence using the embedding of the keypoint given in the first frame.
+In the first configuration, we compute the segmentation using perfect keypoints (keypoints obtained from the ground truth mask),
+which in this case the segmentation method is being tested.
+The second approach consists in segmenting each frame of the sequence using the embedding of the keypoint given in the first frame.
 The third and last configuration is finding the pixel at each frame which has the higher similarity to the annotated pixel in the first frame.
 Then, for each frame, using the keypoint tracked from the first frame, segmentation is done as explained in \secref{methods:embeddingsegmentation}.
 The results in terms of mIoU are shown in \tabref{experiments:videosegmentation:davismiou}.
@@ -380,9 +382,9 @@ In contrast, when only the information from the first frame is used, the perform
 Nevertheless, the tracking operation gives a little boost in comparison to only using the first frame embedding.
 
 If we further analyze the results, the per sequence performance when tracking the keypoints is shown in \figref{experiments:videosegmentation:persequencemiou}.
-Here, we can observe the a big disparity of results among sequences.
+Here, we can observe a big disparity of results among sequences.
 It seems that the biggest challenge for our method is when the object in the first frame is small.
-Throughout the experiments, we have already found out that a drop in performance of the embeddings in small objects and also when they are very close to the contour so very thin objects (e.g. bicycles) present very bad performance.
+Throughout the experiments, we have already found out a drop in performance of the embeddings in small objects and also when they are very close to the contour, so very thin objects (e.g. bicycles) present very bad performance.
 In addition, the prediction of the mask for different sequences are plotted in \figref{experiments:videosegmentation:predmasksdavis}.
 
 \begin{figure}[ht]

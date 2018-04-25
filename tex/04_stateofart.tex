@@ -80,14 +80,14 @@ In this section we explore some of the works that tackle object segmentation on 
 
 \paragraph{OSVOS~\osvos{} and OnAVOS~\onavos{}}
 These works focus on instance segmentation on videos.
-Their main approach consists of training a parent network that given a frame is able to predict the mask of the foreground (all object instances in the image) and then finetune a network for each video.
+Their main approach consists in training a parent network that given a frame is able to predict the mask of the foreground (all object instances in the image) and then finetune a network for each video.
 The finetuning is performed given the mask of the first frame (these methods tackle semi-supervised video object segmentation) and then the trained network for each video is used to predict the masks for the rest of the frames.
 OnAVOS~\onavos{} extends OSVOS~\osvos{} by adding an online training step.
 It makes predictions of the frames and after each frame prediction, the network is trained online with the new predicted mask.
-This two implementations lead to state-of-the-art results on the DAVIS~\davisboth{} dataset.
+These two implementations lead to state-of-the-art results on the DAVIS~\davisboth{} dataset.
 
 \paragraph{MaskRNN~\maskrnn{}}
-This work proposes a recurrent neural network approach which fuses in each frame of the video the output of two deep nets for each objects instance.
+This work proposes a recurrent neural network approach which fuses in each frame of the video the output of two deep nets for each object instance.
 The first net is a binary segmentation network providing a mask and the second one is a localization network providing a bounding box.
 Thanks to the recurrent component and the localization component, this method is able to take advantage of long-term temporal structures of the video as well as rejecting outliers.
 This method also provides competitive results to the works of OSVOS~\osvos{} and OnAVOS~\onavos{} presented in the previous subsection.

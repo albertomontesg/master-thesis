@@ -37,9 +37,9 @@ The architecture takes as input images of size $512 \times 512$ and outputs the 
 Also, note that the number of output channels is 2048, so this output can be used directly, or a header can be plugged.
 A header can be any group of layers that perform a task. Some examples could be a group of fully connected layers that can perform a classification,
 or a group of convolutional layers that reduce the dimensionality.
-In the scenario of this thesis, a header made of a single convolutional filter with kernel size 1 have been used in order to test a dimensionality reduction.
+In the scenario of this thesis, a header made of a single convolutional filter with kernel size 1 has been used in order to test a dimensionality reduction.
 % \ToDo{Explain what a header is} can be plugged to reduce the dimensionality (in the case of classification, reduce the dimensionality to the number of classes).
-Because of these, this architecture is very versatile and easy to use with images.
+Because of this, this architecture is very versatile and easy to use with images.
 
 \newcommand{\blocka}[2]{\multirow{3}{*}{\(\left[\begin{array}{c}\text{3$\times$3, #1}\\[-.1em] \text{3$\times$3, #1} \end{array}\right]\)$\times$#2}
 }
@@ -77,7 +77,7 @@ Because of these, this architecture is very versatile and easy to use with image
   \label{tab:backbonearchitecture:deeplabarch}
 \end{table}
 
-In the original ResNet architecture downsampling with stride 2 was performed at layers \textit{conv3\_1}, \textit{conv4\_1} and \textit{conv5\_1}.
+In the original ResNet architecture, downsampling with stride 2 was performed at layers \textit{conv3\_1}, \textit{conv4\_1} and \textit{conv5\_1}.
 On DeepLab, the downsampling with stride 2 is only performed at \textit{conv3\_1}.
 In contrast, in \textit{conv4\_x} and \textit{conv5\_x} all the convolutions are performed with dilation $2$ and $4$, respectively.
 The dilated convolution was presented in~\dilatedconv{} and supports expansion of the receptive field without loss of spatial resolution.
@@ -94,7 +94,8 @@ This output can be trained to predict the point representation as a gaussian hea
 using the Mean Squared Error loss function.
 
 The heatmap is built using the coordinate of a point $p = (p_x, p_y)$ and computing a guassian around this point.
-In \equref{tracking:heatmap} is shown how to build a heatmap $\mathcal{H}$ which allows some customization with the parameter $\sigma$ which is the spreadness of the sigma.
+In \equref{tracking:heatmap} it is shown how to build a heatmap $\mathcal{H}$ which allows some customization with the parameter $\sigma$,
+which is the spreadness of the gaussian.
 Note that the values of the heatmap are bounded between $[0, 1]$.
 To observe a graphical example, in \figref{tracking:pointrepresentation} there is a point annotated on an image and the resulting heatmap.
 
@@ -122,7 +123,7 @@ To observe a graphical example, in \figref{tracking:pointrepresentation} there i
 
 The strategy to train a model that tracks a point given in the first frame will be the same used in OSVOS~\osvos{}.
 % TODO: Explain VOC
-First is used a model pretrained on semantic segmentation which have learned the representation of all the classes appearing at PASCAL~\pascal{}.
+First it is used a model pretrained on semantic segmentation which have learned the representation of all the classes appearing at PASCAL~\pascal{}.
 Then this model is finetuned over the first frame of one sequence.
 As we only have a single image, some data augmentation is required to enrich the training data and don't overfit on a single image.
 Finally we will test each sequence's model with the rest of the frames and extract the predicted tracked point as the coordinate of the heatmap's maximum.
@@ -132,7 +133,7 @@ Finally we will test each sequence's model with the rest of the frames and extra
 \section{Metric Learning with Triplet Loss}
 \label{sec:methods:metriclearning}
 
-Another approach to track a point in a video sequence could consist on training a model which outputs an embedding for each pixel that can be meaningful to obtain instance segmentation.
+Another approach to track a point in a video sequence could consist in training a model which outputs an embedding for each pixel that can be meaningful to obtain instance segmentation.
 In order to obtain a good embedding, metric learning has been used.
 Metric learning performs the task of learning a good embedding representation using distance comparison.
 % distance function over objects, which in our case, the objects are embeddings.\ToDo{Reformulate}
@@ -140,15 +141,15 @@ Metric learning performs the task of learning a good embedding representation us
 One way to apply metric learning is using a Triplet Loss which was first introduced in~\metriclearning{}.
 One famous implementation of this Triplet Loss was used in FaceNet~\facenet{} where they train a model to embed face images and predict similarity between them.
 
-The objective of the Triplet Loss consists on learning a distance difference between triplets of points.
-The triplet consists on three points that are called: anchor, positive and negative.
+The objective of the Triplet Loss consists in learning a distance difference between triplets of points.
+The triplet consists of three points that are called: anchor, positive and negative.
 It must fill the condition that the label of the anchor and the positive point are the same, while the label of the negative is different.
-The objective of the Triplet Loss is to push the distance of the anchor and positive points to be closer than the distance between the anchor and negative by some margin $\alpha$.
+The objective of the Triplet Loss is to push the distance of the anchor and positive points to be closer than the distance between the anchor and the negatives by some margin $\alpha$.
 In \figref{tripletloss:visualization} a diagram about the learning procedure is shown.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[trim=1cm 9cm 2.5cm 0cm, clip, width=0.7\linewidth]{figures/methods/triplet_loss/triplet_viz.pdf}
+  \includegraphics[trim=0cm 9cm 1.5cm 0cm, clip, width=0.7\linewidth]{figures/methods/triplet_loss/triplet_viz.pdf}
   \caption{
     Graphical representation of Triplet Loss learning.
   Figure extracted from~\facenet{}. }
@@ -172,6 +173,7 @@ Let the Convolutional Neural Network be the embedding model $f(\mathcal{I}; \The
 When training the model,
 only the mask of a single object is available,
 so the learning only pushes the embeddings of one instance at each time.
+Note that all the embeddings at the output are normalized by their $l_2$ norm.
 % there is available the ground truth mask of one object instance in the image.
 When the image is forwarded through the model and the embeddings are computed, $N$ triplets of pixels are sampled.
 For each triplet, two pixels belonging to the mask are sampled and assigned as anchor and positive pixels ($x_a$ and $x_p$ respectively).
