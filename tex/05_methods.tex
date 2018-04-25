@@ -17,7 +17,7 @@ These models perform convolution operations over the input which is usually an i
 
 During the development of this thesis, we have used as a backbone architecture the DeepLab~\deeplab{} model for semantic segmentation.
 This model is fully convolutional and it is based on the ResNet~\resnet{} architecture which was used for image classification.
-The DeepLab~\deeplab{} model applies a sequence of convolutional layers to the input image, and instead of a classifier, plugs an Atrous Spatial Pyramid Pooling (also defined in~\deeplab{}) at the very last part of the architecture to obtain a segmentation mask.
+The DeepLab model applies a sequence of convolutional layers to the input image, and instead of a classifier, plugs an Atrous Spatial Pyramid Pooling (also defined in~\deeplab{}) at the very last part of the architecture to obtain a segmentation mask.
 %what does is to keep the convolutional layers from ResNet~\resnet and add at the end some deconvolutional operations to obtain as an output a mask instead of an object classifier.
 Doing this allows the model to be fully convolutional and free of the constraint about the input image size.
 
@@ -32,10 +32,11 @@ Each layer applies some convolutional operations to the input and then adds this
   \label{fig:backbonearchitecture:resnetblock}
 \end{figure}
 
-For a more detailed description of the whole architecture of the DeepLab~\deeplab{} convolutional neural network see \tabref{backbonearchitecture:deeplabarch}, where two versions used are described: ResNet50 and ResNet101.
+For a more detailed description of the whole architecture of the DeepLab convolutional neural network see \tabref{backbonearchitecture:deeplabarch}, where two versions used are described: ResNet50 and ResNet101.
 The architecture takes as input images of size $512 \times 512$ and outputs the input size downsampled by $8$ both in height and width.
 Also, note that the number of output channels is 2048, so this output can be used directly, or a header can be plugged.
-A header can be any group of layers that perform a task. Some examples could be a group of fully connected layers that can perform a classification, of a group of convolutional layers that reduce the dimensionality.
+A header can be any group of layers that perform a task. Some examples could be a group of fully connected layers that can perform a classification,
+or a group of convolutional layers that reduce the dimensionality.
 In the scenario of this thesis, a header made of a single convolutional filter with kernel size 1 have been used in order to test a dimensionality reduction.
 % \ToDo{Explain what a header is} can be plugged to reduce the dimensionality (in the case of classification, reduce the dimensionality to the number of classes).
 Because of these, this architecture is very versatile and easy to use with images.
@@ -156,7 +157,7 @@ In \figref{tripletloss:visualization} a diagram about the learning procedure is 
 
 In our scenario, we use DeepLab~\deeplab{} explained in detail in \secref{methods:backbonearchitecture}.
 We use a model that is pretrained for semantic segmentation, and we use the full network except the last classification part which predicts the pixels class.
-By default, this model given an image of size $H \times W$ output a features map of size $H' \times W' = \frac{H}{8} \times \frac{W}{8}$ with $2048$ dimensions.
+By default, this model, given an image of size $H \times W$, outputs a feature map of size $H' \times W' = \frac{H}{8} \times \frac{W}{8}$ with $2048$ dimensions.
 A convolutional head can be plugged to reduce this dimensionality to a lower dimension $D$ which may lead to a better embedding.
 
 Before giving the equations of the Triple Loss, we define the following notation.
@@ -169,7 +170,8 @@ Let the Convolutional Neural Network be the embedding model $f(\mathcal{I}; \The
 \end{equation}
 
 When training the model,
-only the mask of a single object is available , so the learning only pushes the embeddings of one instance at each time.
+only the mask of a single object is available,
+so the learning only pushes the embeddings of one instance at each time.
 % there is available the ground truth mask of one object instance in the image.
 When the image is forwarded through the model and the embeddings are computed, $N$ triplets of pixels are sampled.
 For each triplet, two pixels belonging to the mask are sampled and assigned as anchor and positive pixels ($x_a$ and $x_p$ respectively).
