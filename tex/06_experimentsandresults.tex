@@ -171,7 +171,9 @@ The results are plotted in \figref{experiments:tracking:pointregression}.
 \begin{figure}[h]
 	\centering
 	\input{plots/tracking_point_regression.tex}
-  \caption{Precision performance for our proposed methods that track points regressing a heatmap. \ToDo{More?}}
+  \caption{Precision performance for our proposed methods that track points regressing a heatmap.
+    It is shown how finetuning a model to track point improves the detection rate achieving the best performance using a multiscale heatmap as a point representation.
+  }
   \label{fig:experiments:tracking:pointregression}
 \end{figure}
 
@@ -186,7 +188,7 @@ These results are shown in \tabref{experiments:tracking:coveragepointregression}
     Method                       & Coverage       \\
     \midrule
     Baseline                     & 0.428          \\
-    MDNET~\mdnet                 & 0.851          \\
+    MDNet~\mdnet                 & 0.851          \\
     % Hourglass           & 0.812    \\
     % ResNet101           & 0.912 \\
     ResNet50 Finetune            & 0.912          \\
@@ -194,7 +196,8 @@ These results are shown in \tabref{experiments:tracking:coveragepointregression}
     \bottomrule
   \end{tabular}
   \caption{Coverage for different methods that regress the heatmap.
-  Coverage is defined as the accuracy of the model to predict a tracked point inside the ground truth mask of the object to track. \ToDo{More?}}
+    Coverage is defined as the accuracy of the model to predict a tracked point inside the ground truth mask of the object to track.
+    The finetuned models present a coverage higher than $90\%$ exceeding the performance of the state of the art tracker MDNet~\mdnet. }
   \label{tab:experiments:tracking:coveragepointregression}
 \end{table}
 
@@ -223,7 +226,7 @@ For these experiments, the only backbone architecture used was ResNet101 as it i
 
 As can be seen in \figref{experiments:tracking:metriclearning}, the localization precision is really poor, in comparison to the previous experiments.
 In contrast, the coverage results in \tabref{experiments:tracking:coveragemetriclearning} increase once training is done and the dimensionality is being reduced. The last configuration almost achieves the same result with a dedicated network for each sequence.
-Note that this evaluation is performed in DAVIS~\davislast{} validation while the trained model has not seen any images from this dataset as it has been trained using the PASCAL~\pascal{} dataset.
+Note that this evaluation is performed in DAVIS~\davislast{} validation while the trained model has not seen any images from this dataset as it has been trained using the PASCAL dataset.
 
 
 \begin{table}[h]
@@ -262,7 +265,7 @@ As the Triplet Loss only maximizes and minimizes the distance of the embedding p
 However, a qualitative visualization can be performed to check the quality of the obtained embeddings.
 For this visualization, the embeddings for each image are computed  and then a PCA decomposition over the embeddings of all pixels is done.
 The PCA decomposition is performed to reduce the dimensionality to 3 dimensions and the values of this 3 dimensions are scaled to obtain a RGB image.
-In \figref{experiments:segmentation:pca}, some examples of PASCAL~\pascal{} validation images are shown.
+In \figref{experiments:segmentation:pca}, some examples of PASCAL validation images are shown.
 On this projection, we can observe in most of the cases how different color tones show differences between instances even for the same class.
 
 \begin{figure}[h]
@@ -339,7 +342,7 @@ We can conclude that the best value to train the model and obtain a good segment
 
 In the last experiments section, we put everything together, by fusing the two previous approaches.
 We have tested the performance of instance segmentation on DAVIS~\davislast{} 2017 in the sequences of the validation subset.
-Our approach is compared against OnAVOS~\onavos{} and OSVOS~\osvos{} which are state-of-the-art methods that made their predictions publicly available in the DAVIS~\davislast{} 2017 dataset. We compare these two methods against different configurations of our method.
+Our approach is compared against OnAVOS~\onavos{} and OSVOS~\osvos{} which are state-of-the-art methods that made their predictions publicly available in the DAVIS 2017 dataset. We compare these two methods against different configurations of our method.
 
 In the first configuration, we compute the segmentation using perfect keypoints (keypoints obtained from the ground truth mask) which in this case the segmentation method is being tested.
 The second approach consists of segmenting each frame of the sequence using the embedding of the keypoint given in the first frame.
@@ -361,7 +364,7 @@ The results in terms of mIoU are shown in \tabref{experiments:videosegmentation:
     First Frame Keypoint tracked & 0.432 \\
     \bottomrule
   \end{tabular}
-  \caption{Overall performance for video object segmentation comparing different methods and our different approaches.\ToDo{More?}}
+  \caption{Overall performance for video object segmentation comparing different methods and our different approaches. }
   \label{tab:experiments:videosegmentation:davismiou}
 \end{table}
 
