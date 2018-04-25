@@ -18,8 +18,8 @@ We refer to segmentation as the partition of pixels from a video in different cl
 These classes will be different instances appearing in the video plus the background.
 This is an important task in the Computer Vision field during the lasts years and can be a core block for numerous applications like video editing and post-processing, video retrieval, activity recognition and much more.
 
-In previous works, there has been mainly two different approaches to tackle this problem, unsupervised or semi-supervised.
-In the unsupervised methods, the model tries to infer which instances or objects are the protagonists during the whole video and then output a segmentation mask for each instance.
+In previous works, there have been mainly two different approaches to tackle this problem, unsupervised or semi-supervised.
+In the unsupervised methods, the model tries to infer which instances or objects are the protagonists during the whole video and then outputs a segmentation mask for each instance.
 On the other hand, in the semi-supervised methods, the instances that we want to segment are given to the model in the form of the mask in the first frame.
 Thus, the model already has information about the objects that need to be be segmented and can propagate this initial mask through all the sequence to output a prediction.
 % Talk about them
@@ -33,7 +33,7 @@ This approach presents some benefits when applied to real applications, as point
 Our proposed method performs two tasks and fuses them to obtain a final prediction: point tracking and instance segmentation from a point.
 With point tracking, we are able to keep track at every frame of a point per each instance.
 In addition to this, a model has been trained to learn an embedding representation that can be used, given a point and its label, to label the rest of the pixels with a similarity computation.
-A combination of this two tasks gives us a method that is capable of performing the task of weakly semi-supervised video instance segmentation.
+A combination of these two tasks gives us a method that is capable of performing the task of weakly semi-supervised video instance segmentation.
 
 In order to train and evaluate our method, a dataset is required.
 To evaluate our method, we have used the DAVIS~\davisboth{} dataset which provides instance segmentation masks for multiple video sequences.
@@ -52,9 +52,9 @@ In \figref{intro:davis} we can see a sequence and its mask annotation overlaid t
 
 In addition, the PASCAL~\pascal{} has been used.
 It provides segmentation masks for different object instances in images.
-This dataset has helped us to train the embedding model to be able to obtain a good pixel representation that know the difference between two instances of the same class.
+This dataset has helped us to train the embedding model to be able to obtain a good pixel representation that knows the difference between two instances of the same class.
 
-This thesis is structured in the following way. First, in \charef{stateofart}, the current state-of-the-art techniques in image and video instance segmentation are reviewed in order to have an idea of which are the advantages and drawbacks of the other methods.
+This thesis is structured in the following way. First, in \charef{stateofart}, the current state-of-the-art techniques in image and video instance segmentation are reviewed in order to have an idea of the advantages and drawbacks of the other methods.
 
 Then, in \charef{methods}, our proposed method is defined and explained in detail.
 After that, in \charef{experimentsandresults}, the different experiments to test our method are detailed in addition to its results.
