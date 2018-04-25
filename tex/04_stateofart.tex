@@ -10,7 +10,7 @@ First, we focus on methods for tracking, and later, we talk about the state-of-t
 \label{sec:soa_tracking}
 
 Tracking implementations are mainly focused on video object tracking.
-This task consists in taking the bounding box surrounding an object and make bounding box predictions throughout the video that contains the object to track.
+This task consists in taking the bounding box surrounding an object and making bounding box predictions throughout the video that contains the object to track.
 
 One state-of-the-art implementation is MDNet~\mdnet{}.
 It proposes a Convolutional Neural Network with shared layers and multiple branches of domain-specific layers.
@@ -44,8 +44,9 @@ In a follow-up work, the same authors modify the architecture to make it differe
 Their most recent work, Mask R-CNN extends the same idea to predicting not only the bounding box of the detected object but its segmentation mask as well.
 The idea behind this method consists of a CNN that with a forward pass extracts the features at the last convolutional layer.
 Then a set of bounding box proposals are generated and the features in each proposed bounding box are used in one branch to predict a objectiveness score and bounding box regressions.
-On this branch, a set of bounding boxes are obtained and score predicted. With these values, a second branch is responsible to predict a mask from each proposal.
-The final prediction uses non-maximum suppression to reduce the number of the object proposals.
+On this branch, a set of bounding boxes are obtained and a score predicted.
+With these values, a second branch is responsible to predict a mask from each proposal.
+The final prediction uses non-maximum suppression to reduce the number of object proposals.
 This approach shows state-of-the-art results on multiple datasets at the cost of using a very large amount (in the order of 1000s) proposals per image.
 
 Some qualitative results can be found on \figref{stateofart:maskrcnn}.
@@ -59,11 +60,11 @@ Some qualitative results can be found on \figref{stateofart:maskrcnn}.
 
 \paragraph{Deep Metric Learning~\deepml{}}
 This work also focuses on semantic instance segmentation on images.
-They use a Convolutional Neural Network to predict an embedding representation per each pixel.
+They use a Convolutional Neural Network to predict an embedding representation for each pixel.
 This network is trained using metric learning, regressing how likely two pixels are to belong to the same object.
-Then they propose the use of seed points and its pairwise similarity to predict the instances and its masks on an image once the embedding for each pixels is computed.
+Then they propose the use of seed points and its pairwise similarity to predict the instances and its masks on an image once the embedding for each pixel is computed.
 Some results of the segmentations can be found on \figref{deep_metric_learning}.
-During this thesis will be presented a model trained using deep metric learning, but instead of regressing the similarity, it will learn distance metric between embeddings.
+During this thesis a model trained using deep metric learning will be presented, but instead of regressing the similarity, it will learn distance metric between embeddings.
 
 \begin{figure}[h]
   \centering
