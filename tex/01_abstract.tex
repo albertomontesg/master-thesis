@@ -4,14 +4,14 @@
 \label{cha:abstract}
 
 In this thesis, we tackle the task of video object segmentation, using a weakly supervised setup.
-Instead of using strong supervision in the form of a detailed mask annotation per object, our implementation relies on a single point within the object of interest.
+Instead of using strong supervision in the form of a detailed mask annotation per object, our implementation relies on a single point laying inside the object of interest.
 
 We approach this task by dividing it into two complementary sub-tasks: 
-(a) track one point through the video,
-and (b) infer the segmentation mask of an object from a single point.
+(a) tracking one point through the video,
+and (b) inferring the segmentation mask of an object from a single point.
 
-We present a Fully Convolutional Neural Network approach that learns an embedded representation for every pixel of the images.
+We present a Fully Convolutional Neural Network approach that learns an embedded representation for every pixel in an image.
 We train the architecture by using the Triplet Loss which focuses on the similarity among pixels that belong to the same/different objects.
 This embedded representation is used to both track points and obtain segmentation masks.
 
-Our method shows promising results on weakly supervised video object segmentation, and opens new directions for real applications, where the mask of the first frame is not available.
+Our method shows promising results on weakly supervised video object segmentation in the DAVIS 2017 dataset, and opens new directions for real applications, where the mask of the first frame is not available.
