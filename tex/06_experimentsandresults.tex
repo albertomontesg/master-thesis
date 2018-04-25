@@ -150,7 +150,7 @@ For point tracking, the PCK metric~\pckmetric{} is chosen as it has been widely 
 PCK metric illustrates, for a range of distance in pixels in the original resolution of the image (480p in our case), the detection rate.
 At each distance in pixels, the detection rate can be seen as the percentage of samples where the prediction is as furthest this distance. % \ToDo{Rephrase this sentence}
 
-In the following experiments, a ResNet50 backbone architecture has been used with a PSP module~\pspnet{} plug on top.
+In the following experiments, a ResNet50 backbone architecture has been used with a PSP module~\pspnet{} plugged on top.
 No major difference was observed using a ResNet101 architecture so the ResNet50 was used due to its lower training time as it has less training parameters.
 The resolution of the images fed to the network was $512 \times 896$ pixels.
 Regarding the training parameters, SGD optimizer with a learning rate of $10^{-6}$, momentum $0.9$ and weight decay of $0.0005$ was used. The training for each sequence consisted in 3000 iterations with batch size of $2$.
@@ -171,7 +171,7 @@ The results are plotted in \figref{experiments:tracking:pointregression}.
 \begin{figure}[h]
 	\centering
 	\input{plots/tracking_point_regression.tex}
-	\caption{Precision performance for point regression.\ToDo{Expand this caption so that it is self contained}}
+  \caption{Precision performance for our proposed methods that track points regressing a heatmap. \ToDo{More?}}
   \label{fig:experiments:tracking:pointregression}
 \end{figure}
 
@@ -193,7 +193,8 @@ These results are shown in \tabref{experiments:tracking:coveragepointregression}
     ResNet50 Multiscale Finetune & \textbf{0.940} \\
     \bottomrule
   \end{tabular}
-  \caption{Coverage for different methods that regress the heatmap.\ToDo{Expand}}
+  \caption{Coverage for different methods that regress the heatmap.
+  Coverage is defined as the accuracy of the model to predict a tracked point inside the ground truth mask of the object to track. \ToDo{More?}}
   \label{tab:experiments:tracking:coveragepointregression}
 \end{table}
 
@@ -303,7 +304,11 @@ For this example, the used threshold is $\gamma = 0.5$.
   \showpascaldistancemap{2007_005331}
   \showpascaldistancemap{2007_001239}
   \showpascaldistancemap{2007_006698}
-  \caption{Instance segmentation procedure computing the distance map.}
+  \caption{Instance segmentation procedure computing the distance map.
+    \textbf{Left}: Image and ground truth annotation for all objects in the image.
+    \textbf{Middle}: Distance map for two instances in the image. Darker means lower distance and lighter means higher distance.
+    \textbf{Right}: Predicted mask for each instance after thresholding the distance map.
+  }
   \label{fig:experiments:segmentation:distancemaps}
 \end{figure}
 
@@ -352,7 +357,7 @@ The results in terms of mIoU are shown in \tabref{experiments:videosegmentation:
     First Frame Keypoint tracked & 0.432 \\
     \bottomrule
   \end{tabular}
-  \caption{Overall performance comparison for different methods and our different approaches.\ToDo{Expaaaand. performance for what?}}
+  \caption{Overall performance for video object segmentation comparing different methods and our different approaches.\ToDo{More?}}
   \label{tab:experiments:videosegmentation:davismiou}
 \end{table}
 
