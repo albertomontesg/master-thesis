@@ -261,14 +261,13 @@ pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
 %********Capcalera i peu de pagina**********
 % \pagestyle{plain}
 % \pagestyle{myheadings}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{} % sets both header and footer to nothing
 \renewcommand{\headrulewidth}{0pt}
-
 \fancyfoot[RO, LE]{\thepage}
 \fancyfoot[LO]{\leftmark}
 \fancyfoot[RE]{\rightmark}
@@ -326,7 +325,7 @@ pdfkeywords={},bookmarksnumbered,pdfstartview={FitV}}%
 }}
 \chapterstyle{hansen}
 \aliaspagestyle{chapter}{fancy}
-\aliaspagestyle{bibliography}{plain}
+% \aliaspagestyle{references}{fancy}
 
 
 \usepackage{caption}
